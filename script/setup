@@ -1,0 +1,113 @@
+#!/bin/sh
+
+check_is_on_debian() {
+   if [ "`cat /etc/issue | grep Debian | wc -l`" == "1" ]; then
+      echo "Is on Debian, we can go on..."
+   else
+      exit -1
+   fi
+}
+
+install_dependencies() {
+   apt-get update
+   apt-get install ruby rake po4a libgettext-ruby-util libgettext-ruby-data libgettext-ruby1.8 libsqlite3-ruby rcov librmagick-ruby libredcloth-ruby libwill-paginate-ruby iso-codes libfeedparser-ruby libferret-ruby libdaemons-ruby mongrel mongrel-cluster tango-icon-theme libhpricot-ruby
+   apt-get install memcached
+   apt-get install postgresql libpgsql-ruby
+   apt-get install apache2
+   a2enmod deflate expires proxy proxy_balancer proxy_http rewrite
+}
+
+create_noosfero_config_files() {
+   cd ~noosfero/current
+   su noosfero -c 'mongrel_rails cluster::configure'
+   ./etc/init.d/noosfero setup
+}
+
+setup_postgresql_databases() {
+   su postgres -c 'createuser noosfero -S -d -R'
+   su postgres -c 'createdb -O noosfero noosfero_production'
+   su postgres -c 'createdb -O noosfero noosfero_development'
+   su postgres -c 'createdb -O noosfero noosfero_test'
+   sed -i 's/port = 5433/port = 5432/g' /etc/postgresql/8.3/main/postgresql.conf
+   invoke-rc.d postgresql-8.3 restart
+}
+
+migrate_databases() {
+   su noosfero -c 'cp config/database.yml.pgsql config/database.yml'
+   su noosfero -c 'RAILS_ENV=production rake db:schema:load'
+   su noosfero -c 'RAILS_ENV=production ./script/runner "Environment.create!(:name => \"My environment\", :is_default => true)"'
+   su noosfero -c 'RAILS_ENV=production ./script/runner "Environment.default.domains << Domain.new(:name => \"example.com\")"'
+   su noosfero -c 'RAILS_ENV=production ./script/runner "User.create(:login => \"adminuser\", :email => \"admin@example.com\", :password => \"admin\", :password_confirmation => \"admin\", :environment => Environment.default)"'
+}
+
+compile_translations() {
+   su noosfero -c 'RAILS_ENV=production rake noosfero:translations:compile'
+}
+
+enable_notifications() {
+   gem install exception_notification -v 1.0.20090728
+   #config/noosfero.yml
+   #production:
+   #  exception_recipients: [admin@example.com, you@example.com]
+}
+
+setup_apache() {
+  echo <<END > /etc/apache2/sites-available/noosfero
+  <VirtualHost *:80>
+    ServerName example.com
+
+    DocumentRoot "/var/lib/noosfero/current/public"
+    <Directory "/var/lib/noosfero/current/public">
+      Options FollowSymLinks
+      AllowOverride None
+      Order Allow,Deny
+      Allow from all
+    </Directory>
+
+    RewriteEngine On
+
+    # Rewrite index to check for static index.html
+    RewriteRule ^/$ /index.html [QSA]
+
+    # Rewrite to check for Rails cached page
+    RewriteRule ^([^.]+)$ $1.html [QSA]
+
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+    RewriteRule ^.*$ balancer://noosfero%{REQUEST_URI} [P,QSA,L]
+
+    ErrorDocument 503 /503.html
+
+    ErrorLog /var/log/apache2/noosfero.log
+    LogLevel warn
+    CustomLog /var/log/apache2/noosfero.access.log combined
+
+    Include /var/lib/noosfero/current/etc/noosfero/apache/cache.conf
+
+  </VirtualHost>
+
+  <Proxy balancer://noosfero>
+    BalancerMember http://127.0.0.1:3000
+    BalancerMember http://127.0.0.1:3001
+    Order Allow,Deny
+    Allow from All
+  </Proxy>
+END
+   a2ensite noosfero
+   invoke-rc.d apache2 restart
+}
+
+install_initscript() {
+   ln -s /var/lib/noosfero/current/etc/init.d/noosfero /etc/init.d/noosfero
+   update-rc.d noosfero defaults
+}
+
+check_is_on_debian
+install_dependencies
+create_noosfero_config_files
+setup_postgresql_databases
+migrate_databases
+compile_translations
+enable_notifications
+setup_apache
+
+apt-get install postfix
