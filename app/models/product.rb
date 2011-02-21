@@ -42,6 +42,8 @@ class Product < ActiveRecord::Base
 
   acts_as_mappable
 
+  has_one :unit
+
   include FloatHelper
 
   UNITS = [

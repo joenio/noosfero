@@ -162,6 +162,8 @@ class Environment < ActiveRecord::Base
 
   acts_as_accessible
 
+  has_many :units
+
   def superior_intances
     [self, nil]
   end
