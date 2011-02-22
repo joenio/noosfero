@@ -153,7 +153,7 @@ class Product < ActiveRecord::Base
   end
 
   def name_with_unit
-    unit.blank? ? name : "#{name} - #{_(unit)}"
+    unit.blank? ? name : "#{name} - #{unit.name}"
   end
 
 end

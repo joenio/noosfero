@@ -309,7 +309,7 @@ class ProductTest < Test::Unit::TestCase
     product = Product.new
     assert !product.has_basic_info?
 
-    product = Product.new(:unit => 'unit')
+    product = Product.new(:unit => Unit.new)
     assert product.has_basic_info?
 
     product = Product.new(:price => 1)
@@ -348,8 +348,13 @@ class ProductTest < Test::Unit::TestCase
   should 'format name with unit' do
     product = Product.new(:name => "My product")
     assert_equal "My product", product.name_with_unit
-    product.unit = 'litre'
+    product.unit = Unit.new(:name => 'litre')
     assert_equal "My product - litre", product.name_with_unit
+  end
+
+  should 'has relation with unit' do
+    product = Product.new
+    assert_kind_of Unit, product.build_unit
   end
 
 end
