@@ -162,7 +162,7 @@ class Environment < ActiveRecord::Base
 
   acts_as_accessible
 
-  has_many :units
+  has_many :units, :order => 'position'
 
   def superior_intances
     [self, nil]
