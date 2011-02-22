@@ -146,7 +146,7 @@ class Product < ActiveRecord::Base
   end
 
   def name_with_unit
-    unit.blank? ? name : "#{name} - #{unit.name}"
+    unit.blank? ? name : "#{name} - #{unit.name.downcase}"
   end
 
 end

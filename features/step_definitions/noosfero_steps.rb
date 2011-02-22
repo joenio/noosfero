@@ -369,4 +369,8 @@ Given /^someone suggested the following article to be published$/ do |table|
   end
 end
 
-
+Given /^the following units?$/ do |table|
+  table.hashes.each do |row|
+    Unit.create!(row.merge(:environment_id => 1))
+  end
+end
