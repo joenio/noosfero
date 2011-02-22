@@ -470,12 +470,10 @@ ActiveRecord::Schema.define(:version => 20110221195242) do
   end
 
   create_table "units", :force => true do |t|
-    t.string   "singular",       :null => false
-    t.string   "plural",         :null => false
-    t.integer  "position"
-    t.integer  "environment_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "singular",       :null => false
+    t.string  "plural",         :null => false
+    t.integer "position"
+    t.integer "environment_id", :null => false
   end
 
   create_table "users", :force => true do |t|

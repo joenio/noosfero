@@ -4,7 +4,8 @@ class Unit < ActiveRecord::Base
   validates_presence_of :plural
 
   belongs_to :environment
-  acts_as_list :scope => 'environment'
+  validates_presence_of :environment_id
+  acts_as_list :scope => :environment
 
   def name
     self.singular

@@ -5,7 +5,6 @@ class CreateUnitsAndAddReferenceToItAtProductsAndInputs < ActiveRecord::Migratio
       t.string :plural,          :null => false
       t.integer :position
       t.references :environment, :null => false
-      t.timestamps
     end
     [:products, :inputs].each do |table_name|
       change_table table_name do |t|
