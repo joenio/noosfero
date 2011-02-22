@@ -242,7 +242,7 @@ module ManageProductsHelper
   end
 
   def select_unit(object)
-    collection_select(object, :unit_id, environment.units, :id, :singular, {:prompt => _('Select the unit')})
+    collection_select(object.class.name.downcase, :unit_id, environment.units, :id, :singular, {:include_blank => _('Select the unit')})
   end
 
   def input_icon(input)

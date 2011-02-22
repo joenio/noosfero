@@ -42,7 +42,7 @@ class Product < ActiveRecord::Base
 
   acts_as_mappable
 
-  has_one :unit
+  belongs_to :unit
 
   include FloatHelper
 

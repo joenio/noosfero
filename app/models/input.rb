@@ -7,7 +7,7 @@ class Input < ActiveRecord::Base
 
   acts_as_list :scope => :product
 
-  has_one :unit
+  belongs_to :unit
 
   include FloatHelper
 
