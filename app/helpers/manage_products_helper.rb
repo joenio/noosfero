@@ -262,7 +262,7 @@ module ManageProductsHelper
     if product_unit.blank?
        _('Amount used in this product or service')
     else
-       _('Amount used by %s of this product or service') % _(product_unit)
+       _('Amount used by %s of this product or service') % product_unit.singular.downcase
     end
   end
 
