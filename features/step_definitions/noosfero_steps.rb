@@ -121,7 +121,8 @@ Given /^the following inputs?$/ do |table|
     data = item.dup
     product = Product.find_by_name(data.delete("product"))
     category = Category.find_by_slug(data.delete("category").to_slug)
-    input = Input.create!(data.merge(:product => product, :product_category => category))
+    unit = Unit.find_by_singular(data.delete("unit"))
+    input = Input.create!(data.merge(:product => product, :product_category => category, :unit => unit))
     input.update_attributes!(:position => data['position'])
   end
 end
