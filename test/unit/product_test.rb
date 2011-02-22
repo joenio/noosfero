@@ -295,11 +295,6 @@ class ProductTest < Test::Unit::TestCase
      end
   end
 
-  should 'has a list of units' do
-    assert_kind_of Array, Product::UNITS
-    assert_includes Product::UNITS.flatten, 'unit'
-  end
-
   should 'test if name is blank' do
     product = Product.new
     assert product.name_is_blank?

@@ -46,13 +46,6 @@ class Product < ActiveRecord::Base
 
   include FloatHelper
 
-  UNITS = [
-    [N_('unit'), _('units')],
-    [N_('litre'), _('litres')],
-    [N_('kilo'), _('kilos')],
-    [N_('meter'), _('meters')],
-  ]
-
   include WhiteListFilter
   filter_iframes :description, :whitelist => lambda { enterprise && enterprise.environment && enterprise.environment.trusted_sites_for_iframe }
 

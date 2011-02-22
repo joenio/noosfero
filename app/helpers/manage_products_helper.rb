@@ -242,8 +242,7 @@ module ManageProductsHelper
   end
 
   def select_unit(object)
-    selected = object.unit.nil? ? '' : object.unit
-    select(object.class.name.downcase, 'unit', Product::UNITS.map{|unit| [_(unit[0]), unit[0]]}, {:selected => selected, :include_blank => _('Select the unit')})
+    collection_select(object, :unit_id, environment.units, :id, :singular, {:prompt => _('Select the unit')})
   end
 
   def input_icon(input)
@@ -270,7 +269,6 @@ module ManageProductsHelper
   def display_unit(input)
     input_amount_used = content_tag('span', input.formatted_amount, :class => 'input-amount-used')
     return input_amount_used if input.unit.blank?
-    units = Product::UNITS.find {|unit| unit[0] == input.unit}
-    n_('1 %{singular_unit}', '%{num} %{plural_unit}', input.amount_used.to_f) % { :num => input_amount_used, :singular_unit => content_tag('span', units[0], :class => 'input-unit'), :plural_unit => content_tag('span', units[1], :class => 'input-unit') }
+    n_('1 %{singular_unit}', '%{num} %{plural_unit}', input.amount_used.to_f) % { :num => input_amount_used, :singular_unit => content_tag('span', input.unit.singular, :class => 'input-unit'), :plural_unit => content_tag('span', input.unit.plural, :class => 'input-unit') }
   end
 end
