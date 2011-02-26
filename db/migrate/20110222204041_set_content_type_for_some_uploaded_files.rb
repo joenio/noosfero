@@ -7,14 +7,13 @@ class SetContentTypeForSomeUploadedFiles < ActiveRecord::Migration
       print "#{filename}: "
       full_filename = File.join(RAILS_ROOT, filename)
       if File.exists?(full_filename)
-        print 'found, fixing... '
+        say "found, fixing"
         content_type = `file -ib '#{full_filename}'`.gsub(/;.+|\s.+|\n/, '')
         if content_type =~ /^image/
           update(ActiveRecord::Base.sanitize_sql(["UPDATE articles SET content_type=?, filename=?, is_image=? WHERE id=?", content_type, file.name, true, id]))
         else
           update(ActiveRecord::Base.sanitize_sql(["UPDATE articles SET content_type=?, filename=? WHERE id=?", content_type, file.name, id]))
         end
-        say "ok"
       else
         say "not found"
       end
