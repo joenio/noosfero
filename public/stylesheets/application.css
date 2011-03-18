@@ -966,6 +966,15 @@ code input {
   overflow: hidden;
 }
 
+#manage-enterprises {
+  display: inline;
+  margin-right: 5px;
+}
+#manage-enterprises .ui-icon {
+  position: absolute;
+  top: 0;
+  right: -20px;
+}
 
 #article {
   position: relative;

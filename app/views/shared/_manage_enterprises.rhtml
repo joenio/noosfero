@@ -1,0 +1,8 @@
+<div id='manage-enterprises'>
+  <a href="#" id='manage-my-groups-link' onclick='toggleMenu(this);return false' class='simplemenu-trigger'><i class="icon-menu-enterprise"></i><strong><%= ui_icon('ui-icon-triangle-1-s') + _('My enterprises') %></strong></a>
+  <ul style="display:none" class='simplemenu-submenu'>
+    <% enterprises_link.each do |link| %>
+      <li><%= link %></li>
+    <% end %>
+  </ul>
+</div>
