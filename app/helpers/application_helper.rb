@@ -1107,7 +1107,7 @@ module ApplicationHelper
   def manage_enterprises
     if !user.enterprises.empty?
       enterprises_link = user.enterprises.map do |enterprise|
-        link_to('<i class="icon-menu-enterprise"></i>' + content_tag('strong', [_('Manage %s') % enterprise.short_name ]), "/myprofile/enterprise.identifier")
+        link_to(content_tag('strong', [_('<span>Manage</span> %s') % enterprise.short_name(25)]), "/myprofile/#{enterprise.identifier}", :class => "icon-menu-enterprise", :title => [_('Manage %s') % enterprise.short_name])
       end
       render :partial => 'shared/manage_enterprises', :locals => {:enterprises_link => enterprises_link}
     end
