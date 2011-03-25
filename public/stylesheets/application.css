@@ -3961,6 +3961,7 @@ h1#agenda-title {
   float: right;
   padding: 5px;
   margin-bottom: 5px;
+  margin-left: 10px;
 }
 .controller-memberships #memberships-index li .may-clear {
   clear: right;
