@@ -980,7 +980,6 @@ code input {
   text-align: left;
   left: -20px;
   width: 190px;
-  z-index: 100;
 }
 #manage-enterprises .simplemenu-item {
   padding: 5px 0;
@@ -5305,6 +5304,8 @@ h1#agenda-title {
   top: 20px;
   width: 120px;
   margin: 0;
+  display: none;
+  z-index: 100;
 }
 .msie8 .simplemenu-submenu {
   top: 8px;
