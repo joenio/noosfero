@@ -302,7 +302,7 @@ function hideAllSubmenus() {
 jQuery(document).ready(function() {
   jQuery('body').live('click', function() { hideAllSubmenus(); });
   jQuery('.menu-submenu-trigger').click(function(e) { e.stopPropagation(); });
-  jQuery('.simplemenu-trigger').live('click', function(e) { e.stopPropagation(); });
+  jQuery('.simplemenu-trigger').click(function(e) { e.stopPropagation(); });
   jQuery('#chat-online-users').click(function(e) { e.stopPropagation(); });
 });
 
