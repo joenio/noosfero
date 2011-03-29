@@ -1,0 +1,17 @@
+development: &DEVELOPMENT
+  adapter: sqlite3
+  database: db/development.db
+
+test: &TEST
+  adapter: sqlite3
+  database: db/test.db
+
+production:
+  <<: *DEVELOPMENT
+#production:
+#  adapter: postgresql
+#  database: noosfero_production
+#  username: joenio
+
+cucumber:
+  <<: *TEST
