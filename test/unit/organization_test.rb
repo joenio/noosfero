@@ -386,4 +386,8 @@ class OrganizationTest < Test::Unit::TestCase
     assert_includes Organization.more_active, profile
   end
 
+  should 'combine scopes more_popular and with_image' do
+    assert_includes Environment.default.organizations.more_popular.with_image, Environment.default.organizations.first
+  end
+
 end
