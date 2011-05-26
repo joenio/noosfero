@@ -2,7 +2,7 @@ module ActsAsHavingImage
 
   module ClassMethods
     def acts_as_having_image
-      has_one :image, :as => 'owner'
+      belongs_to :image
       self.send(:include, ActsAsHavingImage)
     end
   end
