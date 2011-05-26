@@ -84,8 +84,8 @@ class Profile < ActiveRecord::Base
 
   named_scope :more_recent, :order => "created_at DESC"
 
-  named_scope :with_image, :conditions => [ 'images_id IS NOT NULL' ]
-  named_scope :without_image, :conditions => [ 'images_id IS NULL' ]
+  named_scope :with_image, :conditions => [ 'image_id IS NOT NULL' ]
+  named_scope :without_image, :conditions => [ 'image_id IS NULL' ]
 
   acts_as_trackable :dependent => :destroy
 
