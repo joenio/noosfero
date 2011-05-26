@@ -84,6 +84,13 @@ class Profile < ActiveRecord::Base
 
   named_scope :more_recent, :order => "created_at DESC"
 
+  named_scope :with_image, :conditions => [ 'images.id IS NOT NULL' ],
+    :select => "#{Profile.qualified_column_names}",
+    :joins => "LEFT OUTER JOIN images ON images.owner_id = profiles.id"
+  named_scope :without_image, :conditions => [ 'images.id IS NULL' ],
+    :select => "#{Profile.qualified_column_names}",
+    :joins => "LEFT OUTER JOIN images ON images.owner_id = profiles.id"
+
   acts_as_trackable :dependent => :destroy
 
   has_many :action_tracker_notifications, :foreign_key => 'profile_id'

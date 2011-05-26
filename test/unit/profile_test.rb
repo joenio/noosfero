@@ -1710,6 +1710,28 @@ class ProfileTest < Test::Unit::TestCase
     assert profile.is_on_homepage?("/#{profile.identifier}/#{homepage.slug}", homepage)
   end
 
+  should 'find profiles with image' do
+    env = fast_create(Environment)
+    2.times do |n|
+      p = fast_create(Person, :name => "with_image_#{n}", :environment_id => env.id)
+      Image.create!(:uploaded_data => fixture_file_upload('/files/rails.png', 'image/png'), :owner => p)
+    end
+    without_image = fast_create(Person, :name => 'without_image', :environment_id => env.id)
+    assert_equal 2, env.profiles.with_image.count
+    assert_not_includes env.profiles.with_image, without_image
+  end
+
+  should 'find profiles withouth image' do
+    env = fast_create(Environment)
+    2.times do |n|
+      fast_create(Person, :name => "without_image_#{n}", :environment_id => env.id)
+    end
+    with_image = fast_create(Person, :name => 'with_image', :environment_id => env.id)
+    Image.create!(:uploaded_data => fixture_file_upload('/files/rails.png', 'image/png'), :owner => with_image)
+    assert_equal 2, env.profiles.without_image.count
+    assert_not_includes env.profiles.without_image, with_image
+  end
+
   private
 
   def assert_invalid_identifier(id)
