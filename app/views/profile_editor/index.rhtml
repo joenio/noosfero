@@ -39,7 +39,7 @@
     end %>
   <% end %>
 
-  <%= control_panel_button(_('Change Password'), 'change-password', :controller => 'account', :action => 'change_password') if profile.person? %>
+  <%= control_panel_button(_('Change Password'), 'change-password', :controller => 'my_account', :action => 'change_password') if profile.person? %>
 
   <%= control_panel_button(__('Manage friends'), 'friends', :controller => 'friends', :action => 'index') if profile.person? %>
 
