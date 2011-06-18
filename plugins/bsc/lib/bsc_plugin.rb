@@ -22,6 +22,14 @@ class BscPlugin < Noosfero::Plugin
     end
   end
 
+  def create_enterprise_hidden_fields
+    'bsc_id'
+  end
+
+  def create_enterprise_extra_content
+    'similar_enterprises'
+  end
+
   private
   def bsc?(profile)
     profile.kind_of?(BscPlugin::Bsc)

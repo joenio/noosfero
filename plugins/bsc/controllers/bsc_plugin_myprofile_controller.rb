@@ -43,6 +43,16 @@ class BscPluginMyprofileController < MyProfileController
     end
   end
 
+  def similar_enterprises
+    name = params[:name]
+    city = params[:city]
+
+    result = []
+    if !name.blank?
+      enterprises = (Enterprise.all - profile.enterprises).select { |enterprise| enterprise.bsc_id.nil? && enterprise.city == city && enterprise.name.downcase.include?(name.downcase)}
+      result = enterprises.inject(result) {|result, enterprise| result << [enterprise.id, enterprise.name]}
+    end
+    render :text => result.to_json
+  end
+
 end
-
-
