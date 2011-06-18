@@ -40,7 +40,11 @@ class Noosfero::Plugin
     end
 
     def root_path
-      Rails.root+'/plugins/'+public_name
+      File.join(RAILS_ROOT, 'plugins', public_name)
+    end
+
+    def view_path
+      File.join(root_path,'views')
     end
 
     # Here the developer should specify the meta-informations that the plugin can
