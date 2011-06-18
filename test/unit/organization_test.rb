@@ -386,4 +386,14 @@ class OrganizationTest < Test::Unit::TestCase
     assert_includes Organization.more_active, profile
   end
 
+  should 'validates format of cnpj' do
+    organization = Organization.new(:cnpj => '239-234.234')
+    organization.valid?
+    assert organization.errors.invalid?(:cnpj)
+
+    organization.cnpj = '94.132.024/0001-48'
+    organization.valid?
+    assert !organization.errors.invalid?(:cnpj)
+  end
+
 end
