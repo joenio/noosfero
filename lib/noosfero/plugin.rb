@@ -119,10 +119,31 @@ class Noosfero::Plugin
     nil
   end
 
-  # -> Add plugins' javascript files to application
+  # -> Adds plugins' javascript files to application
   # returns = ['example1.js', 'javascripts/example2.js', 'example3.js']
   def js_files
     []
   end
+
+  # -> Adds links to the admin panel
+  # returns = {:title => title, :url => url}
+  #   title = name that will be displayed in the link
+  #   url   = url or route to which the link will redirect to.
+  def admin_panel_links
+    nil
+  end
+
+  # -> Adds hidden fields to create enterprise
+  # returns = ['field1', 'field2', 'field3']
+  def create_enterprise_hidden_fields
+    nil
+  end
+
+  # -> Adds extra content to the create enterprise page
+  # returns = path to partial
+  def create_enterprise_extra_content
+    nil
+  end
+
 
 end
