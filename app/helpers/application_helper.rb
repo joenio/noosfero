@@ -298,6 +298,17 @@ module ApplicationHelper
     partial_for_task_class(klass.superclass, action)
   end
 
+  def view_for_profile_actions(klass)
+    raise ArgumentError, 'No profile actions view for this class.' if klass.nil?
+
+    name = klass.name.underscore
+    VIEW_EXTENSIONS.each do |ext|
+      return "blocks/profile_info_actions/"+name+ext if File.exists?(File.join(RAILS_ROOT, 'app', 'views', 'blocks', 'profile_info_actions', name+ext))
+    end
+
+    view_for_profile_actions(klass.superclass)
+  end
+
   def user
     @controller.send(:user)
   end
