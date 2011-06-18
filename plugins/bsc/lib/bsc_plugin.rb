@@ -1,4 +1,8 @@
+require_dependency 'ext/enterprise'
+
 class BscPlugin < Noosfero::Plugin
+
+  Bsc
 
   def self.plugin_name
     "BSC"

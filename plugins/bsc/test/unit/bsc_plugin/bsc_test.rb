@@ -1,0 +1,40 @@
+require File.dirname(__FILE__) + '/../../../../../test/test_helper'
+require File.dirname(__FILE__) + '/../../../../../app/models/uploaded_file'
+require File.dirname(__FILE__) + '/../../../lib/ext/enterprise'
+
+class BscPlugin::BscTest < Test::Unit::TestCase
+  VALID_CNPJ = '94.132.024/0001-48'
+
+  should 'validate presence of cnpj' do
+    bsc = BscPlugin::Bsc.new()
+    bsc.valid?
+
+    assert bsc.errors.invalid?(:cnpj)
+  end
+
+  should 'validate uniqueness of cnpj' do
+    bsc1 = BscPlugin::Bsc.create!({:business_name => 'Sample Bsc', :identifier => 'sample-bsc', :company_name => 'Sample Bsc Ltda.', :cnpj => VALID_CNPJ})
+    bsc2 = BscPlugin::Bsc.new(:cnpj => VALID_CNPJ)
+    bsc2.valid?
+   assert bsc2.errors.invalid?(:cnpj)
+  end
+
+  should 'have many enterprises' do
+    e1 = Enterprise.new(:name => 'Enterprise1', :identifier => 'enterprise1')
+    e2 = Enterprise.new(:name => 'Enterprise2', :identifier => 'enterprise2')
+    bsc = BscPlugin::Bsc.new(:business_name => 'Sample Bsc', :company_name => 'Sample Bsc Ltda.', :identifier => 'sample-bsc', :cnpj => VALID_CNPJ)
+    bsc.enterprises << e1
+    bsc.enterprises << e2
+    bsc.save!
+
+    assert_equal e1.bsc, bsc
+    assert_equal e2.bsc, bsc
+  end
+
+  should 'create Bsc enabled and not validated by default' do
+    bsc = BscPlugin::Bsc.create(:business_name => 'Sample Bsc', :company_name => 'Sample Bsc Ltda.', :identifier => 'sample-bsc', :cnpj => VALID_CNPJ)
+    assert bsc.enabled
+    assert !bsc.validated
+  end
+
+end
