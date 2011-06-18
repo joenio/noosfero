@@ -128,6 +128,9 @@ class ApplicationController < ActionController::Base
 
   def init_noosfero_plugins
     @plugins = Noosfero::Plugin::Manager.new(self)
+    @plugins.enabled_plugins.map(&:class).each do |plugin|
+      prepend_view_path(plugin.view_path)
+    end
   end
 
   def load_terminology
