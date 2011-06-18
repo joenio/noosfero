@@ -37,4 +37,15 @@ class BscPlugin::BscTest < Test::Unit::TestCase
     assert !bsc.validated
   end
 
+  should 'verify already requested enterprises' do
+    e1 = fast_create(Enterprise)
+    e2 = fast_create(Enterprise)
+    bsc = BscPlugin::Bsc.new()
+    task = BscPlugin::AssociateEnterprise.new(:target => e1, :bsc => bsc)
+    bsc.enterprise_requests.stubs(:pending).returns([task])
+
+    assert bsc.already_requested?(e1)
+    assert !bsc.already_requested?(e2)
+  end
+  
 end

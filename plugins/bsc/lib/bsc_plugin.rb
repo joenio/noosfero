@@ -12,4 +12,19 @@ class BscPlugin < Noosfero::Plugin
     _("Adds the Bsc feature")
   end
 
+  def admin_panel_links
+    {:title => _('Create BSC'), :url => {:controller => 'bsc_plugin_environment', :action => 'new'}}
+  end
+
+  def control_panel_buttons
+    if bsc?(context.profile)
+      {:title => _("Manage associated enterprises"), :icon => '', :url => {:controller => 'bsc_plugin_myprofile', :action => 'manage_associated_enterprises'}}
+    end
+  end
+
+  private
+  def bsc?(profile)
+    profile.kind_of?(BscPlugin::Bsc)
+  end
+
 end
