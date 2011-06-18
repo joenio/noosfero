@@ -292,7 +292,7 @@ module ApplicationHelper
 
     name = "#{klass.name.underscore}_#{action.to_s}"
     VIEW_EXTENSIONS.each do |ext|
-      return name if File.exists?(File.join(RAILS_ROOT, 'app', 'views', params[:controller], name+ext))
+      return name if File.exists?(File.join(RAILS_ROOT, 'app', 'views', params[:controller], '_'+name+ext))
     end
 
     partial_for_task_class(klass.superclass, action)
