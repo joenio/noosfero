@@ -25,7 +25,7 @@
       else
         jQuery('#similar-enterprises').fadeOut();
     }
-    jQuery('#create_enterprise_name').change(function() {
+    jQuery('#create_enterprise_name,#create_enterprise_city').change(function() {
       var parameters = {};
       if(jQuery('#create_enterprise_name').length)
         parameters.name = jQuery('#create_enterprise_name').val();

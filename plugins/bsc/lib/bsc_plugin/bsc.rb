@@ -27,4 +27,8 @@ class BscPlugin::Bsc < Enterprise
     enterprises.map { |enterprise| {:id => enterprise.id, :name => enterprise.name} }.to_json
   end
 
+  def control_panel_settings_button
+    {:title => _('Bsc info and settings'), :icon => 'edit-profile-enterprise'}
+  end
+
 end
