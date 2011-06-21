@@ -22,6 +22,7 @@
 
     <% @plugins.map(:create_enterprise_hidden_fields).each do |field| %>
       <%= hidden_field_tag  "create_enterprise[#{field}]", params[field.to_sym] %>
+      <%= hidden_field_tag  field, params[field.to_sym] %>
     <% end%>
 
     <%= required f.text_field 'name', :onchange => "updateUrlField(this, 'create_enterprise_identifier')", :size => 40 %>

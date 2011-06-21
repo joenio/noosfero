@@ -6,7 +6,7 @@ class BscPluginMyprofileController < MyProfileController
   end
 
   def search_enterprise
-    render :text => Enterprise.find_by_contents(params[:q] + '*').
+    render :text => environment.enterprises.find(:all, :conditions => ['name LIKE ?', "%#{params[:q]}%"]).
       select { |enterprise| enterprise.bsc.nil? && !profile.already_requested?(enterprise)}.
       map {|enterprise| {:id => enterprise.id, :name => enterprise.name} }.
       to_json
@@ -49,7 +49,7 @@ class BscPluginMyprofileController < MyProfileController
 
     result = []
     if !name.blank?
-      enterprises = (Enterprise.all - profile.enterprises).select { |enterprise| enterprise.bsc_id.nil? && enterprise.city == city && enterprise.name.downcase.include?(name.downcase)}
+      enterprises = (profile.environment.enterprises - profile.enterprises).select { |enterprise| enterprise.bsc_id.nil? && enterprise.city == city && enterprise.name.downcase.include?(name.downcase)}
       result = enterprises.inject(result) {|result, enterprise| result << [enterprise.id, enterprise.name]}
     end
     render :text => result.to_json
