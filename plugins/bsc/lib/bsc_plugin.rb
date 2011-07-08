@@ -18,7 +18,7 @@ class BscPlugin < Noosfero::Plugin
 
   def control_panel_buttons
     if bsc?(context.profile)
-      {:title => _("Manage associated enterprises"), :icon => '', :url => {:controller => 'bsc_plugin_myprofile', :action => 'manage_associated_enterprises'}}
+      {:title => _("Manage associated enterprises"), :icon => 'bsc-enterprises', :url => {:controller => 'bsc_plugin_myprofile', :action => 'manage_associated_enterprises'}}
     end
   end
 
@@ -28,6 +28,10 @@ class BscPlugin < Noosfero::Plugin
 
   def create_enterprise_extra_content
     'similar_enterprises'
+  end
+
+  def stylesheet?
+    true
   end
 
   private
