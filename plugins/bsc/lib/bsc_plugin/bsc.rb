@@ -31,4 +31,8 @@ class BscPlugin::Bsc < Enterprise
     {:title => _('Bsc info and settings'), :icon => 'edit-profile-enterprise'}
   end
 
+  def products
+    enterprises.map { |enterprise| enterprise.products }.flatten
+  end
+
 end

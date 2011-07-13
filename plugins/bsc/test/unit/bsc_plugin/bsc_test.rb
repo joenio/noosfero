@@ -47,5 +47,27 @@ class BscPlugin::BscTest < Test::Unit::TestCase
     assert bsc.already_requested?(e1)
     assert !bsc.already_requested?(e2)
   end
+
+  should 'return associated enterprises products' do
+    e1 = fast_create(Enterprise)
+    e2 = fast_create(Enterprise)
+    category = fast_create(ProductCategory)
+    bsc = BscPlugin::Bsc.new()
+
+    p1 = fast_create(Product, :product_category_id => category.id)
+    p2 = fast_create(Product, :product_category_id => category.id)
+    p3 = fast_create(Product, :product_category_id => category.id)
+    
+    e1.products << p1
+    e1.products << p2
+    e2.products << p3
+    
+    bsc.enterprises << e1
+    bsc.enterprises << e2
+
+    assert_includes bsc.products, p1
+    assert_includes bsc.products, p2
+    assert_includes bsc.products, p3
+  end
   
 end

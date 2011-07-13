@@ -32,6 +32,22 @@ Given /^the following (community|communities|enterprises?|organizations?)$/ do |
   end
 end
 
+Given /^the folllowing "([^\"]*)" from "([^\"]*)"$/ do |kind, plugin, table|
+  klass = (plugin.camelize+'::'+kind.singularize.camelize).constantize
+  table.hashes.each do |row|
+    owner = row.delete("owner")
+    domain = row.delete("domain")
+    organization = klass.create!(row)
+    if owner
+      organization.add_admin(Profile[owner])
+    end
+    if domain
+      d = Domain.new :name => domain, :owner => organization
+      d.save(false)
+    end
+  end
+end
+
 Given /^the following blocks$/ do |table|
   table.hashes.map{|item| item.dup}.each do |item|
     klass = item.delete('type')
