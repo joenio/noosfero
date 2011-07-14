@@ -108,6 +108,12 @@ class Noosfero::Plugin
     nil
   end
 
+  # -> Adds content to calalog list item
+  # returns = lambda block that creates a html code
+  def catalog_list_item_extras(item)
+    nil
+  end
+
   # -> Adds content to products info
   # returns = lambda block that creates a html code
   def product_info_extras(product)

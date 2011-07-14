@@ -171,4 +171,8 @@ class Enterprise < Organization
     {:title => __('Enterprise Info and settings'), :icon => 'edit-profile-enterprise'}
   end
 
+  def create_product?
+    true
+  end
+
 end

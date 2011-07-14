@@ -34,6 +34,16 @@ class BscPlugin < Noosfero::Plugin
     true
   end
 
+  def catalog_list_item_extras(product)
+    if bsc?(context.profile)
+      if BscPlugin::Bsc.all.any? { |bsc| bsc.members.include?(context.user) }
+        lambda {link_to(product.enterprise.short_name, product.enterprise.url, :class => 'bsc-catalog-enterprise-link')}
+      else
+        lambda {product.enterprise.short_name}
+      end
+    end
+  end
+
   private
   def bsc?(profile)
     profile.kind_of?(BscPlugin::Bsc)

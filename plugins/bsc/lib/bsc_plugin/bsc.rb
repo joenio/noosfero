@@ -31,8 +31,13 @@ class BscPlugin::Bsc < Enterprise
     {:title => _('Bsc info and settings'), :icon => 'edit-profile-enterprise'}
   end
 
-  def products
+  def products(reload_flag=false)
+    reload if reload_flag
     enterprises.map { |enterprise| enterprise.products }.flatten
+  end
+
+  def create_product?
+    false
   end
 
 end

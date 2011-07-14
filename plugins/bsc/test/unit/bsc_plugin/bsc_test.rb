@@ -57,11 +57,11 @@ class BscPlugin::BscTest < Test::Unit::TestCase
     p1 = fast_create(Product, :product_category_id => category.id)
     p2 = fast_create(Product, :product_category_id => category.id)
     p3 = fast_create(Product, :product_category_id => category.id)
-    
+
     e1.products << p1
     e1.products << p2
     e2.products << p3
-    
+
     bsc.enterprises << e1
     bsc.enterprises << e2
 
@@ -69,5 +69,24 @@ class BscPlugin::BscTest < Test::Unit::TestCase
     assert_includes bsc.products, p2
     assert_includes bsc.products, p3
   end
-  
+
+  should 'reload products' do
+    e = fast_create(Enterprise)
+    category = fast_create(ProductCategory)
+    bsc = BscPlugin::Bsc.create!(:business_name => 'Sample Bsc', :company_name => 'Sample Bsc', :identifier => 'sample-bsc', :cnpj => VALID_CNPJ)
+    p = fast_create(Product, :product_category_id => category.id)
+
+    e.bsc = bsc
+    e.save!
+    e.products << p
+
+    assert_equal [], bsc.products
+    assert_equal [p], bsc.products(true)
+  end
+
+  should 'not be able to create product' do
+    bsc = BscPlugin::Bsc.new
+    assert !bsc.create_product?
+  end
+
 end

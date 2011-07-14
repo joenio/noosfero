@@ -32,6 +32,13 @@ Given /^the following (community|communities|enterprises?|organizations?)$/ do |
   end
 end
 
+Given /^"([^\"]*)" is associated with "([^\"]*)"$/ do |enterprise, bsc|
+  enterprise = Enterprise.find_by_name(enterprise) || Enterprise[enterprise]
+  bsc = BscPlugin::Bsc.find_by_name(bsc) || BscPlugin::Bsc[bsc]
+
+  bsc.enterprises << enterprise
+end
+
 Given /^the folllowing "([^\"]*)" from "([^\"]*)"$/ do |kind, plugin, table|
   klass = (plugin.camelize+'::'+kind.singularize.camelize).constantize
   table.hashes.each do |row|
@@ -431,4 +438,11 @@ end
 
 Given /^skip comments captcha$/ do
   Comment.any_instance.stubs(:skip_captcha?).returns(true)
+end
+
+Given /^"([^\"]*)" plugin is enabled$/ do |plugin_name|
+  env = Environment.default
+  env.enabled_plugins += [plugin_name + "Plugin"]
+  env.enabled_plugins.uniq!
+  env.save!
 end
