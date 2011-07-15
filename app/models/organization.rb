@@ -149,4 +149,12 @@ class Organization < Profile
     false
   end
 
+  def members_to_json
+    members.map { |member| {:id => member.id, :name => member.name} }.to_json
+  end
+
+  def members_by_role_to_json(role)
+    members_by_role(role).map { |member| {:id => member.id, :name => member.name} }.to_json
+  end
+
 end

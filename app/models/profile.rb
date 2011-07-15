@@ -564,9 +564,7 @@ private :generate_url, :url_options
       if self.closed? && members_count > 0
         AddMember.create!(:person => person, :organization => self) unless self.already_request_membership?(person)
       else
-        if members_count == 0
-          self.affiliate(person, Profile::Roles.admin(environment.id))
-        end
+        self.affiliate(person, Profile::Roles.admin(environment.id)) if members_count == 0
         self.affiliate(person, Profile::Roles.member(environment.id))
       end
     else
