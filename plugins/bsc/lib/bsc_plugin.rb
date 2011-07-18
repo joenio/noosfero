@@ -18,7 +18,7 @@ class BscPlugin < Noosfero::Plugin
 
   def control_panel_buttons
     if bsc?(context.profile)
-      {:title => _("Manage associated enterprises"), :icon => 'bsc-enterprises', :url => {:controller => 'bsc_plugin_myprofile', :action => 'manage_associated_enterprises'}}
+      [{:title => _("Manage associated enterprises"), :icon => 'bsc-enterprises', :url => {:controller => 'bsc_plugin_myprofile', :action => 'manage_associated_enterprises'}}, {:title => _('Transfer enterprises management'), :icon => '', :url => {:controller => 'bsc_plugin_myprofile', :action => 'transfer_enterprises_management'}}]
     end
   end
 

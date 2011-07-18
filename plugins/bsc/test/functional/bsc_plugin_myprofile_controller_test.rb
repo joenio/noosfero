@@ -68,5 +68,23 @@ class BscPluginMyprofileControllerTest < Test::Unit::TestCase
     end
   end
 
+  should 'transfer enterprises management' do
+    p1 = create_user('p1').person
+    p2 = create_user('p2').person
+    p3 = create_user('p3').person
+
+    role = Profile::Roles.admin(bsc.environment.id)
+
+    bsc.add_admin(p1)
+    bsc.add_admin(p2)
+
+    post :transfer_enterprises_management, :profile => bsc.identifier, 'q_'+role.key => "#{p3.id}"
+
+    assert_response :redirect
+
+    assert_not_includes bsc.admins, p1
+    assert_not_includes bsc.admins, p2
+    assert_includes bsc.admins, p3
+  end
 end
 

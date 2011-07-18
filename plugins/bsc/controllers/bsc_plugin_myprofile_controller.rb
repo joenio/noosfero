@@ -55,4 +55,19 @@ class BscPluginMyprofileController < MyProfileController
     render :text => result.to_json
   end
 
+  def transfer_enterprises_management
+    role = Profile::Roles.admin(profile.environment.id)
+    @roles = [role]
+    if request.post?
+      person = Person.find(params['q_'+role.key])
+
+      profile.admins.map { |admin| profile.remove_admin(admin) }
+      profile.add_admin(person)
+
+      BscPlugin::Mailer.deliver_admin_notification(person, profile)
+
+      session[:notice] = _('Enterprises management transferred.')
+      redirect_to :controller => 'profile_editor'
+    end
+  end
 end
