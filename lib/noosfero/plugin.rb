@@ -170,4 +170,26 @@ class Noosfero::Plugin
     nil
   end
 
+  # This is a generic hotspot for all controllers on Noosfero.
+  # If any plugin wants to define filters to run on any controller, the name of
+  # the hotspot must be in the following form: <underscored_controller_name>_filters.
+  # Example: for ProfileController the hotspot is profile_controller_filters
+  #
+  # -> Adds a filter to a controller
+  # returns = { :type => type,
+  #             :method_name => method_name,
+  #             :options => {:opt1 => opt1, :opt2 => opt2},
+  #             :block => Proc or lambda block}
+  #   type = 'before_filter' or 'after_filter'
+  #   method_name = The name of the filter
+  #   option = Filter options, like :only or :except
+  #   block = Block that the filter will call
+  def method_missing(method, *args, &block)
+    if method.to_s =~ /^(.+)_controller_filters$/
+      []
+    else
+      super
+    end
+  end
+
 end

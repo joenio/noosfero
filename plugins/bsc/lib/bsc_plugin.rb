@@ -1,4 +1,5 @@
 require_dependency 'ext/enterprise'
+require_dependency 'ext/product'
 
 class BscPlugin < Noosfero::Plugin
 
@@ -36,7 +37,7 @@ class BscPlugin < Noosfero::Plugin
 
   def catalog_list_item_extras(product)
     if bsc?(context.profile)
-      if BscPlugin::Bsc.all.any? { |bsc| bsc.members.include?(context.user) }
+      if is_member_of_any_bsc?(context.user)
         lambda {link_to(product.enterprise.short_name, product.enterprise.url, :class => 'bsc-catalog-enterprise-link')}
       else
         lambda {product.enterprise.short_name}
@@ -44,9 +45,32 @@ class BscPlugin < Noosfero::Plugin
     end
   end
 
+  def profile_controller_filters
+    if profile
+      special_enterprise = !profile.validated && profile.bsc
+      is_member_of_any_bsc = is_member_of_any_bsc?(context.user)
+      block = lambda {
+        render_access_denied if special_enterprise && !is_member_of_any_bsc
+      }
+
+      [{ :type => 'before_filter', :method_name => 'bsc_access', :block => block }]
+    else
+      []
+    end
+  end
+
   private
+
   def bsc?(profile)
     profile.kind_of?(BscPlugin::Bsc)
+  end
+
+  def is_member_of_any_bsc?(user)
+    BscPlugin::Bsc.all.any? { |bsc| bsc.members.include?(user) }
+  end
+
+  def profile
+    context.environment.profiles.find_by_identifier(context.params[:profile])
   end
 
 end
