@@ -23,7 +23,7 @@ class BscPlugin < Noosfero::Plugin
   end
 
   def create_enterprise_hidden_fields
-    'bsc_id'
+    ['bsc_id', 'enabled', 'validated']
   end
 
   def create_enterprise_extra_content

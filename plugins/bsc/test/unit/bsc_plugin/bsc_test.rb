@@ -31,12 +31,6 @@ class BscPlugin::BscTest < Test::Unit::TestCase
     assert_equal e2.bsc, bsc
   end
 
-  should 'create Bsc enabled and not validated by default' do
-    bsc = BscPlugin::Bsc.create(:business_name => 'Sample Bsc', :company_name => 'Sample Bsc Ltda.', :identifier => 'sample-bsc', :cnpj => VALID_CNPJ)
-    assert bsc.enabled
-    assert !bsc.validated
-  end
-
   should 'verify already requested enterprises' do
     e1 = fast_create(Enterprise)
     e2 = fast_create(Enterprise)

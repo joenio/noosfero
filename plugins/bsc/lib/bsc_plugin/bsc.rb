@@ -14,11 +14,6 @@ class BscPlugin::Bsc < Enterprise
     bsc.name = bsc.business_name || 'Sample name'
   end
 
-  before_create do |bsc|
-    bsc.validated = false
-    bsc.enabled = true
-  end
-
   def already_requested?(enterprise)
     enterprise_requests.pending.map(&:enterprise).include?(enterprise)
   end

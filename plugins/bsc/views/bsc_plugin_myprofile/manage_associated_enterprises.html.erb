@@ -12,7 +12,7 @@
 <% form_tag :action => 'save_associations' do %>
   <%= text_field_tag(:q, nil, :id => 'search-enterprises') %>
 
-  <p style='margin-top: 30px;'><%= button('add', _('Add new enterprise'), {:controller => 'enterprise_registration', :bsc_id => profile.id})%></p>
+  <p style='margin-top: 30px;'><%= button('add', _('Add new enterprise'), {:controller => 'enterprise_registration', :bsc_id => profile.id, :enabled => true, :validated => false })%></p>
 
   <% button_bar do %>
     <%= submit_button('save', _('Save'))%>
