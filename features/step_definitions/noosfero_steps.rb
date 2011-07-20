@@ -39,6 +39,13 @@ Given /^"([^\"]*)" is associated with "([^\"]*)"$/ do |enterprise, bsc|
   bsc.enterprises << enterprise
 end
 
+Then /^"([^\"]*)" should be associated with "([^\"]*)"$/ do |enterprise, bsc|
+  enterprise = Enterprise.find_by_name(enterprise) || Enterprise[enterprise]
+  bsc = BscPlugin::Bsc.find_by_name(bsc) || BscPlugin::Bsc[bsc]
+
+  bsc.enterprises.should include(enterprise)
+end
+
 Given /^the folllowing "([^\"]*)" from "([^\"]*)"$/ do |kind, plugin, table|
   klass = (plugin.camelize+'::'+kind.singularize.camelize).constantize
   table.hashes.each do |row|

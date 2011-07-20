@@ -258,6 +258,7 @@ class Environment < ActiveRecord::Base
 
   def enable_plugin(plugin)
     self.enabled_plugins += [plugin]
+    self.enabled_plugins.uniq!
     self.save!
   end
 
