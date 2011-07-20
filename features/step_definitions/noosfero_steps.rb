@@ -316,12 +316,12 @@ Given /^"(.+)" is friend of "(.+)"$/ do |person, friend|
   Person[person].add_friend(Person[friend])
 end
 
-Given /^(.+) is blocked$/ do |enterprise_name|
+Given /^enterprise "([^\"]*)" is blocked$/ do |enterprise_name|
   enterprise = Enterprise.find_by_name(enterprise_name)
   enterprise.block
 end
 
-Given /^(.+) is disabled$/ do |enterprise_name|
+Given /^enterprise "([^\"]*)" is disabled$/ do |enterprise_name|
   enterprise = Enterprise.find_by_name(enterprise_name)
   enterprise.enabled = false
   enterprise.save
@@ -445,4 +445,15 @@ Given /^"([^\"]*)" plugin is enabled$/ do |plugin_name|
   env.enabled_plugins += [plugin_name + "Plugin"]
   env.enabled_plugins.uniq!
   env.save!
+end
+
+Given /^"([^\"]*)" plugin is (enabled|disabled)$/ do |plugin_name, status|
+  environment = Environment.default
+  environment.send(status.chop + '_plugin', plugin_name+'Plugin')
+end
+
+Then /^there should be an? (.+) named "([^\"]*)"$/ do |klass_name, profile_name|
+  klass = klass_name.camelize.constantize
+  klass.find_by_name(profile_name).nil?.should be_false
+>>>>>>> [bsc-plugin-2] Creating some cucumber tests and minor fixes (on the way)
 end

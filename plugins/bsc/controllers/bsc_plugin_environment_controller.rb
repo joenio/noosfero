@@ -6,7 +6,7 @@ class BscPluginEnvironmentController < AdminController
       @bsc.user = current_user
       @bsc.save!
       @bsc.add_admin(user)
-      session[:notice] = _('Your BSC was created successfully.')
+      session[:notice] = _('Your Bsc was created.')
       redirect_to :controller => 'admin_panel', :action => 'index'
     end
   end

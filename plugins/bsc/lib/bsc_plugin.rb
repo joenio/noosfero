@@ -14,7 +14,7 @@ class BscPlugin < Noosfero::Plugin
   end
 
   def admin_panel_links
-    {:title => _('Create BSC'), :url => {:controller => 'bsc_plugin_environment', :action => 'new'}}
+    {:title => _('Create Bsc'), :url => {:controller => 'bsc_plugin_environment', :action => 'new'}}
   end
 
   def control_panel_buttons

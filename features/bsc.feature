@@ -1,17 +1,60 @@
 Feature: bsc
 
   Background:
+    Given "Bsc" plugin is enabled
+#     Given the folllowing "bsc" from "bsc_plugin"
+#       | business_name | identifier | company_name  | cnpj               |
+#       | Bsc Test      | bsc-test   | Bsc Test Ltda | 94.132.024/0001-48 |
+#     And the following user
+#       | login | name        |
+#       | mario | Mario Souto |
+#     And "Mario Souto" is admin of "Bsc Test"
+#     And I am logged in as "mario"
+#     And feature "disable_products_for_enterprises" is disabled on environment
+#     And I am on Bsc Test's control panel
+
+  Scenario: display link to bsc creation on admin panel when bsc plugin active
+    Given I am logged in as admin
+    When I am on the environment control panel
+    Then I should see "Create Bsc"
+    When "Bsc" plugin is disabled
+    And I am on the environment control panel
+    Then I should not see "Create Bsc"
+
+  Scenario: be able to create a bsc
+    Given I am logged in as admin
+    And I am on the environment control panel
+    And I follow "Create Bsc"
+    And I fill in the following:
+      | Business name | Sample Bsc         |
+      | Company name  | Sample Bsc         |
+      | profile_data_identifier    | sample-identifier  |
+      | Cnpj          | 07.970.746/0001-77 |
+    When I press "Save"
+    Then there should be a profile named "Sample Bsc"
+
+  Scenario: display a button on bsc control panel to manage associated enterprises
     Given the folllowing "bsc" from "bsc_plugin"
       | business_name | identifier | company_name  | cnpj               |
       | Bsc Test      | bsc-test   | Bsc Test Ltda | 94.132.024/0001-48 |
-    And the following user
-      | login | name        |
-      | mario | Mario Souto |
-    And "Mario Souto" is admin of "Bsc Test"
-    And I am logged in as "mario"
-    And "Bsc" plugin is enabled
-    And feature "disable_products_for_enterprises" is disabled on environment
+    And I am logged in as admin
+    When I am on Bsc Test's control panel
+    Then I should see "Manage associated enterprises"
+
+  Scenario: list already associated enterprises on manage associated enterprises
+    Given the folllowing "bsc" from "bsc_plugin"
+      | id  | business_name | identifier | company_name  | cnpj               |
+      | 666 | Bsc Test      | bsc-test   | Bsc Test Ltda | 94.132.024/0001-48 |
+    And the following enterprises
+      | identifier    | name          | bsc_id  |
+      | enterprise-1  | Enterprise 1  | 666     |
+      | enterprise-2  | Enterprise 2  | 666     |
+    And I am logged in as admin
     And I am on Bsc Test's control panel
+    When I follow "Manage associated enterprises"
+    And show me the page
+    Then I should see "Enterprise 1"
+    And I should see "Enterprise 2"
 
   Scenario: do not display "add new product" button
     When I follow "Manage Products and Services"

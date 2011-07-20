@@ -256,9 +256,19 @@ class Environment < ActiveRecord::Base
     self.settings["#{feature}_enabled".to_sym] = true
   end
 
+  def enable_plugin(plugin)
+    self.enabled_plugins += [plugin]
+    self.save!
+  end
+
   # Disables a feature identified by its name
   def disable(feature)
     self.settings["#{feature}_enabled".to_sym] = false
+  end
+
+  def disable_plugin(plugin)
+    self.enabled_plugins.delete(plugin)
+    self.save!
   end
 
   # Tells if a feature, identified by its name, is enabled
