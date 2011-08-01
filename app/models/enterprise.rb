@@ -151,6 +151,7 @@ class Enterprise < Organization
     if enterprise.environment.enabled?('enterprises_are_disabled_when_created')
       enterprise.enabled = false
     end
+    true
   end
 
   def template
