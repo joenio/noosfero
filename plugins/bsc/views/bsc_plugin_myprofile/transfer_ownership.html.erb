@@ -1,4 +1,4 @@
-<h1><%= _('Transfer Enterprises Management') %></h1>
+<h1><%= _('Transfer Ownership') %></h1>
 
 <div id='last-admin-message' style="margin-bottom: 20px;">
   <%= _('This option allows you to transfer this enterprise\'s management to another user. This action will remove all the current administrators. Be careful when confirming this procedure.') %>
@@ -27,7 +27,6 @@
 
 <%= javascript_include_tag '/plugins/bsc/jquery_tokeninput/src/jquery.tokeninput.js' %>
 <% stylesheet('/plugins/bsc/jquery_tokeninput/styles/token-input.css') %>
-
 
 <% @roles.each do |role| %>
   <% search_url = url_for(:controller => 'profile_members', :action => 'search_user', :role => role.id, :profile => profile.identifier) %>

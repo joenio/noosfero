@@ -178,6 +178,15 @@ class Noosfero::Plugin
     nil
   end
 
+  # -> Adds buttons to manage members page
+  # returns = { :title => title, :icon => icon, :url => url }
+  #   title = name that will be displayed.
+  #   icon  = css class name (for customized icons include them in a css file).
+  #   url   = url or route to which the button will redirect.
+  def manage_members_extra_buttons
+    nil
+  end
+
   # This is a generic hotspot for all controllers on Noosfero.
   # If any plugin wants to define filters to run on any controller, the name of
   # the hotspot must be in the following form: <underscored_controller_name>_filters.

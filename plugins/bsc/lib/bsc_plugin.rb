@@ -18,9 +18,14 @@ class BscPlugin < Noosfero::Plugin
   end
 
   def control_panel_buttons
-    if bsc?(context.profile)
-      [{:title => _("Manage associated enterprises"), :icon => 'bsc-enterprises', :url => {:controller => 'bsc_plugin_myprofile', :action => 'manage_associated_enterprises'}}, {:title => _('Transfer enterprises management'), :icon => '', :url => {:controller => 'bsc_plugin_myprofile', :action => 'transfer_enterprises_management'}}]
-    end
+    buttons = []
+    buttons << {:title => _("Manage associated enterprises"), :icon => 'bsc-enterprises', :url => {:controller => 'bsc_plugin_myprofile', :action => 'manage_associated_enterprises'}} if bsc?(context.profile)
+    buttons << {:title => _('Transfer ownership'), :icon => '', :url => {:controller => 'bsc_plugin_myprofile', :action => 'transfer_ownership'}} if context.profile.enterprise?
+    buttons
+  end
+
+  def manage_members_extra_buttons
+    {:title => _('Transfer ownership'), :icon => '', :url => {:controller => 'bsc_plugin_myprofile', :action => 'transfer_enterprises_management'}} if context.profile.enterprise?
   end
 
   def create_enterprise_hidden_fields

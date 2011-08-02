@@ -55,7 +55,7 @@ class BscPluginMyprofileController < MyProfileController
     render :text => result.to_json
   end
 
-  def transfer_enterprises_management
+  def transfer_ownership
     role = Profile::Roles.admin(profile.environment.id)
     @roles = [role]
     if request.post?
@@ -66,7 +66,7 @@ class BscPluginMyprofileController < MyProfileController
 
       BscPlugin::Mailer.deliver_admin_notification(person, profile)
 
-      session[:notice] = _('Enterprises management transferred.')
+      session[:notice] = _('Enterprise ownership transferred.')
       redirect_to :controller => 'profile_editor'
     end
   end

@@ -68,7 +68,7 @@ class BscPluginMyprofileControllerTest < Test::Unit::TestCase
     end
   end
 
-  should 'transfer enterprises management' do
+  should 'transfer ownership' do
     p1 = create_user('p1').person
     p2 = create_user('p2').person
     p3 = create_user('p3').person
@@ -78,7 +78,7 @@ class BscPluginMyprofileControllerTest < Test::Unit::TestCase
     bsc.add_admin(p1)
     bsc.add_admin(p2)
 
-    post :transfer_enterprises_management, :profile => bsc.identifier, 'q_'+role.key => "#{p3.id}"
+    post :transfer_ownership, :profile => bsc.identifier, 'q_'+role.key => "#{p3.id}"
 
     assert_response :redirect
 

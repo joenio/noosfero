@@ -31,13 +31,13 @@ Feature: bsc
     When I am on Bsc Test's control panel
     Then I should see "Manage associated enterprises"
 
-  Scenario: display a button on bsc control panel to transfer enterprises management
+  Scenario: display a button on bsc control panel to transfer ownership
     Given the folllowing "bsc" from "bsc_plugin"
       | business_name | identifier | company_name  | cnpj               |
       | Bsc Test      | bsc-test   | Bsc Test Ltda | 94.132.024/0001-48 |
     And I am logged in as admin
     When I am on Bsc Test's control panel
-    Then I should see "Transfer enterprises management"
+    Then I should see "Transfer ownership"
 
   Scenario: create a new enterprise already associated with a bsc
     Given the following user
