@@ -65,6 +65,20 @@ class BscPlugin < Noosfero::Plugin
     end
   end
 
+  def content_viewer_controller_filters
+    if profile
+      special_enterprise = !profile.validated && profile.bsc
+      is_member_of_any_bsc = is_member_of_any_bsc?(context.user)
+      block = lambda {
+        render_access_denied if special_enterprise && !is_member_of_any_bsc
+      }
+
+      [{ :type => 'before_filter', :method_name => 'bsc_access', :block => block }]
+    else
+      []
+    end
+  end
+
   def asset_product_properties(product)
     properties = []
     properties << { :name => _('Bsc'), :content => lambda { link_to(product.bsc.name, product.bsc.url) } } if product.bsc
