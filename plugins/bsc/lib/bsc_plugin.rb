@@ -37,7 +37,7 @@ class BscPlugin < Noosfero::Plugin
 
   def catalog_list_item_extras(product)
     if bsc?(context.profile)
-      enterprise = product.enterprise_without_bsc
+      enterprise = product.enterprise
       if is_member_of_any_bsc?(context.user)
         lambda {link_to(enterprise.short_name, enterprise.url, :class => 'bsc-catalog-enterprise-link')}
       else
@@ -58,6 +58,17 @@ class BscPlugin < Noosfero::Plugin
     else
       []
     end
+  end
+
+  def asset_product_properties(product)
+    properties = []
+    properties << { :name => _('Bsc'), :content => lambda { link_to(product.bsc.name, product.bsc.url) } } if product.bsc
+    if product.enterprise.validated || is_member_of_any_bsc?(context.user)
+      content = lambda { link_to_homepage(product.enterprise.name, product.enterprise.identifier) }
+    else
+      content = lambda { product.enterprise.name }
+    end
+    properties << { :name => _('Supplier'), :content => content }
   end
 
   private

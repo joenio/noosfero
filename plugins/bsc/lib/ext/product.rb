@@ -1,13 +1,11 @@
 require_dependency 'product'
 
 class Product
-  def enterprise_with_bsc
-    return if enterprise_without_bsc.nil?
-    if !enterprise_without_bsc.validated && enterprise_without_bsc.bsc
-      enterprise_without_bsc.bsc
-    else
-      enterprise_without_bsc
-    end
+  def bsc
+    enterprise.bsc if enterprise
   end
-  alias_method_chain :enterprise, :bsc
+
+  def display_supplier_on_search?
+    false
+  end
 end

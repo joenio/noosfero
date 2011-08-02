@@ -126,6 +126,14 @@ class Noosfero::Plugin
     nil
   end
 
+  # -> Adds a property to the product on asset products
+  # returns = {:name => name, :content => content}
+  #   name = Name of the property
+  #   content = lambda block that creates an html
+  def asset_product_properties(product)
+    nil
+  end
+
   # -> Adds content to the beginning of the page
   # returns = lambda block that creates html code or raw rhtml/html.erb
   def body_beginning
