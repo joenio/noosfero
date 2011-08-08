@@ -6,6 +6,7 @@ include ManageProductsHelper
   def display_products_list(profile, products)
     data = ''
     extra_content = []
+    extra_content_list = []
     products.each { |product|
       extra_content = @plugins.map(:catalog_item_extras, product).collect { |content| instance_eval(&content) } if @plugins
       extra_content_list = @plugins.map(:catalog_list_item_extras, product).collect { |content| instance_eval(&content) } if @plugins
