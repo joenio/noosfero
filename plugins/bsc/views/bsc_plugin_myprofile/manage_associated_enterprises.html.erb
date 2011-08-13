@@ -1,7 +1,7 @@
 <h1><%= _('Manage associated enterprises') %></h1>
 
 <% if !@pending_enterprises.blank? %>
-  <%= _('Pending associations:') %>
+  <%= _('Associations awaiting approval:') %>
   <ul>
     <% @pending_enterprises.each do |enterprise| %>
       <li><%= enterprise.name %></li>

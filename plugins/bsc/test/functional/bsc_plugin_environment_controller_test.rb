@@ -28,7 +28,7 @@ class BscPluginEnvironmentControllerTest < Test::Unit::TestCase
       post :new, :profile_data => {:business_name => 'Sample Bsc', :identifier => 'sample-bsc', :company_name => 'Sample Bsc Ltda.', :cnpj => VALID_CNPJ}
     end
 
-    assert_redirected_to :controller => 'admin_panel'
+    assert_redirected_to :controller => 'profile_editor', :profile => 'sample-bsc'
   end
 
   should 'not create an invalid bsc' do
