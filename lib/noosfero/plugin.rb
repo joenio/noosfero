@@ -65,11 +65,6 @@ class Noosfero::Plugin
     end
   end
 
-  def expanded_template(file_path, locals = {})
-    views_path = "#{RAILS_ROOT}/plugins/#{self.class.public_name}/views"
-    ERB.new(File.read("#{views_path}/#{file_path}")).result(binding)
-  end
-
   # Here the developer may specify the events to which the plugins can
   # register and must return true or false. The default value must be false.
 
@@ -96,7 +91,7 @@ class Noosfero::Plugin
   # returns   = { :title => title, :id => id, :content => content, :start => start }
   #   title   = name that will be displayed.
   #   id      = div id.
-  #   content = content of the tab (use expanded_template method to import content from another file).
+  #   content = lambda block that creates a html code.
   #   start   = boolean that specifies if the tab must come before noosfero tabs (optional).
   def profile_tabs
     nil

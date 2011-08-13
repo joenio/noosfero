@@ -82,6 +82,15 @@ class BscPlugin < Noosfero::Plugin
     properties << { :name => _('Supplier'), :content => content }
   end
 
+  def profile_tabs
+    if bsc?(context.profile)
+      { :title => _("Contact"),
+        :id => 'bsc-contact',
+        :content => lambda { render :partial => 'profile_tab' },
+        :start => true }
+    end
+  end
+
   private
 
   def bsc?(profile)
