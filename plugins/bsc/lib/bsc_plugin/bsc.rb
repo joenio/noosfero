@@ -35,4 +35,8 @@ class BscPlugin::Bsc < Enterprise
     false
   end
 
+  def self.identification
+    'Bsc'
+  end
+
 end

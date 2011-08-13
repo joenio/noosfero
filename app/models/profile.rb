@@ -819,6 +819,10 @@ private :generate_url, :url_options
     {:title => _('Profile Info and settings'), :icon => 'edit-profile'}
   end
 
+  def self.identification
+    name
+  end
+
   protected
 
     def followed_by?(person)
