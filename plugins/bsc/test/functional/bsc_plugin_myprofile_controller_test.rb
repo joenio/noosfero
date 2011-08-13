@@ -86,5 +86,18 @@ class BscPluginMyprofileControllerTest < Test::Unit::TestCase
     assert_not_includes bsc.admins, p2
     assert_includes bsc.admins, p3
   end
+
+  should 'create enterprise' do
+    assert_difference Enterprise, :count, 1 do
+      post :create_enterprise, :profile => bsc.identifier, :create_enterprise => {:name => 'Test Bsc', :identifier => 'test-bsc'}
+    end
+
+    enterprise = Enterprise.find_by_identifier('test-bsc')
+
+    assert_equal true, enterprise.enabled
+    assert_equal false, enterprise.validated
+    assert_equal enterprise.bsc, bsc
+  end
+
 end
 

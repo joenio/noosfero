@@ -6,7 +6,7 @@ class BscPlugin < Noosfero::Plugin
   Bsc
 
   def self.plugin_name
-    "BSC"
+    "Bsc"
   end
 
   def self.plugin_description
@@ -26,14 +26,6 @@ class BscPlugin < Noosfero::Plugin
 
   def manage_members_extra_buttons
     {:title => _('Transfer ownership'), :icon => '', :url => {:controller => 'bsc_plugin_myprofile', :action => 'transfer_enterprises_management'}} if context.profile.enterprise?
-  end
-
-  def create_enterprise_hidden_fields
-    ['bsc_id', 'enabled', 'validated']
-  end
-
-  def create_enterprise_extra_content
-    'similar_enterprises'
   end
 
   def stylesheet?

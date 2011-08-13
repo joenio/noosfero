@@ -166,18 +166,6 @@ class Noosfero::Plugin
     nil
   end
 
-  # -> Adds hidden fields to create enterprise
-  # returns = ['field1', 'field2', 'field3']
-  def create_enterprise_hidden_fields
-    nil
-  end
-
-  # -> Adds extra content to the create enterprise page
-  # returns = path to partial
-  def create_enterprise_extra_content
-    nil
-  end
-
   # -> Adds buttons to manage members page
   # returns = { :title => title, :icon => icon, :url => url }
   #   title = name that will be displayed.

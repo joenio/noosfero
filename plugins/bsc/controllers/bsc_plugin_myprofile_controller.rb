@@ -70,4 +70,19 @@ class BscPluginMyprofileController < MyProfileController
       redirect_to :controller => 'profile_editor'
     end
   end
+
+  def create_enterprise
+    @create_enterprise = CreateEnterprise.new(params[:create_enterprise])
+    @create_enterprise.requestor = user
+    @create_enterprise.target = environment
+    @create_enterprise.bsc_id = profile.id
+    @create_enterprise.enabled = true
+    @create_enterprise.validated = false
+    if request.post? && @create_enterprise.valid?
+      @create_enterprise.perform
+      session[:notice] = _('Enterprise was created in association with %s.') % profile.name
+      redirect_to :controller => 'profile_editor', :profile => @create_enterprise.identifier
+    end
+  end
+
 end
