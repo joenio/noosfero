@@ -1,5 +1,6 @@
-<div id="similar-enterprises" style="display: none;">
-  <%= _('Similar enterprises:') %>
+<div id="similar-enterprises" style="display: none; border-bottom: 2px solid #babdb6;">
+  <p><b><%= _('Existing enterprises:') %></b></p>
+  <p><i style="text-align: center;"><%= _('Were found %{count} enterprises with similar names on the same city, you can decide to associate one of them or create the new enterprise confirming the informations you typed in.') % {:count => content_tag('span', '', :id => 'similar-enterprises-count')} %></i></p>
   <ul id="create-enterprise-similar-enterprises"></ul>
   <% query = bsc.enterprises.map(&:id).join(',') %>
   <script type="text/javascript">
@@ -19,8 +20,10 @@
           '<li>' + name + ' - <a href="' + url +'">' + <%= _('Associate').to_json %> + '</a></li>'
         );
       });
-      if (jQuery(enterprises).length > 0)
+      if (jQuery(enterprises).length > 0){
+        jQuery('#similar-enterprises-count').text(jQuery(enterprises).length.toString());
         jQuery('#similar-enterprises').fadeIn();
+      }
       else
         jQuery('#similar-enterprises').fadeOut();
     }
