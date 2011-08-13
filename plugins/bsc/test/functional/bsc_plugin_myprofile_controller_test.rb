@@ -31,14 +31,17 @@ class BscPluginMyprofileControllerTest < Test::Unit::TestCase
     e4 = Enterprise.create!(:name => 'Sample Enterprise 4', :identifier => 'sample-enterprise-4', :bsc => bsc)
     e5 = Enterprise.create!(:name => 'Sample Enterprise 5', :identifier => 'sample-enterprise-5', :enabled => true)
     BscPlugin::AssociateEnterprise.create!(:requestor => admin, :target => e5, :bsc => bsc)
+    e6 = Enterprise.create!(:name => 'Bla', :identifier => 'sample-enterprise-6')
 
-    get :search_enterprise, :profile => bsc.identifier, :q => 'Sampl'
+    get :search_enterprise, :profile => bsc.identifier, :q => 'sampl'
     
     assert_match /#{e1.name}/, @response.body
     assert_match /#{e2.name}/, @response.body
     assert_no_match /#{e3.name}/, @response.body
     assert_no_match /#{e4.name}/, @response.body
     assert_no_match /#{e5.name}/, @response.body
+    assert_no_match /#{bsc.name}/, @response.body
+    assert_match /#{e6.name}/, @response.body
   end
 
   should 'save associations' do
