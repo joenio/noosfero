@@ -52,8 +52,9 @@ class Profile < ActiveRecord::Base
   acts_as_accessible
 
   named_scope :memberships_of, lambda { |person| { :select => 'DISTINCT profiles.*', :joins => :role_assignments, :conditions => ['role_assignments.accessor_type = ? AND role_assignments.accessor_id = ?', person.class.base_class.name, person.id ] } }
-  named_scope :enterprises, :conditions => "profiles.type = 'Enterprise'"
-  named_scope :communities, :conditions => "profiles.type = 'Community'"
+  #FIXME: these will work only if the subclass is already loaded
+  named_scope :enterprises, lambda { {:conditions => (Enterprise.send(:subclasses).map(&:name) << 'Enterprise').map { |klass| "profiles.type = '#{klass}'"}.join(" OR ")} }
+  named_scope :communities, lambda { {:conditions => (Community.send(:subclasses).map(&:name) << 'Community').map { |klass| "profiles.type = '#{klass}'"}.join(" OR ")} }
 
   def members
     Person.members_of(self)
