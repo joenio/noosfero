@@ -1,3 +1,6 @@
 .controller-profile_editor a.control-panel-bsc-enterprises {background-image: url(images/manage-bsc-enterprises.png)}
 .controller-profile_editor .msie6 a.control-panel-bsc-enterprises {background-image: url(images/manage-bsc-enterprises.gif)}
 
+.icon-menu-bsc {
+  background-image: url(images/manage-bsc-enterprises-icon.png);
+}
