@@ -11,5 +11,25 @@ class BscPluginEnvironmentController < AdminController
     end
   end
 
+  def save_validations
+    enterprises = [Enterprise.find(params[:q].split(','))].flatten
+
+    begin
+      enterprises.each { |enterprise| enterprise.validated = true ; enterprise.save! }
+      session[:notice] = _('Enterprises validated.')
+      redirect_to :controller => 'admin_panel'
+    rescue Exception => ex
+      session[:notice] = _('Enterprise validations couldn\'t be saved.')
+      logger.info ex
+      redirect_to :action => 'validate_enterprises'
+    end
+  end
+
+  def search_enterprise
+    render :text => Enterprise.not_validated.find(:all, :conditions => ["type <> 'BscPlugin::Bsc' AND (name LIKE ? OR identifier LIKE ?)", "%#{params[:q]}%", "%#{params[:q]}%"]).
+      map {|enterprise| {:id => enterprise.id, :name => enterprise.name} }.
+      to_json
+  end
+
 end
 

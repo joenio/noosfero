@@ -12,5 +12,15 @@ class ProductTest < Test::Unit::TestCase
 
     assert_equal bsc, enterprise.bsc
   end
+
+  should 'return correct enterprises on validated and not validated namedscopes' do
+    validated_enterprise = fast_create(Enterprise, :validated => true)
+    not_validated_enterprise = fast_create(Enterprise, :validated => false)
+
+    assert_includes Enterprise.validated, validated_enterprise
+    assert_not_includes Enterprise.validated, not_validated_enterprise
+    assert_not_includes Enterprise.not_validated, validated_enterprise
+    assert_includes Enterprise.not_validated, not_validated_enterprise
+  end
 end
 
