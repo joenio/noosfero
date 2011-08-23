@@ -15,11 +15,11 @@
 
 <% form_tag do %>
   <% @roles.each do |role|%>
-    <%= content_tag('p', content_tag('b', _('Administrator:')), :style => 'margin-top: 30px; margin-bottom: 0px;') %>
+    <%= content_tag('b', _('Administrator:')) %>
     <%= text_field_tag('q_'+role.key, nil, :id => 'search_'+role.key) %>
   <% end %>
 
-  <% button_bar(:style => 'margin-top: 30px;') do %>
+  <% button_bar do %>
     <%= submit_button('save', _('Save'))%>
     <%= button('cancel', _('Cancel'), {:controller => 'profile_editor'})%>
   <% end %>

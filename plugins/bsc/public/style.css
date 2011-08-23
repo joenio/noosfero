@@ -4,3 +4,7 @@
 .icon-menu-bsc {
   background-image: url(images/manage-bsc-enterprises-icon.png);
 }
+
+#content .token-input-list {
+  margin-bottom: 30px;
+}
