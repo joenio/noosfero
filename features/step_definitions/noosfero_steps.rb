@@ -447,13 +447,6 @@ Given /^skip comments captcha$/ do
   Comment.any_instance.stubs(:skip_captcha?).returns(true)
 end
 
-Given /^"([^\"]*)" plugin is enabled$/ do |plugin_name|
-  env = Environment.default
-  env.enabled_plugins += [plugin_name + "Plugin"]
-  env.enabled_plugins.uniq!
-  env.save!
-end
-
 Given /^"([^\"]*)" plugin is (enabled|disabled)$/ do |plugin_name, status|
   environment = Environment.default
   environment.send(status.chop + '_plugin', plugin_name+'Plugin')
@@ -462,5 +455,4 @@ end
 Then /^there should be an? (.+) named "([^\"]*)"$/ do |klass_name, profile_name|
   klass = klass_name.camelize.constantize
   klass.find_by_name(profile_name).nil?.should be_false
->>>>>>> [bsc-plugin-2] Creating some cucumber tests and minor fixes (on the way)
 end

@@ -54,7 +54,7 @@ Feature: bsc
     And I fill in the following:
       | Name    | Associated Enterprise |
       | Address | associated-enterprise |
-    When I press "Next"
+    When I press "Save"
     Then "Associated Enterprise" should be associated with "Bsc Test"
 
   Scenario: do not display "add new product" button
