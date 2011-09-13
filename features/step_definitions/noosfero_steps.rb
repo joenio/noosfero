@@ -456,3 +456,23 @@ Then /^there should be an? (.+) named "([^\"]*)"$/ do |klass_name, profile_name|
   klass = klass_name.camelize.constantize
   klass.find_by_name(profile_name).nil?.should be_false
 end
+
+Then /^"([^\"]*)" profile should exist$/ do |profile_selector|
+  profile = nil
+  begin
+    profile = Profile.find_by_name(profile_selector)
+    profile.nil?.should be_false
+  rescue
+    profile.nil?.should be_false
+  end
+end
+
+Then /^"([^\"]*)" profile should not exist$/ do |profile_selector|
+  profile = nil
+  begin
+    profile = Profile.find_by_name(profile_selector)
+    profile.nil?.should be_true
+  rescue
+    profile.nil?.should be_true
+  end
+end

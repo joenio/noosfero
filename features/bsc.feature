@@ -123,6 +123,28 @@ Feature: bsc
     Then I should see "Sample Enterprise"
     #TODO -> test that it's not a link
 
+  Scenario: allow only environment administrators to delete bsc profile
+    Given the folllowing "bsc" from "bsc_plugin"
+      | business_name | identifier | company_name  | cnpj               |
+      | Bsc Test      | bsc-test   | Bsc Test Ltda | 94.132.024/0001-48 |
+    And the following user
+      | login | name        |
+      | pedro | Pedro Souto |
+    And "Pedro Souto" is admin of "Bsc Test"
+    And I am logged in as "pedro"
+    And I am on Bsc Test's control panel
+    And I follow "Bsc info and settings"
+    When I follow "Delete profile"
+    Then I should see "Access denied"
+    And "Bsc Test" profile should exist
+    But I am logged in as admin
+    And I am on Bsc Test's control panel
+    And I follow "Bsc info and settings"
+    When I follow "Delete profile"
+    Then I should see "Deleting profile Bsc Test"
+    And I follow "Yes, I am sure"
+    Then "Bsc Test" profile should not exist
+
   # Like we can believe that selenium is going to work...
   @selenium
   Scenario: list already associated enterprises on manage associated enterprises
