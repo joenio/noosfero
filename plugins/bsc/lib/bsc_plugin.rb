@@ -60,7 +60,7 @@ class BscPlugin < Noosfero::Plugin
 
   def content_viewer_controller_filters
     if profile
-      special_enterprise = !profile.validated && profile.bsc
+      special_enterprise = profile.enterprise? && !profile.validated && profile.bsc
       is_member_of_any_bsc = is_member_of_any_bsc?(context.user)
       block = lambda {
         render_access_denied if special_enterprise && !is_member_of_any_bsc
