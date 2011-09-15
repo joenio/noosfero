@@ -238,8 +238,10 @@ class ProfileMembersControllerTest < Test::Unit::TestCase
     user = create_user_with_permission('test_user', 'manage_memberships', e)
     login_as :test_user
 
+    # Should list if match name
     p1 = create_user('person_1').person
     p2 = create_user('person_2').person
+    # Should not list if don't match name
     p3 = create_user('blo').person
     r1 = Profile::Roles.organization_member_roles(e.environment.id).first
     r2 = Profile::Roles.organization_member_roles(e.environment.id).last
@@ -249,12 +251,21 @@ class ProfileMembersControllerTest < Test::Unit::TestCase
     p5 = create_user('person_5').person
     e.affiliate(p5, r2)
 
+    # Should be case insensitive
+    p6 = create_user('PeRsOn_2').person
+    # Should list if match identifier
+    p7 = create_user('person_7').person
+    p7.name = 'Bli'
+    p7.save!
+
     get :search_user, :profile => e.identifier, 'q_'+r1.key => 'per', :role => r1.id
     assert_match /#{p1.name}/, @response.body
     assert_match /#{p2.name}/, @response.body
     assert_no_match /#{p3.name}/, @response.body
     assert_no_match /#{p4.name}/, @response.body
     assert_match /#{p5.name}/, @response.body
+    assert_match /#{p6.name}/, @response.body
+    assert_match /#{p7.name}/, @response.body
 
     get :search_user, :profile => e.identifier, 'q_'+r2.key => 'per', :role => r2.id
     assert_match /#{p1.name}/, @response.body
@@ -262,6 +273,8 @@ class ProfileMembersControllerTest < Test::Unit::TestCase
     assert_no_match /#{p3.name}/, @response.body
     assert_match /#{p4.name}/, @response.body
     assert_no_match /#{p5.name}/, @response.body
+    assert_match /#{p6.name}/, @response.body
+    assert_match /#{p7.name}/, @response.body
   end
 
   should 'save associations' do

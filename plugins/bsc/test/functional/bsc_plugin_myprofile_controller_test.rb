@@ -25,12 +25,18 @@ class BscPluginMyprofileControllerTest < Test::Unit::TestCase
   attr_accessor :admin, :bsc
 
   should 'list enterprises on search' do
-    e1 = Enterprise.create!(:name => 'Sample Enterprise 1', :identifier => 'sample-enterprise-1')
-    e2 = Enterprise.create!(:name => 'Sample Enterprise 2', :identifier => 'sample-enterprise-2')
-    e3 = Enterprise.create!(:name => 'Blo', :identifier => 'blo')
-    e4 = Enterprise.create!(:name => 'Sample Enterprise 4', :identifier => 'sample-enterprise-4', :bsc => bsc)
-    e5 = Enterprise.create!(:name => 'Sample Enterprise 5', :identifier => 'sample-enterprise-5', :enabled => true)
+    # Should list if match name
+    e1 = Enterprise.create!(:name => 'sample enterprise 1', :identifier => 'sample-enterprise-1')
+    # Should be case insensitive
+    e2 = Enterprise.create!(:name => 'SaMpLe eNtErPrIsE 2', :identifier => 'sample-enterprise-2')
+    # Should not list if don't match name
+    e3 = Enterprise.create!(:name => 'blo', :identifier => 'blo')
+    # Should not list if is has a bsc
+    e4 = Enterprise.create!(:name => 'sample enterprise 4', :identifier => 'sample-enterprise-4', :bsc => bsc)
+    # Should not list if is enabled
+    e5 = Enterprise.create!(:name => 'sample enterprise 5', :identifier => 'sample-enterprise-5', :enabled => true)
     BscPlugin::AssociateEnterprise.create!(:requestor => admin, :target => e5, :bsc => bsc)
+    # Should search by identifier
     e6 = Enterprise.create!(:name => 'Bla', :identifier => 'sample-enterprise-6')
 
     get :search_enterprise, :profile => bsc.identifier, :q => 'sampl'

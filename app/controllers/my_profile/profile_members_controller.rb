@@ -118,7 +118,7 @@ class ProfileMembersController < MyProfileController
 
   def search_user
     role = Role.find(params[:role])
-    render :text => environment.people.find(:all, :conditions => ['name LIKE ?', "%#{params['q_'+role.key]}%"]).
+    render :text => environment.people.find(:all, :conditions => ['LOWER(name) LIKE ? OR LOWER(identifier) LIKE ?', "%#{params['q_'+role.key]}%", "%#{params['q_'+role.key]}%"]).
       select { |person| !profile.members_by_role(role).include?(person)}.
       map {|person| {:id => person.id, :name => person.name} }.
       to_json
