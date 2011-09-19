@@ -1,0 +1,23 @@
+<br />
+<% task.abuse_reports.each do |abuse_report| %>
+  <div>
+    <strong>"<%= abuse_report.reason %>"</strong> <br />
+    <i><%= _('Reported by %s.') % abuse_report.reporter.name %></i> <br />
+    <% if !abuse_report.content.blank? %>
+      <%= content_tag('a', _('View reported content'), :href => '#', :class => 'display-abuse-report-details', 'report-id' => abuse_report.id) %>
+      <div style='display: none' id=<%= 'abuse-report-details-'+abuse_report.id.to_s %>>
+        <%= abuse_report.content %>
+      </div>
+    <% end %>
+    <br />
+    --
+    <br />
+  </div>
+<% end %>
+
+<script>
+  jQuery('.display-abuse-report-details').click(function(){
+    jQuery('#abuse-report-details-'+jQuery(this).attr('report-id')).slideToggle();
+    return false;
+  });
+</script>

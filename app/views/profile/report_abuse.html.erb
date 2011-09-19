@@ -1,0 +1,19 @@
+<% form_for @abuse_report, :url => {:action => 'register_report'},
+                           :html => {:id => 'report-abuse-form'} do |f| %>
+  <%= labelled_form_field('* ' + _('Report reasons'), f.text_area(:reason, :rows => 6, :cols => 60, :class => 'required')) %>
+  <%= hidden_field_tag(:content_type, params[:content_type]) %>
+  <%= hidden_field_tag(:content_id, params[:content_id]) %>
+
+  <p><%= recaptcha_tags :ajax => true, :display => {:theme => 'clean'} %> </p>
+
+  <%= submit_button(:ok, _('Report profile'), :style => 'margin-top: 10px;', :id => 'report-abuse-submit-button') %>
+<% end %>
+
+<script type="text/javascript">
+//<![CDATA[
+  var $ = jQuery;
+  $(document).ready(function(){
+    $("#report-abuse-form").validate();
+  });
+//]]>
+</script>

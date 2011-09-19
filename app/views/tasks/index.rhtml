@@ -3,6 +3,10 @@
 <h1><%= _("%s's pending tasks") % profile.name %></h1>
 <p>
 
+<% type_collection = [[nil, _('All')]] %>
+<% type_collection += Task.all_types.map{|s| [s, s.constantize.new.title] } %>
+
+
 <% if !@failed.blank? %>
   <div id="errorExplanation">
     <% @failed.each do |error, tasks_descriptions|%>
@@ -18,6 +22,9 @@
 <% end %>
 
 <% if @tasks.empty? %>
+  <p>
+    <%= labelled_select(_('Type')+': ', :filter_type, :first, :last, @filter,  type_collection, :onchange => 'document.location.href = "?filter_type="+this.value')%>
+  </p>
   <em><%= _('No pending tasks for %s') % profile.name %></em>
 <% else %>
   <% form_tag :action => 'close' do%>
@@ -30,6 +37,9 @@
     <% end %>
 
     <ul class='task-list'>
+      <p>
+        <%= labelled_select(_('Type')+': ', :filter_type, :first, :last, @filter,  type_collection, :onchange => 'document.location.href = "?filter_type="+this.value')%>
+      </p>
       <p>
       <%= labelled_select(_("Set all to: "), 'set-decisions', 'first', 'last', nil, [['',""],['accept',_("Accept")],['reject',_("Reject")],['skip',_("Skip")]], :id => "up-set-all-tasks-to") %>
       </p>

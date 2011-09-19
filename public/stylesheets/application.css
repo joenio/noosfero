@@ -1259,19 +1259,19 @@ a.comment-picture {
   padding: 7px 1px 3px 5px;
 }
 
-#article .comment-reply-link {
+#article .comment-footer {
   font-size: 10px;
   text-decoration: none;
   color: #000;
 }
 
 #profile-activity .profile-activity-send-message a:hover, #profile-network .profile-network-send-message a:hover, #profile-wall .profile-wall-send-message a:hover,
-#article .comment-reply-link:hover {
+#article .comment-footer-link:hover {
   text-decoration: underline;
 }
 
-#article .opened .comment-reply-link {
-  visibility: hidden;
+#article .opened .comment-footer-hide {
+  display: none;
 }
 
 .comment_form div.fieldWithErrors input {
