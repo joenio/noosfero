@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728173905) do
+ActiveRecord::Schema.define(:version => 20110913200746) do
+
+  create_table "abuse_reports", :force => true do |t|
+    t.integer  "reporter_id"
+    t.integer  "abuse_complaint_id"
+    t.text     "content"
+    t.text     "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "action_tracker", :force => true do |t|
     t.integer  "user_id"
@@ -402,6 +411,15 @@ ActiveRecord::Schema.define(:version => 20110728173905) do
   create_table "region_validators", :id => false, :force => true do |t|
     t.integer "region_id"
     t.integer "organization_id"
+  end
+
+  create_table "reported_images", :force => true do |t|
+    t.integer "size"
+    t.string  "content_type"
+    t.string  "filename"
+    t.integer "height"
+    t.integer "width"
+    t.integer "abuse_report_id"
   end
 
   create_table "role_assignments", :force => true do |t|

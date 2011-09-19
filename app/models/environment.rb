@@ -727,5 +727,7 @@ class Environment < ActiveRecord::Base
     portal_community ? portal_community.image_galleries : []
   end
 
+  def reports_lower_bound
+    0
+  end
 end
-
