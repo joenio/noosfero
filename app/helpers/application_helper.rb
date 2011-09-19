@@ -969,6 +969,7 @@ module ApplicationHelper
       'thickbox',
       'lightbox',
       'colorpicker',
+      colorbox_stylesheet_path,
       pngfix_stylesheet_path,
     ]
   end
@@ -980,6 +981,10 @@ module ApplicationHelper
 
   def pngfix_stylesheet_path
     'iepngfix/iepngfix.css'
+  end
+
+  def colorbox_stylesheet_path
+    'colorbox/colorbox.css'
   end
 
   def noosfero_layout_features
