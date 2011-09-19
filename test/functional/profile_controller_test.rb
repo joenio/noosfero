@@ -469,7 +469,7 @@ class ProfileControllerTest < Test::Unit::TestCase
 
     get :join, :profile => community.identifier
 
-    assert_equal "/profile/#{community.identifier}", @request.session[:before_join]
+    assert_equal "/profile/#{community.identifier}", @request.session[:previous_location]
   end
 
   should 'redirect to location before login after join community' do
@@ -482,7 +482,7 @@ class ProfileControllerTest < Test::Unit::TestCase
 
     assert_redirected_to "/profile/#{community.identifier}/to_go"
 
-    assert_nil @request.session[:before_join]
+    assert_nil @request.session[:previous_location]
   end
 
   should 'show number of published events in index' do
@@ -1192,4 +1192,13 @@ class ProfileControllerTest < Test::Unit::TestCase
     assert_redirected_to :host => 'community.example.net'
   end
 
+  should 'register abuse report' do
+    reported = fast_create(Profile)
+    login_as(profile.identifier)
+    @controller.stubs(:verify_recaptcha).returns(true)
+
+    assert_difference AbuseReport, :count, 1 do
+      post :register_report, :profile => reported.identifier, :abuse_report => {:reason => 'some reason'}
+    end
+  end
 end

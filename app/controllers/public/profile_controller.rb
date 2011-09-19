@@ -2,8 +2,8 @@ class ProfileController < PublicController
 
   needs_profile
   before_filter :check_access_to_profile, :except => [:join, :join_not_logged, :index, :add]
-  before_filter :store_before_join, :only => [:join, :join_not_logged]
-  before_filter :login_required, :only => [:add, :join, :join_not_logged, :leave, :unblock, :leave_scrap, :remove_scrap, :remove_activity, :view_more_scraps, :view_more_activities, :view_more_network_activities]
+  before_filter :store_location, :only => [:join, :join_not_logged, :report_abuse]
+  before_filter :login_required, :only => [:add, :join, :join_not_logged, :leave, :unblock, :leave_scrap, :remove_scrap, :remove_activity, :view_more_scraps, :view_more_activities, :view_more_network_activities, :report_abuse, :register_report]
 
   helper TagsHelper
 
@@ -100,7 +100,7 @@ class ProfileController < PublicController
     if request.post?
       profile.add_member(user)
       session[:notice] = _('%s administrator still needs to accept you as member.') % profile.name if profile.closed?
-      redirect_to_before_join
+      redirect_to_previous_location
     else
       if user.memberships.include?(profile)
         session[:notice] = _('You are already a member of %s.') % profile.name
@@ -227,6 +227,37 @@ class ProfileController < PublicController
     end
   end
 
+  def report_abuse
+    @abuse_report = AbuseReport.new
+    render :layout => false
+  end
+
+  def register_report
+    if !verify_recaptcha
+      session[:notice] = _('You could not answer the captcha.')
+    else
+      begin
+        abuse_report = AbuseReport.new(params[:abuse_report])
+        if !params[:content_type].blank?
+          article = params[:content_type].constantize.find(params[:content_id])
+          content = article_to_html(article)
+          abuse_report.content = '<p><strong>'+article.title+'</strong></p>' + content if article.title
+        end
+
+        user.register_report(abuse_report, profile)
+
+        if !params[:content_type].blank?
+          abuse_report = AbuseReport.find_by_reporter_id_and_abuse_complaint_id(user.id, profile.opened_abuse_complaint.id)
+          Delayed::Job.enqueue DownloadReportedImagesJob.new(abuse_report, article.body_images_paths)
+        end
+        session[:notice] = _('Your abuse report was registered. The administrators are reviewing your report.')
+      rescue
+        session[:notice] = _('Your report couldn\'t be saved due to some problem. Please contact the administrator.')
+      end
+    end
+    redirect_to_previous_location
+  end
+
   protected
 
   def check_access_to_profile
@@ -235,16 +266,16 @@ class ProfileController < PublicController
     end
   end
 
-  def store_before_join
-    if session[:before_join].nil?
-      session[:before_join] = request.referer
+  def store_location
+    if session[:previous_location].nil?
+      session[:previous_location] = request.referer
     end
   end
 
-  def redirect_to_before_join
-    back = session[:before_join]
+  def redirect_to_previous_location
+    back = session[:previous_location]
     if back
-      session[:before_join] = nil
+      session[:previous_location] = nil
       redirect_to back
     else
       redirect_to profile.url

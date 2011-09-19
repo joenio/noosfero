@@ -100,6 +100,10 @@ class Comment < ActiveRecord::Base
     root
   end
 
+  def to_html(option={})
+    body || ''
+  end
+
   class Notifier < ActionMailer::Base
     def mail(comment)
       profile = comment.article.profile

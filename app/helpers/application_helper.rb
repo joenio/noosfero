@@ -1251,4 +1251,35 @@ module ApplicationHelper
     render :partial => 'shared/dialog_error_messages', :locals => { :object_name => instance_name }
   end
 
+  def report_abuse(profile, type, content=nil)
+    return if !user || user == profile
+
+    url = { :controller => 'profile',
+            :action => 'report_abuse',
+            :profile => profile.identifier }
+    url.merge!({:content_type => content.class.name, :content_id => content.id}) if content
+    text = content_tag('span', _('Report abuse'))
+    klass = 'report-abuse-action'
+    already_reported_message = _('You already reported this profile.')
+    report_profile_message = _('Report this profile for abusive behaviour')
+
+    if type == :button
+      if user.already_reported?(profile)
+        button(:cancel, text, url, :class => klass, :disabled => true, :title => already_reported_message)
+      else
+        button(:cancel, text, url, :class => klass, :title => report_profile_message)
+      end
+    elsif type == :link
+      if user.already_reported?(profile)
+        content_tag('a', text, :class => klass + ' button with-text icon-cancel', :title => already_reported_message)
+      else
+        link_to(text, url, :class => klass + ' button with-text icon-cancel', :title => report_profile_message)
+      end
+    elsif type == :comment_link
+      (user.already_reported?(profile) ?
+        content_tag('a', text, :class => klass + ' comment-footer comment-footer-link', :title => already_reported_message) :
+        link_to(text, url, :class => klass + ' comment-footer comment-footer-link', :title => report_profile_message)
+      ) + content_tag('span', ' | ', :class => 'comment-footer comment-footer-hide')
+    end
+  end
 end
