@@ -120,18 +120,18 @@ class TasksControllerTest < Test::Unit::TestCase
 
   should 'create a ticket' do
     assert_difference Ticket, :count do
-      post :new, :profile => profile.identifier, :ticket => {:title => 'test ticket'}
+      post :new, :profile => profile.identifier, :ticket => {:name => 'test ticket'}
     end
   end
 
   should 'create a ticket with profile requestor' do
-    post :new, :profile => profile.identifier, :ticket => {:title => 'new task'} 
+    post :new, :profile => profile.identifier, :ticket => {:name => 'new task'}
     
     assert_equal profile, assigns(:ticket).requestor
   end
 
   should 'list tasks that this profile created' do
-    task = Ticket.create!(:title => 'test', :requestor => profile)
+    task = Ticket.create!(:name => 'test', :requestor => profile)
     get :list_requested, :profile => profile.identifier
 
     assert_includes assigns(:tasks), task
@@ -141,7 +141,7 @@ class TasksControllerTest < Test::Unit::TestCase
      f = create_user('friend').person
      profile.add_friend f
 
-     post :new, :profile => profile.identifier, :ticket => {:title => 'test ticket', :target_id => f.id, :target_type => 'Profile'}
+     post :new, :profile => profile.identifier, :ticket => {:name => 'test ticket', :target_id => f.id, :target_type => 'Profile'}
      assert_response :redirect
 
      assert_equal f, assigns(:ticket).target

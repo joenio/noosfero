@@ -1140,8 +1140,9 @@ module ApplicationHelper
 
   def usermenu_logged_in
     pending_tasks_count = ''
-    if user && user.all_pending_tasks.count > 0
-      pending_tasks_count = link_to(user.all_pending_tasks.count.to_s, @environment.top_url + '/myprofile/{login}/tasks', :id => 'pending-tasks-count', :title => _("Manage your pending tasks"))
+    count = user ? Task.to(user).pending.count : -1
+    if count > 0
+      pending_tasks_count = link_to(count.to_s, @environment.top_url + '/myprofile/{login}/tasks', :id => 'pending-tasks-count', :title => _("Manage your pending tasks"))
     end
 
     (_('Welcome, %s') % link_to('<i></i><strong>{login}</strong>', @environment.top_url + '/{login}', :id => "homepage-link", :title => _('Go to your homepage'))) +
