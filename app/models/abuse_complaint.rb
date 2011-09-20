@@ -24,7 +24,7 @@ class AbuseComplaint < Task
   end
 
   def title
-    _('Abuse complaint')
+    abuse_reports.count > 1 ? (_('Abuse complaint (%s)') % abuse_reports.count) :_('Abuse complaint')
   end
 
   def linked_subject
