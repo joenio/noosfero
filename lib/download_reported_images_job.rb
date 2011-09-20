@@ -1,5 +1,6 @@
-class DownloadReportedImagesJob < Struct.new(:abuse_report, :images_paths)
+class DownloadReportedImagesJob < Struct.new(:abuse_report, :article)
   def perform
+    images_paths = article.image? ? [File.join(article.profile.environment.top_url, article.public_filename(:display))] : article.body_images_paths
     images_paths.each do |image_path|
       image = get_image(image_path)
       reported_image = ReportedImage.create!( :abuse_report => abuse_report,

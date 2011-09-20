@@ -268,13 +268,14 @@ module ApplicationHelper
     search_name = String.new(name)
     if search_name.include?("/")
       search_name.gsub!(/(\/)([^\/]*)$/,'\1_\2')
-      name = File.join(params[:controller], name)
+      name = File.join(params[:controller], name) if defined?(params) && params[:controller]
     else
       search_name = "_" + search_name
     end
 
     VIEW_EXTENSIONS.each do |ext|
-      return name if File.exists?(File.join(view_path, params[:controller], search_name+ext))
+      path = defined?(params) && params[:controller] ? File.join(view_path, params[:controller], search_name+ext) : File.join(view_path, search_name+ext)
+      return name if File.exists?(File.join(path))
     end
 
     partial_for_class_in_view_path(klass.superclass, view_path)

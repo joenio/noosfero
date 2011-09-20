@@ -240,15 +240,14 @@ class ProfileController < PublicController
         abuse_report = AbuseReport.new(params[:abuse_report])
         if !params[:content_type].blank?
           article = params[:content_type].constantize.find(params[:content_id])
-          content = article_to_html(article)
-          abuse_report.content = '<p><strong>'+article.title+'</strong></p>' + content if article.title
+          abuse_report.content = instance_eval(&article.reported_version)
         end
 
         user.register_report(abuse_report, profile)
 
         if !params[:content_type].blank?
           abuse_report = AbuseReport.find_by_reporter_id_and_abuse_complaint_id(user.id, profile.opened_abuse_complaint.id)
-          Delayed::Job.enqueue DownloadReportedImagesJob.new(abuse_report, article.body_images_paths)
+          Delayed::Job.enqueue DownloadReportedImagesJob.new(abuse_report, article)
         end
         session[:notice] = _('Your abuse report was registered. The administrators are reviewing your report.')
       rescue
