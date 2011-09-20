@@ -3,6 +3,7 @@ class AbuseComplaint < Task
   belongs_to :reported, :class_name => "Profile", :foreign_key => "requestor_id"
 
   validates_presence_of :reported
+  alias :requestor :reported
 
   def initialize(*args)
     super
