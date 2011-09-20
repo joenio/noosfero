@@ -234,7 +234,13 @@ class ProfileController < PublicController
 
   def register_report
     if !verify_recaptcha
-      session[:notice] = _('You could not answer the captcha.')
+      render :text => {
+        :ok => false,
+        :error => {
+          :code => 1,
+          :message => _('You could not answer the captcha.')
+        }
+      }.to_json
     else
       begin
         abuse_report = AbuseReport.new(params[:abuse_report])
@@ -249,12 +255,21 @@ class ProfileController < PublicController
           abuse_report = AbuseReport.find_by_reporter_id_and_abuse_complaint_id(user.id, profile.opened_abuse_complaint.id)
           Delayed::Job.enqueue DownloadReportedImagesJob.new(abuse_report, article)
         end
-        session[:notice] = _('Your abuse report was registered. The administrators are reviewing your report.')
+
+        render :text => {
+          :ok => true,
+          :message => _('Your abuse report was registered. The administrators are reviewing your report.'),
+        }.to_json
       rescue
-        session[:notice] = _('Your report couldn\'t be saved due to some problem. Please contact the administrator.')
+        render :text => {
+          :ok => false,
+          :error => {
+            :code => 2,
+            :message => _('Your report couldn\'t be saved due to some problem. Please contact the administrator.')
+          }
+        }.to_json
       end
     end
-    redirect_to_previous_location
   end
 
   protected
