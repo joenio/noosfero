@@ -260,7 +260,8 @@ class ProfileController < PublicController
           :ok => true,
           :message => _('Your abuse report was registered. The administrators are reviewing your report.'),
         }.to_json
-      rescue
+      rescue Exception => exception
+        logger.error(exception.to_s)
         render :text => {
           :ok => false,
           :error => {
