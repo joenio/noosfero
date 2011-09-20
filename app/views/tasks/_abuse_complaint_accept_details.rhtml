@@ -1,11 +1,11 @@
 <br />
 <% task.abuse_reports.each do |abuse_report| %>
   <div>
-    <strong>"<%= abuse_report.reason %>"</strong> <br />
-    <i><%= _('Reported by %s.') % abuse_report.reporter.name %></i> <br />
+    <strong style="word-wrap: break-word; display: block; padding-right: 40px">"<%= abuse_report.reason %>"</strong> <br />
+    <i><%= _('Reported by %{reporter} %{time}.') % {:reporter => abuse_report.reporter.name, :time => time_ago_as_sentence(abuse_report.created_at) + ' ' + _('ago')}%></i> <br />
     <% if !abuse_report.content.blank? %>
-      <%= content_tag('a', _('View reported content'), :href => '#', :class => 'display-abuse-report-details', 'report-id' => abuse_report.id) %>
-      <div style='display: none' id=<%= 'abuse-report-details-'+abuse_report.id.to_s %>>
+      <button class="display-abuse-report-details" data-report="<%=abuse_report.id%>"><%=_('View details')%></button>
+      <div style='display: none' id=<%= 'abuse-report-details-'+abuse_report.id.to_s %> class="abuse-report-details">
         <%= abuse_report.content %>
       </div>
     <% end %>
@@ -16,8 +16,17 @@
 <% end %>
 
 <script>
-  jQuery('.display-abuse-report-details').click(function(){
-    jQuery('#abuse-report-details-'+jQuery(this).attr('report-id')).slideToggle();
+  var $ = jQuery;
+  $(".display-abuse-report-details").each(function(index, bt){
+    $(bt).button({
+      icons: {
+        primary: "ui-icon-info"
+      },
+      text: false
+    });
+  });
+  $('.display-abuse-report-details').click(function(){
+    $('#abuse-report-details-'+jQuery(this).attr('data-report')).slideToggle();
     return false;
   });
 </script>

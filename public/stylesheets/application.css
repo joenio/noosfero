@@ -4763,12 +4763,9 @@ h1#agenda-title {
   padding: 0px;
 }
 
-.controller-tasks #content .task-list li {
-  margin: 10px 0px;
-  list-style: none;
-  border: 1px solid #BFC2BC;
-  padding-left:1em;
-  padding-right:1em;
+.controller-tasks #content .task-list ul {
+  padding-left: 0px;
+  list-style-type: none;
 }
 
 /* ==> public/stylesheets/controller_themes.css <== */
@@ -6135,4 +6132,16 @@ h1#agenda-title {
 
 #user a#pending-tasks-count {
   color: #FFFFFF;
+}
+
+.abuse-report-details {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.display-abuse-report-details {
+  float: right;
+  margin-top: -30px;
 }
