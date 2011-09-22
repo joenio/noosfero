@@ -27,8 +27,9 @@ class Folder < Article
 
   include ActionView::Helpers::TagHelper
   def to_html(options = {})
+    folder = self
     lambda do
-      render :file => 'content_viewer/folder'
+      render :file => 'content_viewer/folder', :locals => {:folder => folder}
     end
   end
 
