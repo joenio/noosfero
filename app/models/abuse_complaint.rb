@@ -49,7 +49,7 @@ class AbuseComplaint < Task
   end
 
   def perform
-    reported.disable_profile
+    reported.disable
   end
 
   def task_activated_message
