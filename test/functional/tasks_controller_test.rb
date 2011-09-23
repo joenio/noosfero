@@ -321,4 +321,22 @@ class TasksControllerTest < Test::Unit::TestCase
     assert_includes assigns(:tasks), t2
     assert_includes assigns(:tasks), t3
   end
+
+  should 'return tasks ordered accordingly and limited by pages' do
+    time = Time.now
+    person = fast_create(Person)
+    t1 = Task.create!(:status => Task::Status::ACTIVE, :target => profile, :requestor => person, :created_at => time)
+    t2 = Task.create!(:status => Task::Status::ACTIVE, :target => profile, :requestor => person, :created_at => time + 1.second)
+    t3 = Task.create!(:status => Task::Status::ACTIVE, :target => profile, :requestor => person, :created_at => time + 2.seconds)
+    t4 = Task.create!(:status => Task::Status::ACTIVE, :target => profile, :requestor => person, :created_at => time + 3.seconds)
+
+    Task.stubs(:per_page).returns(2)
+
+    post :index, :page => 1
+    assert_equal [t1,t2], assigns(:tasks)
+
+    Task.stubs(:per_page).returns(3)
+    post :index, :page => 2
+    assert_equal [t4], assigns(:tasks)
+  end
 end

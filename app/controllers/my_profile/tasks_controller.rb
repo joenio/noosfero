@@ -4,7 +4,7 @@ class TasksController < MyProfileController
   
   def index
     @filter = params[:filter_type].blank? ? nil : params[:filter_type]
-    @tasks = Task.to(profile).pending.of(@filter).sort_by(&:created_at)
+    @tasks = Task.to(profile).pending.of(@filter).order_by('created_at', 'asc').paginate(:per_page => Task.per_page, :page => params[:page])
     @failed = params ? params[:failed] : {}
   end
 

@@ -306,6 +306,19 @@ class TaskTest < Test::Unit::TestCase
     assert_includes Task.of(nil), t3
   end
 
+  should 'order tasks by some attribute correctly' do
+    Task.destroy_all
+    t1 = fast_create(Task, :status => 4, :created_at => 1)
+    t2 = fast_create(Task, :status => 3, :created_at => 2)
+    t3 = fast_create(Task, :status => 2, :created_at => 3)
+    t4 = fast_create(Task, :status => 1, :created_at => 4)
+
+    assert_equal [t1,t2,t3,t4], Task.order_by('created_at', 'asc')
+    assert_equal [t4,t3,t2,t1], Task.order_by('created_at', 'desc')
+    assert_equal [t1,t2,t3,t4], Task.order_by('status', 'desc')
+    assert_equal [t4,t3,t2,t1], Task.order_by('status', 'asc')
+  end
+
   protected
 
   def sample_user

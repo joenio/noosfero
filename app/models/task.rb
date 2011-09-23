@@ -265,7 +265,8 @@ class Task < ActiveRecord::Base
   named_scope :pending, :conditions => { :status =>  Task::Status::ACTIVE }
   named_scope :finished, :conditions => { :status =>  [Task::Status::CANCELLED, Task::Status::FINISHED] }
   named_scope :opened, :conditions => { :status =>  [Task::Status::ACTIVE, Task::Status::HIDDEN] }
-  named_scope :of, lambda { |type| {:conditions => [ 'type LIKE ?', type || '%' ]} }
+  named_scope :of, lambda { |type| conditions = type ? "type LIKE '#{type}'" : "1=1"; {:conditions =>  [conditions]} }
+  named_scope :order_by, lambda { |attribute, ord| {:order => "#{attribute} #{ord}"} }
 
   named_scope :to, lambda { |profile|
     environment_condition = nil
@@ -300,6 +301,10 @@ class Task < ActiveRecord::Base
     # Can be used in subclasses to find only their instances.
     def find_by_code(code)
       self.find(:first, :conditions => { :code => code, :status => Task::Status::ACTIVE })
+    end
+
+    def per_page
+      15
     end
 
   end
