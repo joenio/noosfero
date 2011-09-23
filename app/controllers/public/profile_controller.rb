@@ -309,7 +309,7 @@ class ProfileController < PublicController
   end
 
   def invisible_profile
-    render_access_denied(_("Sorry, this profile was defined as private by its owner. You'll not be able to view content here unless the profile owner adds adds you."), _("Oops ... you cannot go ahead here"))
+    render_access_denied(_("This profile is inaccessible. You don't have the permission to view the content here."), _("Oops ... you cannot go ahead here"))
   end
 
   def per_page
