@@ -16,17 +16,13 @@
 <% end %>
 
 <script>
-  var $ = jQuery;
-  $(".display-abuse-report-details").each(function(index, bt){
-    $(bt).button({
-      icons: {
-        primary: "ui-icon-info"
-      },
-      text: false
+  (function($){
+    $("#task-<%= task.id %> .display-abuse-report-details").button({
+        icons: { primary: "ui-icon-info" },
+        text: false
+    }).click(function(){
+      $('#abuse-report-details-'+$(this).attr('data-report')).slideToggle();
+      return false;
     });
-  });
-  $('.display-abuse-report-details').click(function(){
-    $('#abuse-report-details-'+jQuery(this).attr('data-report')).slideToggle();
-    return false;
-  });
+  })(jQuery);
 </script>
