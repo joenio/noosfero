@@ -4,7 +4,8 @@
 <p>
 
 <% type_collection = [[nil, _('All')]] %>
-<% type_collection += Task.all_types.map{|s| [s, s.constantize.new.title] } %>
+<% type_collection += Task.all_types.sort_by {|klass| klass.constantize.new.title}.map{|s| [s, s.constantize.new.title] } %>
+
 
 
 <% if !@failed.blank? %>
