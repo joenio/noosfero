@@ -1009,6 +1009,11 @@ code input {
 #article-actions {
   margin-bottom: 5px;
   width: 100%;
+  text-align: left;
+}
+
+#article-actions a{
+  white-space: nowrap;
 }
 
 #article-tags {
