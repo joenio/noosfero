@@ -1270,15 +1270,15 @@ module ApplicationHelper
 
     if type == :button
       if user.already_reported?(profile)
-        button(:cancel, text, url, :class => klass+' disabled', :disabled => true, :title => already_reported_message)
+        button(:alert, text, url, :class => klass+' disabled', :disabled => true, :title => already_reported_message)
       else
-        button(:cancel, text, url, :class => klass, :title => report_profile_message)
+        button(:alert, text, url, :class => klass, :title => report_profile_message)
       end
     elsif type == :link
       if user.already_reported?(profile)
-        content_tag('a', text, :class => klass + ' disabled button with-text icon-cancel', :title => already_reported_message)
+        content_tag('a', text, :class => klass + ' disabled button with-text icon-alert', :title => already_reported_message)
       else
-        link_to(text, url, :class => klass + ' button with-text icon-cancel', :title => report_profile_message)
+        link_to(text, url, :class => klass + ' button with-text icon-alert', :title => report_profile_message)
       end
     elsif type == :comment_link
       (user.already_reported?(profile) ?
