@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110913200746) do
+ActiveRecord::Schema.define(:version => 20110924004111) do
 
   create_table "abuse_reports", :force => true do |t|
     t.integer  "reporter_id"
@@ -249,6 +249,7 @@ ActiveRecord::Schema.define(:version => 20110913200746) do
     t.text     "terms_of_use_acceptance_text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "reports_lower_bound",          :default => 0,         :null => false
   end
 
   create_table "external_feeds", :force => true do |t|
