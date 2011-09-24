@@ -304,6 +304,7 @@ class TasksControllerTest < Test::Unit::TestCase
   should 'filter tasks by type' do
     class CleanHouse < Task; end
     class FeedDog < Task; end
+    Task.stubs(:per_page).returns(3)
     requestor = fast_create(Person)
     t1 = CleanHouse.create!(:requestor => requestor, :target => profile)
     t2 = CleanHouse.create!(:requestor => requestor, :target => profile)
