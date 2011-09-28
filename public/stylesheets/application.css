@@ -152,7 +152,7 @@ div#notice {
 
   width: 300px;
   min-height: 60px;
-  position: absolute;
+  position: fixed;
   top: 30px;
   right: 30px;
 }
@@ -1009,6 +1009,11 @@ code input {
 #article-actions {
   margin-bottom: 5px;
   width: 100%;
+  text-align: left;
+}
+
+#article-actions a{
+  white-space: nowrap;
 }
 
 #article-tags {
@@ -1259,19 +1264,19 @@ a.comment-picture {
   padding: 7px 1px 3px 5px;
 }
 
-#article .comment-reply-link {
+#article .comment-footer {
   font-size: 10px;
   text-decoration: none;
   color: #000;
 }
 
 #profile-activity .profile-activity-send-message a:hover, #profile-network .profile-network-send-message a:hover, #profile-wall .profile-wall-send-message a:hover,
-#article .comment-reply-link:hover {
+#article .comment-footer-link:hover {
   text-decoration: underline;
 }
 
-#article .opened .comment-reply-link {
-  visibility: hidden;
+#article .opened .comment-footer-hide {
+  display: none;
 }
 
 .comment_form div.fieldWithErrors input {
@@ -2768,6 +2773,7 @@ div#activation_enterprise div {
   border-top: none;
   border-left: none;
   color: #585858;
+  font-size: 11px;
 }
 .formfield input {
   text-indent: 5px;
@@ -2979,6 +2985,7 @@ div#activation_enterprise div {
   border: 1px solid #888;
   margin-bottom: 10px;
   padding: 5px 10px;
+  position: relative;
 }
 
 #product_list .product-pic {
@@ -3216,85 +3223,6 @@ div#activation_enterprise div {
   font-weight: bold;
 }
 
-/* * * * * * Price details  * * * * * */
-
-#product-price-details {
-  border: 1px solid #AAA;
-  margin-top: 20px;
-  padding: 15px 20px;
-}
-
-#display-price-details .price-details-list {
-  padding-left: 0px;
-}
-
-#display-price-details .price-details-list li {
-  list-style: none;
-}
-
-#display-price-details .price-details-list li .price-detail-name {
-  width: 200px;
-}
-
-#display-price-details .price-details-list li .price-detail-name,
-#display-price-details .price-details-list li .price-detail-price {
-  display: inline-block;
-}
-
-#manage-product-details-form .formlabel,
-#manage-product-details-form .formfield {
-  display: inline-block;
-}
-
-/* * * Progress bar on price details edition * * */
-
-#display-manage-price-details .ui-widget-content {
-  border: 1px solid #DDD;
-}
-
-#display-manage-price-details .ui-progressbar {
-  height: 20px;
-}
-
-#display-manage-price-details .ui-progressbar .ui-progressbar-value {
-  margin: 0px;
-  background-color: #A40000;
-}
-
-#display-manage-price-details .ui-progressbar .ui-progressbar-value.price-described {
-  background-color: #4E9A06;
-}
-
-#display-manage-price-details #price-details-info {
-  margin: 10px 0px;
-}
-
-#display-manage-price-details #details-progressbar {
-  position: relative;
-  width: 410px;
-  display: inline-block;
-}
-
-#display-manage-price-details #progressbar-text {
-  position: absolute;
-  top: 5px;
-  right: 7px;
-  font-size: 11px;
-}
-
-#display-manage-price-details #progressbar-icon {
-  display: inline-block;
-  cursor: pointer;
-}
-
-#display-manage-price-details #details-progressbar .ui-corner-left,
-#display-manage-price-details #details-progressbar .ui-corner-right {
-  -moz-border-radius-bottomleft: 0px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-topleft: 0px;
-  -moz-border-radius-topright: 0px;
-}
-
 /* ==> public/stylesheets/controller_cms.css <== */
 
 
@@ -3421,21 +3349,7 @@ table.cms-articles .icon:hover {
   display: block;
 }
 
-/* Media listing */
-
-.controller-cms #media-listing-iframe {
-  float: right;
-  width: 380px;
-  height: 630px;
-  border: none;
-  margin-top: 104px;
-  padding: 0px;
-  overflow: hidden;
-}
-
-.controller-cms .msie #media-listing-iframe {
-  height: 610px;
-}
+/* Text editors sidebar */
 
 .controller-cms div.with_media_panel {
   float: left;
@@ -3444,6 +3358,64 @@ table.cms-articles .icon:hover {
 
 div.with_media_panel .formfield input {
   width: 100%;
+}
+
+.text-editor-sidebar {
+  position: absolute;
+  width: 380px;
+  right: 20px;
+  top: 70px;
+}
+
+.text-editor-sidebar-box  {
+  background: #eeeeec;
+  border: 1px solid #d3d7cf;
+  padding: 10px 10px 0px 10px;
+  margin-bottom: 10px;
+}
+.text-editor-sidebar-box p {
+  margin-top: 0px;
+}
+.text-editor-sidebar code,
+.text-editor-sidebar pre {
+  border: 1px solid #d3d7cf;
+  color: black;
+  padding: 2px;
+}
+.text-editor-sidebar .icon-loading {
+  background-image: url(../images/loading-small.gif);
+}
+.text-editor-sidebar .items {
+  margin-bottom: 10px;
+}
+.text-editor-sidebar .items div {
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+  padding-left: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border: none;
+  margin-bottom: 2px;
+}
+.text-editor-sidebar .items :hover {
+  background-color: transparent;
+  border: none;
+}
+.text-editor-sidebar #media-upload-box,
+.text-editor-sidebar #media-search-box {
+  background-repeat: no-repeat;
+  background-position: 98% 10px;
+}
+.text-editor-sidebar img {
+ max-height: 96px;
+ max-width: 96px;
+ border: 1px solid #d3d7cf;
+}
+.text-editor-sidebar .media-upload-error {
+  color: red;
+}
+.text-editor-sidebar select {
+  max-width: 355px;
 }
 
 /* ==> public/stylesheets/controller_contact.css <== */
@@ -4530,13 +4502,15 @@ h1#agenda-title {
   padding: 2px 0px 4px 0px;
 }
 
-.controller-search #content .search-results-type-article li {
+.controller-search #content .search-results-type-article li,
+.controller-search #content .search-results-type-event li {
   padding: 0px 0px 4px 20px;
   background-repeat: no-repeat;
   border-color: transparent;
 }
 
-.controller-search #content .search-results-type-article li:hover {
+.controller-search #content .search-results-type-article li:hover,
+.controller-search #content .search-results-type-event li:hover {
   background-color: transparent;
 }
 
@@ -4589,6 +4563,7 @@ h1#agenda-title {
 }
 
 .search-results-type-product li.product-item {
+  position: relative;
   height: 60px;
   overflow: hidden;
 }
@@ -4793,12 +4768,9 @@ h1#agenda-title {
   padding: 0px;
 }
 
-.controller-tasks #content .task-list li {
-  margin: 10px 0px;
-  list-style: none;
-  border: 1px solid #BFC2BC;
-  padding-left:1em;
-  padding-right:1em;
+.controller-tasks #content .task-list ul {
+  padding-left: 0px;
+  list-style-type: none;
 }
 
 /* ==> public/stylesheets/controller_themes.css <== */
@@ -6165,4 +6137,36 @@ h1#agenda-title {
 
 #user a#pending-tasks-count {
   color: #FFFFFF;
+}
+
+/* Abuse report */
+
+.abuse-report-details {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.display-abuse-report-details {
+  float: right;
+  margin-top: -30px;
+}
+
+#content a.report-abuse-action.disabled {
+  cursor: default;
+  text-decoration: none;
+  color: #999;
+}
+
+#content a.button.report-abuse-action.disabled:hover {
+  background-color: #eee;
+  color: #999;
+  border: solid 1px #ccc;
+}
+
+#article-actions a.button.report-abuse-action.disabled:hover {
+  border: none;
+  background-color: transparent;
+  color: #999;
 }

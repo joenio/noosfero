@@ -9,6 +9,13 @@ class Environment < ActiveRecord::Base
 
   has_many :tasks, :dependent => :destroy, :as => 'target'
 
+  IDENTIFY_SCRIPTS = /(php[0-9s]?|[sp]htm[l]?|pl|py|cgi|rb)/
+
+  def self.verify_filename(filename)
+    filename += '.txt' if File.extname(filename) =~ IDENTIFY_SCRIPTS
+    filename
+  end
+
   PERMISSIONS['Environment'] = {
     'view_environment_admin_panel' => N_('View environment admin panel'),
     'edit_environment_features' => N_('Edit environment features'),
@@ -65,6 +72,10 @@ class Environment < ActiveRecord::Base
 
   def add_admin(user)
     self.affiliate(user, Environment::Roles.admin(self.id))
+  end
+
+  def remove_admin(user)
+    self.disaffiliate(user, Environment::Roles.admin(self.id))
   end
 
   def admins
@@ -162,7 +173,6 @@ class Environment < ActiveRecord::Base
   acts_as_accessible
 
   has_many :units, :order => 'position'
-  has_many :production_costs, :as => :owner
 
   def superior_intances
     [self, nil]
@@ -220,7 +230,19 @@ class Environment < ActiveRecord::Base
   settings_items :currency_separator, :type => String, :default => '.'
   settings_items :currency_delimiter, :type => String, :default => ','
 
-  settings_items :trusted_sites_for_iframe, :type => Array, :default => ['itheora.org', 'tv.softwarelivre.org', 'stream.softwarelivre.org', 'www.youtube.com']
+  settings_items :trusted_sites_for_iframe, :type => Array, :default => %w[
+    developer.myspace.com
+    itheora.org
+    maps.google.com
+    platform.twitter.com
+    player.vimeo.com
+    stream.softwarelivre.org
+    tv.softwarelivre.org
+    www.facebook.com
+    www.flickr.com
+    www.gmodules.com
+    www.youtube.com
+  ] + ('a' .. 'z').map{|i| "#{i}.yimg.com"}
 
   settings_items :enabled_plugins, :type => Array, :default => []
 
@@ -230,17 +252,17 @@ class Environment < ActiveRecord::Base
 
   # Enables a feature identified by its name
   def enable(feature)
-    self.settings["#{feature}_enabled"] = true
+    self.settings["#{feature}_enabled".to_sym] = true
   end
 
   # Disables a feature identified by its name
   def disable(feature)
-    self.settings["#{feature}_enabled"] = false
+    self.settings["#{feature}_enabled".to_sym] = false
   end
 
   # Tells if a feature, identified by its name, is enabled
   def enabled?(feature)
-    self.settings["#{feature}_enabled"] == true
+    self.settings["#{feature}_enabled".to_sym] == true
   end
 
   # enables the features identified by <tt>features</tt>, which is expected to
@@ -496,6 +518,7 @@ class Environment < ActiveRecord::Base
   xss_terminate :only => [ :message_for_disabled_enterprise ], :with => 'white_list', :on => 'validation'
 
   validates_presence_of :theme
+  validates_numericality_of :reports_lower_bound, :allow_nil => false, :only_integer => true, :greater_than_or_equal_to => 0
 
   include WhiteListFilter
   filter_iframes :message_for_disabled_enterprise, :whitelist => lambda { trusted_sites_for_iframe }
@@ -519,12 +542,12 @@ class Environment < ActiveRecord::Base
   # If #force_www is true, adds 'www.' at the beginning of the hostname. If the
   # environment has not associated domains, returns 'localhost'.
   def default_hostname(email_hostname = false)
-    if self.domains(true).empty?
-      'localhost'
-    else
+    domain = 'localhost'
+    unless self.domains(true).empty?
       domain = (self.domains.find_by_is_default(true) || self.domains.find(:first, :order => 'id')).name
-      email_hostname ? domain : (force_www ? ('www.' + domain) : domain)
+      domain = email_hostname ? domain : (force_www ? ('www.' + domain) : domain)
     end
+    domain
   end
 
   def top_url(ssl = false)
@@ -673,13 +696,14 @@ class Environment < ActiveRecord::Base
   def create_templates
     pre = self.name.to_slug + '_'
     ent_id = Enterprise.create!(:name => 'Enterprise template', :identifier => pre + 'enterprise_template', :environment => self, :visible => false).id
+    inactive_enterprise_tmpl = Enterprise.create!(:name => 'Inactive Enterprise template', :identifier => pre + 'inactive_enterprise_template', :environment => self, :visible => false)
     com_id = Community.create!(:name => 'Community template', :identifier => pre + 'community_template', :environment => self, :visible => false).id
     pass = Digest::MD5.hexdigest rand.to_s
     user = User.create!(:login => (pre + 'person_template'), :email => (pre + 'template@template.noo'), :password => pass, :password_confirmation => pass, :environment => self).person
-    user.visible = false
-    user.save!
+    user.update_attributes(:visible => false, :name => "Person template")
     usr_id = user.id
     self.settings[:enterprise_template_id] = ent_id
+    self.inactive_enterprise_template = inactive_enterprise_tmpl
     self.settings[:community_template_id] = com_id
     self.settings[:person_template_id] = usr_id
     self.save!
@@ -687,7 +711,7 @@ class Environment < ActiveRecord::Base
 
   after_destroy :destroy_templates
   def destroy_templates
-    [enterprise_template, community_template, person_template].compact.each do |template|
+    [enterprise_template, inactive_enterprise_template, community_template, person_template].compact.each do |template|
       template.destroy
     end
   end
@@ -703,6 +727,4 @@ class Environment < ActiveRecord::Base
   def image_galleries
     portal_community ? portal_community.image_galleries : []
   end
-
 end
-

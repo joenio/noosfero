@@ -15,6 +15,7 @@ class ContentViewerControllerTest < Test::Unit::TestCase
 
     @profile = create_user('testinguser').person
     @environment = @profile.environment
+    Comment.skip_captcha!
   end
   attr_reader :profile, :environment
 
@@ -1278,7 +1279,7 @@ class ContentViewerControllerTest < Test::Unit::TestCase
     comment.save!
     login_as 'testuser'
     get :view_page, :profile => 'testuser', :page => [ 'test' ]
-    assert_tag :tag => 'a', :attributes => { :class => /comment-reply-link/ }
+    assert_tag :tag => 'a', :attributes => { :class => /comment-footer-link/ }, :content => 'Reply'
   end
 
   should 'display reply to comment button if not authenticated' do
@@ -1288,7 +1289,7 @@ class ContentViewerControllerTest < Test::Unit::TestCase
     comment = article.comments.build(:author => profile, :title => 'a comment', :body => 'lalala')
     comment.save!
     get :view_page, :profile => 'testuser', :page => [ 'test' ]
-    assert_tag :tag => 'a', :attributes => { :class => /comment-reply-link/ }
+    assert_tag :tag => 'a', :attributes => { :class => /comment-footer-link/ }, :content => 'Reply'
   end
 
   should 'display replies if comment has replies' do
@@ -1403,6 +1404,22 @@ class ContentViewerControllerTest < Test::Unit::TestCase
     blog = fast_create(Blog, :profile_id => community.id, :path => 'blog')
     xhr :get, :view_page, :profile => community.identifier, :page => ['blog'], :toolbar => true
     assert_tag :tag => 'div', :attributes => { :id => 'article-header' }
+  end
+
+  should 'add class to body tag if is on profile homepage' do
+    profile = fast_create(Profile)
+    blog = fast_create(Blog, :profile_id => profile.id, :path => 'blog')
+    profile.home_page = blog
+    profile.save
+    get :view_page, :profile => profile.identifier, :page => ['blog']
+    assert_tag :tag => 'body', :attributes => { :class => /profile-homepage/ }
+  end
+
+  should 'not add class to body tag if is not on profile homepage' do
+    profile = fast_create(Profile)
+    blog = fast_create(Blog, :profile_id => profile.id, :path => 'blog')
+    get :view_page, :profile => profile.identifier, :page => ['blog']
+    assert_no_tag :tag => 'body', :attributes => { :class => /profile-homepage/ }
   end
 
 end

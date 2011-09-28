@@ -8,16 +8,70 @@ class ApplicationHelperTest < Test::Unit::TestCase
     self.stubs(:session).returns({})
   end
 
-  should 'calculate correctly partial for object' do
+  should 'calculate correctly partial for models' do
+    p1 = 'path1/'
+    p2 = 'path2/'
+    @controller = mock()
+    @controller.stubs(:view_paths).returns([p1,p2])
+
     self.stubs(:params).returns({:controller => 'test'})
 
-    File.expects(:exists?).with("#{RAILS_ROOT}/app/views/test/_float.rhtml").returns(false)
-    File.expects(:exists?).with("#{RAILS_ROOT}/app/views/test/_numeric.rhtml").returns(true).times(2)
-    File.expects(:exists?).with("#{RAILS_ROOT}/app/views/test/_runtime_error.rhtml").returns(true).at_least_once
+    File.expects(:exists?).with(p1+"test/_integer.rhtml").returns(true)
+
+    assert_equal 'integer', partial_for_class(Integer)
+  end
+
+
+  should 'calculate correctly partial for models recursively' do
+    p1 = 'path1/'
+    p2 = 'path2/'
+    @controller = mock()
+    @controller.stubs(:view_paths).returns([p1,p2])
+
+    self.stubs(:params).returns({:controller => 'test'})
+
+    File.expects(:exists?).with(p1+"test/_float.rhtml").returns(false)
+    File.expects(:exists?).with(p1+"test/_float.html.erb").returns(false)
+    File.expects(:exists?).with(p2+"test/_float.rhtml").returns(false)
+    File.expects(:exists?).with(p2+"test/_float.html.erb").returns(false)
+    File.expects(:exists?).with(p1+"test/_numeric.rhtml").returns(false)
+    File.expects(:exists?).with(p1+"test/_object.rhtml").returns(false)
+    File.expects(:exists?).with(p1+"test/_object.html.erb").returns(false)
+    File.expects(:exists?).with(p1+"test/_numeric.html.erb").returns(false)
+    File.expects(:exists?).with(p2+"test/_numeric.rhtml").returns(true)
 
     assert_equal 'numeric', partial_for_class(Float)
-    assert_equal 'numeric', partial_for_class(Numeric)
-    assert_equal 'runtime_error', partial_for_class(RuntimeError)
+  end
+
+  should 'raise error when partial is missing' do
+    p1 = 'path1/'
+    p2 = 'path2/'
+    @controller = mock()
+    @controller.stubs(:view_paths).returns([p1,p2])
+
+    self.stubs(:params).returns({:controller => 'test'})
+
+    File.expects(:exists?).with(p1+"test/_object.rhtml").returns(false)
+    File.expects(:exists?).with(p1+"test/_object.html.erb").returns(false)
+    File.expects(:exists?).with(p2+"test/_object.rhtml").returns(false)
+    File.expects(:exists?).with(p2+"test/_object.html.erb").returns(false)
+
+    assert_raises ArgumentError do
+      partial_for_class(Object)
+    end
+  end
+
+  should 'calculate correctly partial for namespaced models' do
+    p = 'path/'
+    @controller = mock()
+    @controller.stubs(:view_paths).returns([p])
+    self.stubs(:params).returns({:controller => 'test'})
+
+    class School; class Project; end; end
+
+    File.expects(:exists?).with(p+"test/application_helper_test/school/_project.rhtml").returns(true)
+
+    assert_equal 'test/application_helper_test/school/project', partial_for_class(School::Project)
   end
 
   should 'give error when there is no partial for class' do
@@ -89,7 +143,7 @@ class ApplicationHelperTest < Test::Unit::TestCase
     person = create_user('usertest').person
     community = fast_create(Community, :name => 'new community', :identifier => 'new-community', :environment_id => Environment.default.id)
     community.add_member(person)
-    assert_equal 'Profile Administrator', rolename_for(person, community)
+    assert_tag_in_string rolename_for(person, community), :tag => 'span', :content => 'Profile Administrator'
   end
 
   should 'rolename for a member' do
@@ -98,7 +152,7 @@ class ApplicationHelperTest < Test::Unit::TestCase
     community = fast_create(Community, :name => 'new community', :identifier => 'new-community', :environment_id => Environment.default.id)
     community.add_member(member1)
     community.add_member(member2)
-    assert_equal 'Profile Member', rolename_for(member2, community)
+    assert_tag_in_string rolename_for(member2, community), :tag => 'span', :content => 'Profile Member'
   end
 
   should 'get theme from environment by default' do
@@ -608,27 +662,6 @@ class ApplicationHelperTest < Test::Unit::TestCase
   end
 
   protected
-
-  def url_for(args = {})
-    args
-  end
-  def content_tag(tag, content, options = {})
-    content.strip
-  end
-  def javascript_tag(any)
-    ''
-  end
-  def javascript_include_tag(any)
-    ''
-  end
-  def link_to(label, action, options = {})
-    label
-  end
-  def check_box_tag(name, value = 1, checked = false, options = {})
-    name
-  end
-  def stylesheet_link_tag(arg)
-    arg
-  end
+  include NoosferoTestHelper
 
 end

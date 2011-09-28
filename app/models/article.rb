@@ -188,6 +188,14 @@ class Article < ActiveRecord::Base
     body || ''
   end
 
+  include ApplicationHelper
+  def reported_version(options = {})
+    article = self
+    search_path = File.join(Rails.root, 'app', 'views', 'shared', 'reported_versions')
+    partial_path = File.join('shared', 'reported_versions', partial_for_class_in_view_path(article.class, search_path))
+    lambda { render_to_string(:partial => partial_path, :locals => {:article => article}) }
+  end
+
   # returns the data of the article. Must be overriden in each subclass to
   # provide the correct content for the article. 
   def data
@@ -262,6 +270,10 @@ class Article < ActiveRecord::Base
   end
 
   def forum?
+    false
+  end
+
+  def uploaded_file?
     false
   end
 
@@ -512,7 +524,7 @@ class Article < ActiveRecord::Base
   def body_images_paths
     require 'uri'
     Hpricot(self.body.to_s).search('img[@src]').collect do |i|
-      (self.profile && self.profile.environment) ? URI.join(self.profile.environment.top_url, i.attributes['src']).to_s : i.attributes['src']
+      (self.profile && self.profile.environment) ? URI.join(self.profile.environment.top_url, URI.escape(i.attributes['src'])).to_s : i.attributes['src']
     end
   end
 

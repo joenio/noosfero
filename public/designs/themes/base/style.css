@@ -472,7 +472,8 @@ div#notice {
 #content .enterprises-block ul,
 #content .members-block ul,
 #content .communities-block ul,
-#content .friends-block ul {
+#content .friends-block ul,
+#content .fans-block ul {
   min-width: 196px;
   width: 192px;
   margin: 0px 0px 0px -3px;
@@ -915,14 +916,17 @@ X.sep {
   height: 225px;
 }
 
-#content .search-results-type-article li {
+#content .search-results-type-article li,
+#content .search-results-type-event li {
   padding: 5px 0px;
 }
 
-.search-results-type-article a {
+.search-results-type-article a,
+.search-results-type-event a {
   text-decoration: none;
 }
-.search-results-type-article a:hover {
+.search-results-type-article a:hover,
+.search-results-type-event a:hover {
   text-decoration: underline;
 }
 
@@ -1294,4 +1298,10 @@ table.profile th {
 }
 #chat-window .history .other-name {
    color: #7F1F1F;
+}
+
+/* recaptcha*/
+
+table#recaptcha_table tr:hover td {
+  background-color: #fff;
 }

@@ -6,6 +6,7 @@ class ArticleTest < Test::Unit::TestCase
 
   def setup
     @profile = create_user('testing').person
+    Comment.skip_captcha!
   end
   attr_reader :profile
 
@@ -1553,6 +1554,13 @@ class ArticleTest < Test::Unit::TestCase
     Environment.any_instance.stubs(:default_hostname).returns('noosfero.org')
     a = Article.new :profile => @profile
     assert_equal [], a.body_images_paths
+  end
+
+  should 'survive to a invalid src attribute while looking for images in body' do
+    article = Article.new(:body => "An article with invalid src in img tag <img src='path with spaces.png' />", :profile => @profile)
+    assert_nothing_raised URI::InvalidURIError do
+      assert_equal ['http://localhost/path%20with%20spaces.png'], article.body_images_paths
+    end
   end
 
 end

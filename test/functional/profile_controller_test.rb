@@ -469,7 +469,7 @@ class ProfileControllerTest < Test::Unit::TestCase
 
     get :join, :profile => community.identifier
 
-    assert_equal "/profile/#{community.identifier}", @request.session[:before_join]
+    assert_equal "/profile/#{community.identifier}", @request.session[:previous_location]
   end
 
   should 'redirect to location before login after join community' do
@@ -482,7 +482,7 @@ class ProfileControllerTest < Test::Unit::TestCase
 
     assert_redirected_to "/profile/#{community.identifier}/to_go"
 
-    assert_nil @request.session[:before_join]
+    assert_nil @request.session[:previous_location]
   end
 
   should 'show number of published events in index' do
@@ -1164,6 +1164,8 @@ class ProfileControllerTest < Test::Unit::TestCase
     tabs = [plugin1_tab, plugin2_tab]
     plugins = mock()
     plugins.stubs(:map).with(:profile_tabs).returns(tabs)
+    plugins.stubs(:enabled_plugins).returns([])
+    plugins.stubs(:map).with(:body_beginning).returns([])
     Noosfero::Plugin::Manager.stubs(:new).returns(plugins)
 
     get :index, :profile => profile.identifier
@@ -1181,4 +1183,22 @@ class ProfileControllerTest < Test::Unit::TestCase
     end
   end
 
+  should 'redirect to profile domain if it has one' do
+    community = fast_create(Community, :name => 'community with domain')
+    community.domains << Domain.new(:name => 'community.example.net')
+    @request.stubs(:host).returns(community.environment.default_hostname)
+    get :index, :profile => community.identifier
+    assert_response :redirect
+    assert_redirected_to :host => 'community.example.net'
+  end
+
+  should 'register abuse report' do
+    reported = fast_create(Profile)
+    login_as(profile.identifier)
+    @controller.stubs(:verify_recaptcha).returns(true)
+
+    assert_difference AbuseReport, :count, 1 do
+      post :register_report, :profile => reported.identifier, :abuse_report => {:reason => 'some reason'}
+    end
+  end
 end

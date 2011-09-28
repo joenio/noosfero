@@ -20,9 +20,14 @@ Given /^the following (community|communities|enterprises?|organizations?)$/ do |
   klass = kind.singularize.camelize.constantize
   table.hashes.each do |row|
     owner = row.delete("owner")
+    domain = row.delete("domain")
     organization = klass.create!(row)
     if owner
       organization.add_admin(Profile[owner])
+    end
+    if domain
+      d = Domain.new :name => domain, :owner => organization
+      d.save(false)
     end
   end
 end
@@ -60,7 +65,7 @@ Given /^the following (articles|events|blogs|folders|forums|galleries)$/ do |con
       result.parent = Article.find_by_name(parent)
     end
     result.save!
-    if home
+    if home == 'true'
       owner.home_page = result
       owner.save!
     end
@@ -111,8 +116,8 @@ Given /^the following products?$/ do |table|
     data = item.dup
     owner = Enterprise[data.delete("owner")]
     category = Category.find_by_slug(data.delete("category").to_slug)
-    product = Product.create!(data.merge(:enterprise => owner, :product_category => category))
-    image = Image.create!(:owner => product, :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png'))
+    img = Image.create!(:uploaded_data => fixture_file_upload('/files/rails.png', 'image/png'))
+    product = Product.create!(data.merge(:enterprise => owner, :product_category => category, :image_id => img.id))
   end
 end
 
@@ -172,22 +177,6 @@ Given /^the following certifiers$/ do |table|
       row["qualifiers"] = qualifiers_list.split(', ').map{|i| Qualifier.find_by_name(i)}
     end
     Certifier.create!(row.merge(:environment_id => 1))
-  end
-end
-
-Given /^the following production costs?$/ do |table|
-  table.hashes.map{|item| item.dup}.each do |item|
-    owner_type = item.delete('owner')
-    owner = owner_type == 'environment' ? Environment.default : Profile[owner_type]
-    ProductionCost.create!(item.merge(:owner => owner))
-  end
-end
-
-Given /^the following price details?$/ do |table|
-  table.hashes.map{|item| item.dup}.each do |item|
-    product = Product.find_by_name item.delete('product')
-    production_cost = ProductionCost.find_by_name item.delete('production_cost')
-    product.price_details.create!(item.merge(:production_cost => production_cost))
   end
 end
 
@@ -370,6 +359,7 @@ Given /^the articles of "(.+)" are moderated$/ do |organization|
 end
 
 Given /^the following comments?$/ do |table|
+  Comment.skip_captcha!
   table.hashes.each do |item|
     data = item.dup
     article = Article.find_by_name(data.delete("article"))
@@ -408,6 +398,21 @@ Given /^"([^\"]*)" asked to join "([^\"]*)"$/ do |person, organization|
   AddMember.create!(:person => person, :organization => organization)
 end
 
-And /^I want to add "([^\"]*)" as cost$/ do |string|
-  selenium.answer_on_next_prompt(string)
+Given /^that the default environment have (.+) templates?$/ do |option|
+  env = Environment.default
+  case option
+    when 'all profile'
+      env.create_templates
+    when 'no Inactive Enterprise'
+      env.inactive_enterprise_template && env.inactive_enterprise_template.destroy
+  end
+end
+
+Given /^the environment domain is "([^\"]*)"$/ do |domain|
+  d = Domain.new :name => domain, :owner => Environment.default
+  d.save(false)
+end
+
+Given /^skip comments captcha$/ do
+  Comment.any_instance.stubs(:skip_captcha?).returns(true)
 end

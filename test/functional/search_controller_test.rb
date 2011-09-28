@@ -17,6 +17,7 @@ class SearchControllerTest < Test::Unit::TestCase
     domain.save!
 
     @product_category = fast_create(ProductCategory)
+    Comment.skip_captcha!
   end
 
   def create_article_with_optional_category(name, profile, category = nil)
@@ -287,6 +288,27 @@ class SearchControllerTest < Test::Unit::TestCase
     get :assets, :asset => 'products', :category_path => [ 'my-category' ]
 
     assert_equal [prod1], assigns(:results)[:products]
+  end
+
+  should 'include extra content supplied by plugins on product asset' do
+    enterprise = fast_create(Enterprise)
+    product = fast_create(Product, :enterprise_id => enterprise.id)
+    plugin1_local_variable = "Plugin1"
+    plugin1_content = lambda {"<span id='plugin1'>This is #{plugin1_local_variable} speaking!</span>"}
+    plugin2_local_variable = "Plugin2"
+    plugin2_content = lambda {"<span id='plugin2'>This is #{plugin2_local_variable} speaking!</span>"}
+    contents = [plugin1_content, plugin2_content]
+
+    plugins = mock()
+    plugins.stubs(:enabled_plugins).returns([])
+    plugins.stubs(:map).with(:body_beginning).returns([])
+    plugins.stubs(:map).with(:asset_product_extras, product, enterprise).returns(contents)
+    Noosfero::Plugin::Manager.stubs(:new).returns(plugins)
+
+    get :assets, :asset => 'products'
+
+    assert_tag :tag => 'span', :content => 'This is ' + plugin1_local_variable + ' speaking!', :attributes => {:id => 'plugin1'}
+    assert_tag :tag => 'span', :content => 'This is ' + plugin2_local_variable + ' speaking!', :attributes => {:id => 'plugin2'}
   end
 
   should 'paginate enterprise listing' do

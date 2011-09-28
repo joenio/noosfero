@@ -1,5 +1,5 @@
 <% if errors %>
-  <%= render :partial => 'shared/dialog_error_messages', :locals => { :object_name => 'product' } %>
+  <%= render_dialog_error_messages 'product' %>
 <% end %>
 
 <% remote_form_for(@product,
@@ -55,4 +55,9 @@
   <% end %>
 <% end %>
 
-<%= render :partial => 'shared/numbers_only_javascript' %>
+<% javascript_tag do %>
+  jQuery(".numbers-only").keypress(function(event) {
+    var separator = "<%= environment.currency_separator %>"
+    return numbersonly(event, separator)
+  });
+<% end %>

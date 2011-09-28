@@ -123,6 +123,13 @@ class ManageProductsControllerTest < Test::Unit::TestCase
     assert_template 'shared/_dialog_error_messages'
   end
 
+  should "not crash if product has no category" do
+    product = fast_create(Product, :enterprise_id => @enterprise.id)
+    assert_nothing_raised do
+      post 'edit_category', :profile => @enterprise.identifier, :id => product.id
+    end
+  end
+
   should "destroy product" do
     product = fast_create(Product, :name => 'test product', :enterprise_id => @enterprise.id, :product_category_id => @product_category.id)
     assert_difference Product, :count, -1 do
@@ -160,6 +167,14 @@ class ManageProductsControllerTest < Test::Unit::TestCase
     assert_difference Product, :count do
       post 'new', :profile => @enterprise.identifier, :product => { :name => 'test product' }, :selected_category_id => category2.id
       assert_equal category2, assigns(:product).product_category
+    end
+  end
+
+  should 'not create a new product with an invalid category' do
+    category1 = fast_create(Category, :name => 'Category 1')
+    category2 = fast_create(Category, :name => 'Category 2', :parent_id => category1)
+    assert_raise ActiveRecord::AssociationTypeMismatch do
+      post 'new', :profile => @enterprise.identifier, :product => { :name => 'test product' }, :selected_category_id => category2.id
     end
   end
 
@@ -421,47 +436,23 @@ class ManageProductsControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'div', :attributes => { :id => "product-#{product.id}-tabs" }, :descendant => {:tag => 'a', :attributes => {:href => '#product-inputs'}, :content => 'Inputs and raw material'}
   end
 
-  should 'remove price detail of a product' do
-    product = fast_create(Product, :enterprise_id => @enterprise.id, :product_category_id => @product_category.id)
-    cost = fast_create(ProductionCost, :owner_id => Environment.default.id, :owner_type => 'Environment')
-    detail = product.price_details.create(:production_cost_id => cost.id, :price => 10)
+  should 'include extra content supplied by plugins on products info extras' do
+    product = fast_create(Product, :enterprise_id => @enterprise.id)
+    plugin1_local_variable = "Plugin1"
+    plugin1_content = lambda {"<span id='plugin1'>This is #{plugin1_local_variable} speaking!</span>"}
+    plugin2_local_variable = "Plugin2"
+    plugin2_content = lambda {"<span id='plugin2'>This is #{plugin2_local_variable} speaking!</span>"}
+    contents = [plugin1_content, plugin2_content]
 
-    assert_equal [detail], product.price_details
+    plugins = mock()
+    plugins.stubs(:enabled_plugins).returns([])
+    plugins.stubs(:map).with(:body_beginning).returns([])
+    plugins.stubs(:map).with(:product_info_extras, product).returns(contents)
+    Noosfero::Plugin::Manager.stubs(:new).returns(plugins)
 
-    post :remove_price_detail, :id => detail.id, :product => product, :profile => @enterprise.identifier
-    product.reload
-    assert_equal [], product.price_details
+    get :show, :id => product.id, :profile => @enterprise.identifier
+
+    assert_tag :tag => 'span', :content => 'This is ' + plugin1_local_variable + ' speaking!', :attributes => {:id => 'plugin1'}
+    assert_tag :tag => 'span', :content => 'This is ' + plugin2_local_variable + ' speaking!', :attributes => {:id => 'plugin2'}
   end
-
-  should 'create a production cost for enterprise' do
-    get :create_production_cost, :profile => @enterprise.identifier, :id => 'Taxes'
-
-    assert_equal ['Taxes'], Enterprise.find(@enterprise.id).production_costs.map(&:name)
-    resp = ActiveSupport::JSON.decode(@response.body)
-    assert_equal 'Taxes', resp['name']
-    assert resp['id'].kind_of?(Integer)
-    assert resp['ok']
-    assert_nil resp['error_msg']
-  end
-
-  should 'display error if production cost has no name' do
-    get :create_production_cost, :profile => @enterprise.identifier
-
-    resp = ActiveSupport::JSON.decode(@response.body)
-    assert_nil resp['name']
-    assert_nil resp['id']
-    assert !resp['ok']
-    assert_match /blank/, resp['error_msg']
-  end
-
-  should 'display error if name of production cost is too long' do
-    get :create_production_cost, :profile => @enterprise.identifier, :id => 'a'*60
-
-    resp = ActiveSupport::JSON.decode(@response.body)
-    assert_nil resp['name']
-    assert_nil resp['id']
-    assert !resp['ok']
-    assert_match /too long/, resp['error_msg']
-  end
-
 end
