@@ -6136,3 +6136,29 @@ h1#agenda-title {
 #user a#pending-tasks-count {
   color: #FFFFFF;
 }
+
+/* Signup interface */
+
+#url-check .available {
+  color: #4e9a06;
+  background: transparent url(/images/check-ok.png) left center no-repeat;
+}
+
+#url-check .unavailable {
+  color: #a40000;
+  background: transparent url(/images/check-error.png) left center no-repeat;
+}
+
+#url-check .checking {
+  color: #555573;
+  background: transparent url(/images/loading-small.gif) left center no-repeat;
+}
+
+#url-check p {
+  line-height: 18px;
+  margin: 3px 0;
+}
+
+#url-check span {
+  padding-left: 20px;
+}

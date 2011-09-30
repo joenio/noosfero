@@ -207,13 +207,13 @@ class AccountController < ApplicationController
     @identifier = params[:identifier]
     valid = Person.is_available?(@identifier, environment)
     if valid
-      @status = _('Available!')
+      @profile_url = environment.top_url + '/' + @identifier
+      @status = _('Login available! Your profile URL will be: %s') % @profile_url
       @status_class = 'available'
     else
-      @status = _('Unavailable!')
+      @status = _('Login unavailable! Please choose another one.')
       @status_class = 'unavailable'
     end
-    @url = environment.top_url + '/' + @identifier
     render :partial => 'identifier_status'
   end
 

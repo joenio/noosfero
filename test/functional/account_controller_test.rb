@@ -661,6 +661,7 @@ class AccountControllerTest < Test::Unit::TestCase
     profile = create_user('mylogin').person
     get :check_url, :identifier => 'mylogin'
     assert_equal 'available', assigns(:status_class)
+    assert_equal env.top_url + '/mylogin', assigns(:profile_url)
   end
 
   should 'check if url is not available on environment' do
@@ -668,6 +669,7 @@ class AccountControllerTest < Test::Unit::TestCase
     profile = create_user('mylogin').person
     get :check_url, :identifier => 'mylogin'
     assert_equal 'unavailable', assigns(:status_class)
+    assert_nil assigns(:profile_url)
   end
 
   should 'merge user data with extra stuff from plugins' do
@@ -713,6 +715,36 @@ class AccountControllerTest < Test::Unit::TestCase
     post :login, :user => {:login => 'testuser', :password => 'test123'}
     assert_nil session[:user]
     assert_redirected_to '/bli'
+  end
+
+  should 'be able to upload an image' do
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_not_nil Person.last.image
+  end
+
+  should 'not be able to upload an image bigger than max size' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] + 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_nil Person.last.image
+  end
+
+  should 'display error message when image has more than max size' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] + 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_tag :tag => 'div', :attributes => { :class => 'errorExplanation', :id => 'errorExplanation' }
+  end
+
+  should 'not display error message when image has less than max size' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] - 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_no_tag :tag => 'div', :attributes => { :class => 'errorExplanation', :id => 'errorExplanation' }
+  end
+
+  should 'not redirect when some file has errors' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] + 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_response :success
+    assert_template 'signup'
   end
 
   protected

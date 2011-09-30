@@ -7,7 +7,7 @@
 </div>
 <% end %>
 
-<% labelled_form_for :user, @user do |f| %>
+<% labelled_form_for :user, @user, :html => { :multipart => true } do |f| %>
 <%= icaptcha_field() %>
 
 <%= hidden_field_tag :invitation_code, @invitation_code %>
@@ -19,11 +19,11 @@
   <%= content_tag(:small,_('This e-mail address will be used to contact you.')) %>
 </div>
 
-<%= required f.text_field(:login, :onchange => 'this.value = convToValidLogin( this.value )') %>
+<%= required f.text_field(:login, :onchange => 'this.value = convToValidLogin( this.value );') %>
 <%= content_tag(:small,_('Insert your login')) %>
 <div id='url-check'></div>
 
-<%= observe_field 'user_login', :url => {:action => 'check_url'}, :with => 'identifier', :update => 'url-check' %>
+<%= observe_field 'user_login', :url => {:action => 'check_url'}, :with => 'identifier', :update => 'url-check', :loading => "jQuery('#url-check').html('<p><span class=\"checking\">#{_('Checking availability of login name...')}</span></p>');", :complete => "jQuery('#url-check').effect('highlight', {}, 3000)" %>
 
 <div id='signup-password'>
   <%= required f.password_field(:password) %>
