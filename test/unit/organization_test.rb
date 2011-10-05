@@ -396,4 +396,16 @@ class OrganizationTest < Test::Unit::TestCase
     assert !organization.errors.invalid?(:cnpj)
   end
 
+  should 'return members by role in a json format' do
+    organization = fast_create(Organization)
+    p1 = create_user('person-1').person
+    p2 = create_user('person-2').person
+    role = Profile::Roles.organization_member_roles(organization.environment.id).last
+
+    organization.affiliate(p1, role)
+    organization.affiliate(p2, role)
+
+    assert_match [{:id => p1.id, :name => p1.name}, {:id => p2.id, :name => p2.name}].to_json, organization.members_by_role_to_json(role)
+  end
+
 end
