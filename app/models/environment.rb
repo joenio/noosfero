@@ -117,6 +117,7 @@ class Environment < ActiveRecord::Base
       'enable_organization_url_change' => _("Allow organizations to change their URL"),
       'admin_must_approve_new_communities' => _("Admin must approve creation of communities"),
       'enterprises_are_disabled_when_created' => __('Enterprises are disabled when created'),
+      'enterprises_are_validated_when_created' => __('Enterprises are validated when created'),
       'show_balloon_with_profile_links_when_clicked' => _('Show a balloon with profile links when a profile image is clicked'),
       'xmpp_chat' => _('XMPP/Jabber based chat'),
       'show_zoom_button_on_article_images' => _('Show a zoom link on all article images')

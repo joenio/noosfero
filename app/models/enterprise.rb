@@ -147,6 +147,7 @@ class Enterprise < Organization
   end
 
   before_create do |enterprise|
+    enterprise.validated = enterprise.environment.enabled?('enterprises_are_validated_when_created')
     if enterprise.environment.enabled?('enterprises_are_disabled_when_created')
       enterprise.enabled = false
     end
