@@ -167,4 +167,8 @@ class Enterprise < Organization
     enable_contact_us
   end
 
+  def create_product?
+    true
+  end
+
 end
