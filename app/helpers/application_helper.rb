@@ -981,7 +981,8 @@ module ApplicationHelper
       'lightbox',
       'colorpicker',
       pngfix_stylesheet_path,
-    ]
+    ] +
+    tokeninput_stylesheets
   end
 
   # DEPRECATED. Do not use this·
@@ -991,6 +992,10 @@ module ApplicationHelper
 
   def pngfix_stylesheet_path
     'iepngfix/iepngfix.css'
+  end
+
+  def tokeninput_stylesheets
+    ['token-input', 'token-input-facebook', 'token-input-mac']
   end
 
   def noosfero_layout_features

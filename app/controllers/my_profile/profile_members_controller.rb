@@ -1,6 +1,5 @@
 class ProfileMembersController < MyProfileController
   protect 'manage_memberships', :profile
-  no_design_blocks
 
   def index
     @members = profile.members
