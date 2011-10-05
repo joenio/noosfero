@@ -180,4 +180,20 @@ all_fixtures
     assert_equal assigns(:create_enterprise).target, environment
   end
 
+  should 'add plugins hidden fields on create enterprise' do
+    field1 = 'field1'
+    field2 = 'field2'
+    plugins = mock()
+    plugins.stubs(:map).with(:create_enterprise_hidden_fields).returns([field1,field2])
+    plugins.stubs(:map).with(:create_enterprise_extra_content).returns([])
+    plugins.stubs(:enabled_plugins).returns([])
+    plugins.stubs(:map).with(:body_beginning).returns([])
+    Noosfero::Plugin::Manager.stubs(:new).returns(plugins)
+
+    get :index
+
+    assert_tag :tag => 'input', :attributes => {:type => 'hidden', :name => "create_enterprise[#{field1}]"}
+    assert_tag :tag => 'input', :attributes => {:type => 'hidden', :name => "create_enterprise[#{field2}]"}
+  end
+
 end
