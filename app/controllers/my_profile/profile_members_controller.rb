@@ -15,21 +15,22 @@ class ProfileMembersController < MyProfileController
       @person = nil
     end
 
-    if @person && @person.define_roles(@roles, profile)
-      if profile.admins.blank?
+    if @person
+      if@person.is_last_admin_leaving?(profile, @roles)
         redirect_to :action => :last_admin
-      else
+      elsif @person.define_roles(@roles, profile)
         session[:notice] = _('Roles successfuly updated')
         redirect_to :controller => 'profile_editor'
+      else
+        session[:notice] = _('Couldn\'t change the roles')
+        redirect_to :action => 'index'
       end
-    else
-      session[:notice] = _('Couldn\'t change the roles')
-      redirect_to :action => 'index'
     end
   end
   
   def last_admin
     @roles = [Profile::Roles.admin(environment.id)]
+    @pre_population = [].to_json
   end
 
   def add_role
@@ -118,7 +119,7 @@ class ProfileMembersController < MyProfileController
   def search_user
     role = Role.find(params[:role])
     render :text => environment.people.find(:all, :conditions => ['LOWER(name) LIKE ? OR LOWER(identifier) LIKE ?', "%#{params['q_'+role.key]}%", "%#{params['q_'+role.key]}%"]).
-      select { |person| !profile.members_by_role(role).include?(person)}.
+      select { |person| !profile.members_by_role(role).include?(person) }.
       map {|person| {:id => person.id, :name => person.name} }.
       to_json
   end
