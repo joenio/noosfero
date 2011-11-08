@@ -1,0 +1,9 @@
+<tr>
+  <td align="center"><%= counter %></td>
+  <td><%= BscPlugin::Contract::ClientType.names[contract.client_type] %></td>
+  <td><%= contract.city %></td>
+  <td><%= BscPlugin::Contract::BusinessType.names[contract.business_type] %></td>
+  <td><%= BscPlugin::Contract::Status.names[contract.status] %></td>
+  <td align="center"><%= contract.enterprises.count %></td>
+  <td align="center"><%= contract.products.count %></td>
+</tr>

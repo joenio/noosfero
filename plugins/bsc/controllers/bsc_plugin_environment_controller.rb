@@ -33,5 +33,20 @@ class BscPluginEnvironmentController < AdminController
       to_json
   end
 
-end
+  def report
+    self.class.no_design_blocks
+    @from = params[:from] ? Date.parse(params[:from]) : Date.today.at_beginning_of_month
+    @to = params[:to] ? Date.parse(params[:to]) : Date.today
+    @bscs = BscPlugin::Bsc.with_article_or_contract_in_period(@from, @to)
+    @users = environment.users
+    @relatorio = []
 
+    respond_to do |format|
+      format.html
+      format.xml do
+        stream = render_to_string(:action => 'report.xml.builder', :layout => false)
+        send_data(stream, :type=>"text/xml",:filename => "bscs-report.xml")
+      end
+    end
+  end
+end

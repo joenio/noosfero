@@ -1,0 +1,52 @@
+<div>
+  <strong><%= "##{counter} #{bsc.name}" %></strong>
+  <table class="bsc-plugin-report-table-bsc">
+    <%= display_text_field(_('Company name'), bsc.company_name) %>
+    <%= display_text_field(_('Enterprises total'), bsc.enterprises.count) %>
+
+    <% if bsc.enterprises.count > 0 %>
+      <tr><td colspan="2" class="grey-separator"></td></tr>
+      <tr><td colspan='2'><table class="bsc-plugin-report-table-enterprises alternate-colors">
+        <% counter = 1 %>
+        <% bsc.enterprises.each do |enterprise| %>
+          <%= render :partial => 'report_enterprise', :locals => {:enterprise => enterprise, :counter => counter} %>
+          <% counter += 1 %>
+        <% end %>
+      </table></td></tr>
+    <% end %>
+
+    <% contents, total = group_by_quantity(bsc.articles.created_between(@from, @to), 'class', 'name') %>
+    <% if total > 0 %>
+      <tr><td colspan="2" class="grey-separator"></td></tr>
+      <%= display_text_field(_('Shared content in the period'), contents, {:class => 'bsc-plugin-report-table-list-label', :style => 'padding-top: 8px'}, {:style => 'padding-top: 8px'}) %>
+      <%= display_text_field(_('Total'), total) %>
+    <% end %>
+
+    <% contracts = bsc.contracts.created_between(@from, @to) %>
+    <% contents, total = group_by_quantity(contracts, 'status', 'contract_status_to_name', true) %>
+    <% if total > 0 %>
+      <tr><td colspan="2" class="grey-separator"></td></tr>
+      <%= display_text_field(_('Contracts in the period'), contents, {:class => 'bsc-plugin-report-table-list-label', :style => 'padding-top: 8px'}, {:style => 'padding-top: 8px'}) %>
+      <%= display_text_field(_('Total'), total) %>
+    <% end %>
+
+    <% if contracts.count > 0 %>
+      <tr><td colspan='2'><table class="bsc-plugin-table alternate-colors" style="margin-top: 20px">
+        <tr>
+          <th>#</th>
+          <th><%= _('Client type') %></th>
+          <th><%= _('Client city') %></th>
+          <th><%= _('Business type') %></th>
+          <th><%= _('Status') %></th>
+          <th><%= '# '+_('Enterprises') %></th>
+          <th><%= '# '+_('Products') %></th>
+        </tr>
+        <% counter = 1 %>
+        <% contracts.each do |contract| %>
+          <%= render :partial => 'report_contract', :locals => {:contract => contract, :counter => counter} %>
+          <% counter += 1 %>
+        <% end %>
+      </table></td></tr>
+    <% end %>
+  </table>
+</div>

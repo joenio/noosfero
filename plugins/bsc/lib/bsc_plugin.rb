@@ -14,8 +14,9 @@ class BscPlugin < Noosfero::Plugin
   end
 
   def admin_panel_links
-    [{:title => _('Create Bsc'), :url => {:controller => 'bsc_plugin_environment', :action => 'new'}},
-    {:title => _('Validate Enterprises'), :url => {:controller => 'bsc_plugin_environment', :action => 'validate_enterprises'}} ]
+    [ {:title => _('Create Bsc'), :url => {:controller => 'bsc_plugin_environment', :action => 'new'}},
+      {:title => _('Bsc Report'), :url => {:controller => 'bsc_plugin_environment', :action => 'report'}},
+      {:title => _('Validate Enterprises'), :url => {:controller => 'bsc_plugin_environment', :action => 'validate_enterprises'}} ]
   end
 
   def control_panel_buttons

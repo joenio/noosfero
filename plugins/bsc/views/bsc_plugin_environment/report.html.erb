@@ -1,0 +1,15 @@
+<h1><%= _("Bsc's report") %></h1>
+<%= link_to('[XML]', {:action => 'report', :format => 'xml', :from => @from, :to => @to}, :style => 'float: right; margin-bottom: -15px')%>
+<table class="bsc-plugin-report-table-bsc" style="margin-left: 0px; width: 100%;">
+  <%= display_text_field(_("Bsc's total"), @bscs.all.count) %>
+  <% form_tag do %>
+    <%= display_text_field(_('Period'), datepicker_period_field_tag('from', 'to', @from, @to) + submit_button(:save, _('Filter'))) %>
+  <% end %>
+  <tr><td colspan="2" class="black-separator"></td></tr>
+</table>
+<br />
+<% counter = 1 %>
+<% @bscs.each do |bsc| %>
+  <%= render :partial => 'report_bsc', :locals => {:bsc => bsc, :counter => counter} %>
+  <% counter += 1 %>
+<% end %>

@@ -12,6 +12,26 @@ class BscPlugin::Bsc < Enterprise
   validates_uniqueness_of :company_name
   validates_uniqueness_of :cnpj
 
+  named_scope :with_article_or_contract_in_period, lambda { |from, to|
+    article_conditions = []
+    article_conditions << (from ? "(articles.created_at >= '#{from}'" : nil)
+    article_conditions << (to ? "articles.created_at < '#{to+1.day}')" : nil)
+    article_conditions = article_conditions.compact.join(' AND ')
+
+    contract_conditions = []
+    contract_conditions << (from ? "(bsc_plugin_contracts.created_at >= '#{from}'" : nil)
+    contract_conditions << (to ? "bsc_plugin_contracts.created_at < '#{to+1.day}')" : nil)
+    contract_conditions = contract_conditions.compact.join(' AND ')
+
+    conditions = [article_conditions, contract_conditions].compact.join(' OR ')
+
+    { :joins => "INNER JOIN articles ON profiles.id = articles.profile_id 
+                 INNER JOIN bsc_plugin_contracts ON profiles.id = bsc_plugin_contracts.bsc_id",
+      :select => 'DISTINCT profiles.*',
+      :conditions => [conditions]
+    }
+  }
+
   before_validation do |bsc|
     bsc.name = bsc.business_name || 'Sample name'
   end

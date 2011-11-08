@@ -72,6 +72,27 @@ class BscPlugin::ContractTest < Test::Unit::TestCase
     assert_includes all, contract4
   end
 
+  should 'filter contracts by date of creation' do
+    bsc = BscPlugin::Bsc.new
+    from = Date.today - 2.days
+    to = Date.today - 1.day
+    contract1 = BscPlugin::Contract.create!(:bsc => bsc, :created_at => from - 1.day, :client_name => 'Marvin')
+    contract2 = BscPlugin::Contract.create!(:bsc => bsc, :created_at => from + 6.hours, :client_name => 'Marvin')
+    contract3 = BscPlugin::Contract.create!(:bsc => bsc, :created_at => to + 1.day, :client_name => 'Marvin')
+
+    assert_not_includes BscPlugin::Contract.created_between(from, nil), contract1
+    assert_includes BscPlugin::Contract.created_between(from, nil), contract2
+    assert_includes BscPlugin::Contract.created_between(from, nil), contract3
+
+    assert_includes BscPlugin::Contract.created_between(nil, to), contract1
+    assert_includes BscPlugin::Contract.created_between(nil, to), contract2
+    assert_not_includes BscPlugin::Contract.created_between(nil, to), contract3
+
+    assert_not_includes BscPlugin::Contract.created_between(from, to), contract1
+    assert_includes BscPlugin::Contract.created_between(from, to), contract2
+    assert_not_includes BscPlugin::Contract.created_between(from, to), contract3
+  end
+
   should 'sort contracts by date' do
     bsc = BscPlugin::Bsc.new
     contract1 = BscPlugin::Contract.create!(:bsc => bsc, :created_at => 2.day.ago, :client_name => 'Marvin')

@@ -9,6 +9,12 @@ class BscPlugin::Contract < Noosfero::Plugin::ActiveRecord
 
   named_scope :status, lambda { |status_list| status_list.blank? ? {} : {:conditions => ['status in (?)', status_list]} }
   named_scope :sorted_by, lambda { |sorter, direction| {:order => "#{sorter} #{direction}"} }
+  named_scope :created_between, lambda { |from, to|
+    conditions = []
+    conditions << (from ? "created_at >= '#{from}'" : nil)
+    conditions << (to ? "created_at < '#{to+1.day}'" : nil)
+    {:conditions => [conditions.compact.join(' AND ')]}
+  }
 
   before_create do |contract|
     contract.created_at ||= Time.now.utc

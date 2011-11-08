@@ -1562,6 +1562,7 @@ class ArticleTest < Test::Unit::TestCase
     end
   end
 
+<<<<<<< HEAD
   should 'find more recent contents' do
     Article.delete_all
 
@@ -1634,6 +1635,26 @@ class ArticleTest < Test::Unit::TestCase
     c5 = fast_create(TextileArticle, :name => 'Testing article 5', :body => 'Article body 5', :profile_id => profile.id)
 
     assert_equal [c1,c2,c5], Article.text_articles
+  end
+
+  should 'filter articles by date of creation' do
+    from = Date.today - 2.days
+    to = Date.today - 1.day
+    article1 = fast_create(Article, :created_at => from - 1.day)
+    article2 = fast_create(Article, :created_at => from + 6.hours)
+    article3 = fast_create(Article, :created_at => to + 1.day)
+
+    assert_not_includes Article.created_between(from, nil), article1
+    assert_includes Article.created_between(from, nil), article2
+    assert_includes Article.created_between(from, nil), article3
+
+    assert_includes Article.created_between(nil, to), article1
+    assert_includes Article.created_between(nil, to), article2
+    assert_not_includes Article.created_between(nil, to), article3
+
+    assert_not_includes Article.created_between(from, to), article1
+    assert_includes Article.created_between(from, to), article2
+    assert_not_includes Article.created_between(from, to), article3
   end
 
 end

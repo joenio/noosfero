@@ -1,0 +1,10 @@
+<tr>
+  <td colspan='2' style="padding: 10px 10px">
+    <strong><%= "##{counter} #{enterprise.name}" %></strong>
+    <table class="bsc-plugin-report-table-enterprise">
+      <%= display_text_field(_('Company name'), enterprise.company_name) %>
+      <% products = enterprise.products.map(&:name).join("<br />")%>
+      <%= display_text_field(_('Products'), products, {:class => 'bsc-plugin-report-table-list-label'}) %>
+    </table>
+  </td>
+</tr>

@@ -4,6 +4,7 @@ require File.dirname(__FILE__) + '/../../../lib/ext/enterprise'
 
 class BscPlugin::BscTest < Test::Unit::TestCase
   VALID_CNPJ = '94.132.024/0001-48'
+  ANOTHER_VALID_CNPJ = '16.780.851/0001-34'
 
   def setup
     @bsc = BscPlugin::Bsc.create!(:business_name => 'Sample Bsc', :company_name => 'Sample Bsc', :identifier => 'sample-bsc', :cnpj => VALID_CNPJ)
@@ -79,6 +80,38 @@ class BscPlugin::BscTest < Test::Unit::TestCase
 
     assert_includes bsc.contracts, contract1
     assert_includes bsc.contracts, contract2
+  end
+
+  should 'filter bsc that contains at least one article or contract in the period' do
+    bsc1 = bsc
+    bsc2 = BscPlugin::Bsc.create!(:business_name => 'Another Bsc', :company_name => 'Another Bsc', :identifier => 'another-bsc', :cnpj => ANOTHER_VALID_CNPJ)
+    bsc1.articles.destroy_all
+    bsc2.articles.destroy_all
+    bsc1.contracts.destroy_all
+    bsc2.contracts.destroy_all
+
+    contract1 = BscPlugin::Contract.create!(:bsc => bsc1, :created_at => 1.days.ago, :client_name => 'Marvin')
+    contract2 = BscPlugin::Contract.create!(:bsc => bsc2, :created_at => 3.days.ago, :client_name => 'Marvin')
+    article1 = fast_create(Article, :created_at => 5.days.ago, :profile_id => bsc1.id)
+    article2 = fast_create(Article, :created_at => 7.days.ago, :profile_id => bsc2.id)
+
+    assert_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 2.days, Date.today), bsc1
+    assert_not_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 2.days, Date.today), bsc2
+
+    assert_not_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 4.days, Date.today - 2.days), bsc1
+    assert_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 4.days, Date.today - 2.days), bsc2
+
+    assert_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 6.days, Date.today - 4.days), bsc1
+    assert_not_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 6.days, Date.today - 4.days), bsc2
+
+    assert_not_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 8.days, Date.today - 6.days), bsc1
+    assert_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 8.days, Date.today - 6.days), bsc2
+
+    assert_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 8.days, Date.today), bsc1
+    assert_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 8.days, Date.today), bsc2
+
+    assert_not_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 10.days, Date.today - 8.days), bsc1
+    assert_not_includes BscPlugin::Bsc.with_article_or_contract_in_period(Date.today - 10.days, Date.today - 8.days), bsc2
   end
 
 end

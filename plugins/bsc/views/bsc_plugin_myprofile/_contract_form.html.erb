@@ -32,11 +32,9 @@
     </tr>
   </table>
 
-  <%= labelled_form_field( _('Supply period'), 
-    text_field_tag('contract[supply_start]', (@contract.supply_start ? @contract.supply_start.strftime("%Y-%m-%d") : nil), :id => 'from', :size => 9) + 
-    _(' to ') +
-    text_field_tag('contract[supply_end]', (@contract.supply_end ? @contract.supply_end.strftime("%Y-%m-%d") : nil), :id => 'to', :size => 9) )
-  %>
+  <%= labelled_form_field _('Supply period'),
+    datepicker_period_field_tag('contract[supply_start]', 'contract[supply_end]',
+                                @contract.supply_start, @contract.supply_end) %>
 
   <%= f.text_area(:annotations, :rows => 5, :cols => 68) %>
   <% button_bar do%>
@@ -45,7 +43,7 @@
 <% end %>
 
 <% scripts = %w{/plugins/bsc/jquery.ui.spinner/ui.spinner.js
-                /plugins/bsc/contracts /plugins/bsc/datepicker
+                /plugins/bsc/contracts
                 /plugins/bsc/spinner} %>
 <% scripts.each do |script|%>
   <%= javascript_include_tag script %>

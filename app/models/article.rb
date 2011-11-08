@@ -55,6 +55,13 @@ class Article < ActiveRecord::Base
     ]
   }}
 
+  named_scope :created_between, lambda { |from, to|
+    conditions = []
+    conditions << (from ? "created_at >= '#{from}'" : nil)
+    conditions << (to ? "created_at < '#{to+1.day}'" : nil)
+    {:conditions => [conditions.compact.join(' AND ')]}
+  }
+
   URL_FORMAT = /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?\Z/ix
 
   validates_format_of :external_link, :with => URL_FORMAT, :if => lambda { |article| !article.external_link.blank? }
