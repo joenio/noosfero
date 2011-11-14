@@ -152,7 +152,7 @@ div#notice {
 
   width: 300px;
   min-height: 60px;
-  position: absolute;
+  position: fixed;
   top: 30px;
   right: 30px;
 }
@@ -967,7 +967,7 @@ code input {
 }
 
 #manage-enterprises {
-  display: inline;
+  display: inline-block;
   margin-right: 5px;
   position: relative;
 }
@@ -998,6 +998,10 @@ code input {
   top: 16px;
 }
 
+.webkit #manage-enterprises .simplemenu-submenu {
+  top: 20px;
+}
+
 #article {
   position: relative;
   text-align: justify;
@@ -1006,6 +1010,11 @@ code input {
 #article-actions {
   margin-bottom: 5px;
   width: 100%;
+  text-align: left;
+}
+
+#article-actions a{
+  white-space: nowrap;
 }
 
 #article-tags {
@@ -1089,6 +1098,16 @@ code input {
 
 #article pre {
   white-space: pre-wrap;
+}
+
+#article .article-body a.icon {
+  padding: 0px 0px 3px 20px;
+  border: none;
+  background-repeat: no-repeat;
+}
+
+#article .article-body a.icon:hover {
+  background-color: transparent;
 }
 
 /* * *  Comments  * * */
@@ -1246,19 +1265,19 @@ a.comment-picture {
   padding: 7px 1px 3px 5px;
 }
 
-#article .comment-reply-link {
+#article .comment-footer {
   font-size: 10px;
   text-decoration: none;
   color: #000;
 }
 
 #profile-activity .profile-activity-send-message a:hover, #profile-network .profile-network-send-message a:hover, #profile-wall .profile-wall-send-message a:hover,
-#article .comment-reply-link:hover {
+#article .comment-footer-link:hover {
   text-decoration: underline;
 }
 
-#article .opened .comment-reply-link {
-  visibility: hidden;
+#article .opened .comment-footer-hide {
+  display: none;
 }
 
 .comment_form div.fieldWithErrors input {
@@ -2734,7 +2753,6 @@ div#activation_enterprise div {
   text-align: center;
 }
 
-
 .formfieldline {
   padding: 3px 0px;
 }
@@ -2756,6 +2774,7 @@ div#activation_enterprise div {
   border-top: none;
   border-left: none;
   color: #585858;
+  font-size: 11px;
 }
 .formfield input {
   text-indent: 5px;
@@ -2770,6 +2789,9 @@ div#activation_enterprise div {
 }
 .formfield textarea {
   padding: 2px 0px 0px 5px;
+}
+.Blog .formfield textarea {
+  width: 99%;
 }
 
 .formfield.type-radio input,
@@ -2964,6 +2986,7 @@ div#activation_enterprise div {
   border: 1px solid #888;
   margin-bottom: 10px;
   padding: 5px 10px;
+  position: relative;
 }
 
 #product_list .product-pic {
@@ -3327,21 +3350,7 @@ table.cms-articles .icon:hover {
   display: block;
 }
 
-/* Media listing */
-
-.controller-cms #media-listing-iframe {
-  float: right;
-  width: 380px;
-  height: 630px;
-  border: none;
-  margin-top: 104px;
-  padding: 0px;
-  overflow: hidden;
-}
-
-.controller-cms .msie #media-listing-iframe {
-  height: 610px;
-}
+/* Text editors sidebar */
 
 .controller-cms div.with_media_panel {
   float: left;
@@ -3350,6 +3359,64 @@ table.cms-articles .icon:hover {
 
 div.with_media_panel .formfield input {
   width: 100%;
+}
+
+.text-editor-sidebar {
+  position: absolute;
+  width: 380px;
+  right: 20px;
+  top: 70px;
+}
+
+.text-editor-sidebar-box  {
+  background: #eeeeec;
+  border: 1px solid #d3d7cf;
+  padding: 10px 10px 0px 10px;
+  margin-bottom: 10px;
+}
+.text-editor-sidebar-box p {
+  margin-top: 0px;
+}
+.text-editor-sidebar code,
+.text-editor-sidebar pre {
+  border: 1px solid #d3d7cf;
+  color: black;
+  padding: 2px;
+}
+.text-editor-sidebar .icon-loading {
+  background-image: url(../images/loading-small.gif);
+}
+.text-editor-sidebar .items {
+  margin-bottom: 10px;
+}
+.text-editor-sidebar .items div {
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+  padding-left: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border: none;
+  margin-bottom: 2px;
+}
+.text-editor-sidebar .items :hover {
+  background-color: transparent;
+  border: none;
+}
+.text-editor-sidebar #media-upload-box,
+.text-editor-sidebar #media-search-box {
+  background-repeat: no-repeat;
+  background-position: 98% 10px;
+}
+.text-editor-sidebar img {
+ max-height: 96px;
+ max-width: 96px;
+ border: 1px solid #d3d7cf;
+}
+.text-editor-sidebar .media-upload-error {
+  color: red;
+}
+.text-editor-sidebar select {
+  max-width: 355px;
 }
 
 /* ==> public/stylesheets/controller_contact.css <== */
@@ -4436,13 +4503,15 @@ h1#agenda-title {
   padding: 2px 0px 4px 0px;
 }
 
-.controller-search #content .search-results-type-article li {
+.controller-search #content .search-results-type-article li,
+.controller-search #content .search-results-type-event li {
   padding: 0px 0px 4px 20px;
   background-repeat: no-repeat;
   border-color: transparent;
 }
 
-.controller-search #content .search-results-type-article li:hover {
+.controller-search #content .search-results-type-article li:hover,
+.controller-search #content .search-results-type-event li:hover {
   background-color: transparent;
 }
 
@@ -4495,6 +4564,7 @@ h1#agenda-title {
 }
 
 .search-results-type-product li.product-item {
+  position: relative;
   height: 60px;
   overflow: hidden;
 }
@@ -4699,12 +4769,9 @@ h1#agenda-title {
   padding: 0px;
 }
 
-.controller-tasks #content .task-list li {
-  margin: 10px 0px;
-  list-style: none;
-  border: 1px solid #BFC2BC;
-  padding-left:1em;
-  padding-right:1em;
+.controller-tasks #content .task-list ul {
+  padding-left: 0px;
+  list-style-type: none;
 }
 
 /* ==> public/stylesheets/controller_themes.css <== */
@@ -6071,4 +6138,391 @@ h1#agenda-title {
 
 #user a#pending-tasks-count {
   color: #FFFFFF;
+}
+
+/* Abuse report */
+
+.abuse-report-details {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.display-abuse-report-details {
+  float: right;
+  margin-top: -30px;
+}
+
+#content a.report-abuse-action.disabled {
+  cursor: default;
+  text-decoration: none;
+  color: #999;
+}
+
+#content a.button.report-abuse-action.disabled:hover {
+  background-color: #eee;
+  color: #999;
+  border: solid 1px #ccc;
+}
+
+#article-actions a.button.report-abuse-action.disabled:hover {
+  border: none;
+  background-color: transparent;
+  color: #999;
+}
+
+/* Captcha */
+
+/* Colorbox */
+
+#cboxClose {
+  display: none !important;
+}
+
+/* Signup interface */
+
+#url-check {
+  margin: 0 0 2px 0;
+  width: 100%;
+  text-align: right;
+}
+
+#email-check {
+  margin: -2px 171px 2px 0;
+  text-align: right;
+  clear: both;
+}
+
+#email-check p {
+  margin: 0;
+}
+
+.available {
+  color: #88BD00;
+}
+
+.unavailable {
+  color: #FFA000;
+}
+
+.checking {
+  color: #4A4A4A;
+}
+
+#email-check p, #url-check p {
+  margin: 0;
+  text-transform: lowercase;
+  font-size: 11px;
+  clear: both;
+}
+
+.action-account-signup #main-content-wrapper-8 {
+  background: #ECECEC;
+}
+
+@font-face {
+  font-family: droidserif;
+  src: url('/fonts/DroidSerif-Regular.ttf');
+}
+
+.action-account-signup #content .no-boxes h1 {
+  font-variant: normal;
+  border-bottom: 0;
+  color: #666666;
+  font-family: droidserif, serif;
+  font-weight: lighter;
+  text-align: center;
+  margin-top: 35px;
+  margin-left: 12px;
+}
+
+.action-account-signup #wrap-1 .formfield select,
+.action-account-signup #wrap-1 .formfield textarea,
+.action-account-signup #wrap-1 #profile_data_name,
+.action-account-signup #wrap-1 .formfield input {
+  background: transparent url(/images/field-bg.png) left top no-repeat;
+  padding: 7px 3px 10px 7px;
+  height: 24px;
+  width: 335px;
+  color: #6d786e;
+  font-size: 20px;
+  font-family: droidserif, serif;
+  margin: 9px 14px 0;
+  border: 0;
+}
+
+.action-account-signup #wrap-1 .formfield select {
+  height: auto;
+}
+
+.action-account-signup #wrap-1 .formfield .select-birth-date select {
+  width: 93px;
+  margin-right: 2px;
+  margin-left: 0;
+}
+
+.webkit.action-account-signup #wrap-1 .formfield select {
+  background: #fff;
+}
+
+.action-account-signup #wrap-1 .formfield textarea {
+  height: 335px;
+  background: #fff;
+}
+
+.action-account-signup #wrap-1 .formfield input[type=file] {
+  font-size: 12px;
+}
+
+.action-account-signup #wrap-1 .formfield textarea {
+  height: 100px;
+}
+
+.action-account-signup #wrap-1 label,
+.action-account-signup #wrap-1 small,
+.action-account-signup #wrap-1 #user_password,
+.action-account-signup #wrap-1 #user_password_confirmation {
+   display: none;
+}
+
+.action-account-signup #wrap-1 input[type=radio] {
+  height: auto;
+  margin: 0;
+  margin-left: 3px;
+}
+
+.action-account-signup #wrap-1 .fieldgroup {
+  margin: 5px 10px;
+}
+
+.action-account-signup #wrap-1 label[for=profile_data_sex_female],
+.action-account-signup #wrap-1 label[for=profile_data_sex_male] {
+  color: #6d786e;
+  font-size: 20px;
+  font-family: droidserif;
+  text-transform: lowercase;
+  display: inline;
+  margin-left: 8px;
+}
+
+.action-account-signup #wrap-1 label[for=profile_data_country],
+.action-account-signup #wrap-1 label[for=profile_data_preferred_domain_id],
+.action-account-signup #wrap-1 label[for=profile_data_birth_date_2i],
+.action-account-signup #wrap-1 label[for=profile_data_birth_date_3i],
+.action-account-signup #wrap-1 label[for=profile_data_schooling],
+.action-account-signup #wrap-1 label[for=profile_data_formation],
+.action-account-signup #wrap-1 label[for=profile_data_area_of_study],
+.action-account-signup #wrap-1 label[for=profile_data_image_builder_uploaded_data] {
+  display: block;
+}
+
+.action-account-signup #wrap-1 .formfield input[type=password] {
+  margin-bottom: -6px;
+  margin-top: 15px;
+}
+
+.action-account-signup #wrap-1 .formfield textarea,
+.action-account-signup #wrap-1 .formfield input[type=password],
+.action-account-signup #wrap-1 #profile_data_name,
+.action-account-signup #wrap-1 .formfield input[type=text] {
+  width: 400px;
+}
+
+.action-account-signup #wrap-1 #profile_data_name {
+  padding-left: 10px;
+  margin-top: 12px;
+  margin-bottom: 3px;
+}
+
+.action-account-signup #wrap-1 #signup-form-header {
+  background: #E3E3E3;
+  padding-top: 10px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  margin: 75px auto 20px;
+  position: relative;
+  width: 563px;
+}
+
+.action-account-signup #wrap-1 #user_email,
+.action-account-signup #wrap-1 .formfield input.passwords_match,
+.action-account-signup #wrap-1 .formfield input.passwords_differ {
+  width: 338px;
+  padding-right: 30px;
+}
+
+.action-account-signup #wrap-1 #user_login.available,
+.action-account-signup #wrap-1 #user_email.available,
+.action-account-signup #wrap-1 #user_login.unavailable,
+.action-account-signup #wrap-1 #user_email.unavailable,
+.action-account-signup #wrap-1 #user_email.checking,
+.action-account-signup #wrap-1 #user_login.checking,
+.action-account-signup #wrap-1 #user_login.available,
+.action-account-signup #wrap-1 #user_email.available,
+.action-account-signup #wrap-1 .formfield input.passwords_differ,
+.action-account-signup #wrap-1 .formfield input.passwords_match {
+  border-width: 2px;
+  border-style: solid;
+  background-color: #fff;
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding: 5px 30px 8px 5px;
+}
+
+.action-account-signup #wrap-1 #user_login.unavailable,
+.action-account-signup #wrap-1 #user_email.unavailable,
+.action-account-signup #wrap-1 .formfield input.passwords_differ {
+  border-color: #FFA000;
+  background-image: url(/images/passwords_nomatch.png);
+}
+
+.action-account-signup #wrap-1 #user_email.checking,
+.action-account-signup #wrap-1 #user_login.checking {
+  border-color: #4A4A4A;
+  background-image: url(/images/login_checking.png);
+}
+
+.action-account-signup #wrap-1 #user_login.available,
+.action-account-signup #wrap-1 #user_email.available,
+.action-account-signup #wrap-1 .formfield input.passwords_match {
+  border-color: #88BD00;
+  background-image: url(/images/passwords_match.png);
+}
+
+#signup-domain {
+  float: left;
+  display: inline-block;
+  vertical-align: middle;
+  background: #EAEAEA;
+  border-right: 2px solid #FFFFFF;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #CFCFCF;
+  border-bottom: 2px solid #CFCFCF;
+  line-height: 37px;
+  padding: 0px 7px;
+  color: #4A4A4A;
+  font-size: 20px;
+  font-family: droidserif;
+  text-transform: lowercase;
+  margin: 14px 0 0 14px;
+}
+
+.action-account-signup #wrap-1 #signup-form-header #user_login {
+  margin: 0;
+  width: 200px;
+  padding-right: 30px;
+}
+
+#url-check {
+  width: 239px;
+}
+
+#signup-login-field {
+  float: left;
+  margin: 11px 0 0 0;
+}
+
+.action-account-signup #wrap-1 #signup-password-confirmation,
+.action-account-signup #wrap-1 #signup-login {
+  position: relative;
+}
+
+.action-account-signup #wrap-1 small#signup-balloon,
+.action-account-signup #wrap-1 small#password-balloon {
+  display: none;
+  width: 142px;
+  height: 69px;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 5px 10px 45px 10px;
+  margin: 0;
+  line-height: 1.5em;
+  background: transparent url(/images/orange-balloon.png) bottom center no-repeat;
+  position: absolute;
+  z-index: 2;
+  right: -40px;
+  top: -80px;
+}
+
+.action-account-signup #wrap-1 .required-field label,
+.action-account-signup #wrap-1 .formlabel {
+  color: #b4b9b5;
+  font-size: 20px;
+  text-transform: lowercase;
+  font-weight: normal;
+  margin-left: 15px;
+  font-family: droidserif;
+}
+
+.action-account-signup #wrap-1 .required-field label::after {
+  content: '';
+}
+
+.action-account-signup #wrap-1 div.fieldWithErrors {
+  background: transparent;
+}
+
+.person_image_maxsize {
+  margin: 0 18px;
+  font: 13px sans-serif;
+  color: #BABABA;
+}
+
+#terms-of-use-box {
+  margin: 20px 0 30px 40px;
+  color: #B3B3B3;
+}
+
+#terms-of-use-box input[type=checkbox] {
+  border: 1px solid #FFA514;
+  background: #FFF;
+}
+
+.action-account-signup #terms-of-use-box label {
+  display: inline;
+  font-size: 14px;
+}
+
+.action-account-signup #terms-of-use-box label a {
+  color: #FF7F2A;
+}
+
+.action-account-signup #content form input.button.submit {
+  border: 0;
+  padding: 8px 36px 12px;
+  background: transparent url(/images/orange-bg.png) left center repeat-x;
+  font-size: 17px;
+  font-family: droidserif;
+  color: #FFFFD5;
+  text-align: center;
+  text-shadow: #d45500 0 -1px 0;
+  border-radius: 7px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  max-height: none;
+  height: 39px;
+}
+
+.action-account-signup .no-boxes {
+  margin-left: 128px;
+  margin-right: 128px;
+}
+
+#signup-password {
+  margin-top: -19px;
+}
+
+#signup-password-confirmation {
+  margin-top: -5px;
+}
+
+#signup-form-profile {
+  margin: 30px 0 0 40px;
+}
+
+.select-birth-date {
+  margin-left: 14px;
 }

@@ -2,6 +2,9 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class CommentTest < Test::Unit::TestCase
 
+  def setup
+  end
+
   should 'have a name and require it' do
     assert_mandatory(Comment.new, :title)
   end

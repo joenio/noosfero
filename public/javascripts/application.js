@@ -475,6 +475,8 @@ jQuery(function($) {
     if (data.notice) {
       display_notice(data.notice);
     }
+    // Bind this event to do more actions with the user data (for example, inside plugins)
+    $(window).trigger("userDataLoaded", data);
   });
 
   function loggedInDataCallBack(data) {
@@ -660,6 +662,7 @@ function add_comment_reply_form(button, comment_id) {
   var f = container.find('.comment_form');
   if (f.length == 0) {
     f = jQuery('#page-comment-form .comment_form').clone();
+    f.find('#dynamic_recaptcha').remove();
     f.find('.fieldWithErrors').map(function() { jQuery(this).replaceWith(jQuery(this).contents()); });
     f.prepend('<input type="hidden" name="comment[reply_of_id]" value="' + comment_id + '" />');
     container.append(f);
@@ -677,3 +680,18 @@ function original_image_dimensions(src) {
   img.src = src;
   return { 'width' : img.width, 'height' : img.height };
 }
+
+jQuery(function() {
+  jQuery("#ajax-form").before("<div id='ajax-form-loading-area' style='display:block;width:16px;height:16px;'></div>");
+  jQuery("#ajax-form").before("<div id='ajax-form-message-area'></div>");
+  jQuery("#ajax-form").ajaxForm({
+    beforeSubmit: function(a,f,o) {
+      jQuery('#ajax-form-message-area').html('');
+      o.loading = small_loading('ajax-form-loading-area');
+    },
+    success: function() {
+      loading_done('ajax-form-loading-area');
+    },
+    target: "#ajax-form-message-area"
+  })
+});

@@ -1503,4 +1503,63 @@ class ArticleTest < Test::Unit::TestCase
     assert !child.accept_uploads?
   end
 
+  should 'index by schema name when database is postgresql' do
+    uses_postgresql 'schema_one'
+    art1 = Article.create!(:name => 'some thing', :profile_id => @profile.id)
+    assert_equal Article.find_by_contents('thing'), [art1]
+    uses_postgresql 'schema_two'
+    art2 = Article.create!(:name => 'another thing', :profile_id => @profile.id)
+    assert_not_includes Article.find_by_contents('thing'), art1
+    assert_includes Article.find_by_contents('thing'), art2
+    uses_postgresql 'schema_one'
+    assert_includes Article.find_by_contents('thing'), art1
+    assert_not_includes Article.find_by_contents('thing'), art2
+    uses_sqlite
+  end
+
+  should 'not index by schema name when database is not postgresql' do
+    uses_sqlite
+    art1 = Article.create!(:name => 'some thing', :profile_id => @profile.id)
+    assert_equal Article.find_by_contents('thing'), [art1]
+    art2 = Article.create!(:name => 'another thing', :profile_id => @profile.id)
+    assert_includes Article.find_by_contents('thing'), art1
+    assert_includes Article.find_by_contents('thing'), art2
+  end
+
+  should 'get images paths in article body' do
+    Environment.any_instance.stubs(:default_hostname).returns('noosfero.org')
+    a = TinyMceArticle.new :profile => @profile
+    a.body = 'Noosfero <img src="http://noosfero.com/test.png" /> test <img src="http://test.com/noosfero.png" />'
+    assert_includes a.body_images_paths, 'http://noosfero.com/test.png'
+    assert_includes a.body_images_paths, 'http://test.com/noosfero.png'
+  end
+
+  should 'get absolute images paths in article body' do
+    Environment.any_instance.stubs(:default_hostname).returns('noosfero.org')
+    a = TinyMceArticle.new :profile => @profile
+    a.body = 'Noosfero <img src="test.png" alt="Absolute" /> test <img src="/relative/path.png" />'
+    assert_includes a.body_images_paths, 'http://noosfero.org/test.png'
+    assert_includes a.body_images_paths, 'http://noosfero.org/relative/path.png'
+  end
+
+  should 'return empty if there are no images in article body' do
+    Environment.any_instance.stubs(:default_hostname).returns('noosfero.org')
+    a = Event.new :profile => @profile
+    a.body = 'Noosfero test'
+    assert_equal [], a.body_images_paths
+  end
+
+  should 'return empty if body is nil' do
+    Environment.any_instance.stubs(:default_hostname).returns('noosfero.org')
+    a = Article.new :profile => @profile
+    assert_equal [], a.body_images_paths
+  end
+
+  should 'survive to a invalid src attribute while looking for images in body' do
+    article = Article.new(:body => "An article with invalid src in img tag <img src='path with spaces.png' />", :profile => @profile)
+    assert_nothing_raised URI::InvalidURIError do
+      assert_equal ['http://localhost/path%20with%20spaces.png'], article.body_images_paths
+    end
+  end
+
 end

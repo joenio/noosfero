@@ -70,7 +70,8 @@ class AccountControllerTest < Test::Unit::TestCase
   def test_should_allow_signup
     assert_difference User, :count do
       new_user
-      assert_response :redirect
+      assert_response :success
+      assert_not_nil assigns(:register_pending)
     end
   end
 
@@ -79,6 +80,7 @@ class AccountControllerTest < Test::Unit::TestCase
       new_user(:login => nil)
       assert assigns(:user).errors.on(:login)
       assert_response :success
+      assert_nil assigns(:register_pending)
     end
   end
 
@@ -87,6 +89,7 @@ class AccountControllerTest < Test::Unit::TestCase
       new_user(:password => nil)
       assert assigns(:user).errors.on(:password)
       assert_response :success
+      assert_nil assigns(:register_pending)
     end
   end
 
@@ -95,6 +98,7 @@ class AccountControllerTest < Test::Unit::TestCase
       new_user(:password_confirmation => nil)
       assert assigns(:user).errors.on(:password_confirmation)
       assert_response :success
+      assert_nil assigns(:register_pending)
     end
   end
 
@@ -103,6 +107,7 @@ class AccountControllerTest < Test::Unit::TestCase
       new_user(:email => nil)
       assert assigns(:user).errors.on(:email)
       assert_response :success
+      assert_nil assigns(:register_pending)
     end
   end
 
@@ -111,6 +116,7 @@ class AccountControllerTest < Test::Unit::TestCase
       Environment.default.update_attributes(:terms_of_use => 'some terms ...')
       new_user
       assert_response :success
+      assert_nil assigns(:register_pending)
     end
   end
 
@@ -118,7 +124,8 @@ class AccountControllerTest < Test::Unit::TestCase
     assert_difference User, :count do
       Environment.default.update_attributes(:terms_of_use => 'some terms ...')      
       new_user(:terms_accepted => '1')
-      assert_response :redirect
+      assert_response :success
+      assert_not_nil assigns(:register_pending)
     end
   end
 
@@ -564,17 +571,6 @@ class AccountControllerTest < Test::Unit::TestCase
 
 # end of enterprise activation tests
 
-  should 'not be able to signup while inverse captcha field filled' do
-    assert_no_difference User, :count do
-      new_user({}, @controller.icaptcha_field => 'bli@bla.email.foo')
-    end
-  end
-
-  should 'render inverse captcha field' do
-    get :signup
-    assert_tag :tag => 'input', :attributes => { :type => 'text', :name => @controller.icaptcha_field }
-  end
-
   should 'use the current environment for the template of user' do
     template = create_user('test_template', :email => 'test@bli.com', :password => 'pass', :password_confirmation => 'pass').person
     template.boxes.destroy_all
@@ -643,7 +639,7 @@ class AccountControllerTest < Test::Unit::TestCase
     Person.any_instance.stubs(:required_fields).returns(['organization'])
     assert_difference User, :count do
       post :signup, :user => { :login => 'testuser', :password => '123456', :password_confirmation => '123456', :email => 'testuser@example.com' }, :profile_data => { :organization => 'example.com' }
-      assert_redirected_to :controller => 'profile_editor', :profile => 'testuser'
+      assert_response :success
     end
     assert_equal 'example.com', Person['testuser'].organization
   end
@@ -668,6 +664,111 @@ class AccountControllerTest < Test::Unit::TestCase
     profile = create_user('mylogin').person
     get :check_url, :identifier => 'mylogin'
     assert_equal 'unavailable', assigns(:status_class)
+  end
+
+  should 'check if e-mail is available on environment' do
+    env = fast_create(Environment, :name => 'Environment test')
+    @controller.expects(:environment).returns(env).at_least_once
+    profile = create_user('mylogin', :email => 'mylogin@noosfero.org', :environment_id => fast_create(Environment).id)
+    get :check_email, :address => 'mylogin@noosfero.org'
+    assert_equal 'available', assigns(:status_class)
+  end
+
+  should 'check if e-mail is not available on environment' do
+    env = fast_create(Environment, :name => 'Environment test')
+    @controller.expects(:environment).returns(env).at_least_once
+    profile = create_user('mylogin', :email => 'mylogin@noosfero.org', :environment_id => env)
+    get :check_email, :address => 'mylogin@noosfero.org'
+    assert_equal 'unavailable', assigns(:status_class)
+  end
+
+  should 'merge user data with extra stuff from plugins' do
+    class Plugin1 < Noosfero::Plugin
+      def user_data_extras
+        {:foo => 'bar'}
+      end
+    end
+
+    class Plugin2 < Noosfero::Plugin
+      def user_data_extras
+        {:test => 5}
+      end
+    end
+
+    e = User.find_by_login('ze').environment
+    e.enable_plugin(Plugin1.name)
+    e.enable_plugin(Plugin2.name)
+
+    login_as 'ze'
+
+    xhr :get, :user_data
+    assert_equal User.find_by_login('ze').data_hash.merge({ 'foo' => 'bar', 'test' => 5 }), ActiveSupport::JSON.decode(@response.body)
+  end
+
+  should 'activate user when activation code is present and correct' do
+    user = User.create! :login => 'testuser', :password => 'test123', :password_confirmation => 'test123', :email => 'test@test.org'
+    get :activate, :activation_code => user.activation_code
+    assert_not_nil assigns(:message)
+    assert_response :success
+    post :login, :user => {:login => 'testuser', :password => 'test123'}
+    assert_not_nil session[:user]
+    assert_redirected_to :controller => 'profile_editor', :profile => 'testuser'
+  end
+
+  should 'not activate user when activation code is missing' do
+    @request.env["HTTP_REFERER"] = '/bli'
+    user = User.create! :login => 'testuser', :password => 'test123', :password_confirmation => 'test123', :email => 'test@test.org'
+    get :activate
+    assert_nil assigns(:message)
+    post :login, :user => {:login => 'testuser', :password => 'test123'}
+    assert_nil session[:user]
+    assert_redirected_to '/bli'
+  end
+
+  should 'not activate user when activation code is incorrect' do
+    @request.env["HTTP_REFERER"] = '/bli'
+    user = User.create! :login => 'testuser', :password => 'test123', :password_confirmation => 'test123', :email => 'test@test.org'
+    get :activate, :activation_code => 'wrongcode'
+    assert_nil assigns(:message)
+    post :login, :user => {:login => 'testuser', :password => 'test123'}
+    assert_nil session[:user]
+    assert_redirected_to '/bli'
+  end
+
+  should 'be able to upload an image' do
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_not_nil Person.last.image
+  end
+
+  should 'not be able to upload an image bigger than max size' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] + 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_nil Person.last.image
+  end
+
+  should 'display error message when image has more than max size' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] + 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_tag :tag => 'div', :attributes => { :class => 'errorExplanation', :id => 'errorExplanation' }
+  end
+
+  should 'not display error message when image has less than max size' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] - 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_no_tag :tag => 'div', :attributes => { :class => 'errorExplanation', :id => 'errorExplanation' }
+  end
+
+  should 'not redirect when some file has errors' do
+    Image.any_instance.stubs(:size).returns(Image.attachment_options[:max_size] + 1024)
+    new_user({}, :profile_data => { :image_builder => { :uploaded_data => fixture_file_upload('/files/rails.png', 'image/png') } })
+    assert_response :success
+    assert_template 'signup'
+  end
+
+  should 'remove useless user data on signup' do
+    assert_nothing_raised do
+      new_user :password_clear => 'nothing', :password_confirmation_clear => 'nothing'
+    end
   end
 
   protected
