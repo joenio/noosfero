@@ -1,0 +1,1 @@
+/usr/share/locale/eo/LC_MESSAGES/iso_3166.mo

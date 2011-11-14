@@ -1,0 +1,1 @@
+/usr/share/locale/hy/LC_MESSAGES/rails.mo
