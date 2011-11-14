@@ -1,6 +1,7 @@
 vendor/rails
 doc/api
 doc/noosfero/plugins
+tmp
 config/database.yml
 config/session.secret
 config/noosfero.yml
@@ -16,6 +17,7 @@ public/user_themes
 public/designs/themes/default
 public/designs/icons/default
 public/javascripts/cache*.js
+public/stylesheets/cache*.css
 public/plugins
 db/development.db
 db/production.db
