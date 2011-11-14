@@ -1,0 +1,36 @@
+Name=FeltTip 24
+Description=Soft and expressive emoticons for Gaim.
+Icon=smile.png
+Author=Chromakode
+
+[default]
+smile.png   		:-) :)
+boring.png          :-| :|
+frown.png           :-( :(
+meh.png             :-P :P :-p :p
+laughing.png        :-D :D :d :-d
+wink.png            ;-) ;)
+sleeping.png        |-) |) (zzz)
+ohmygod.png         :-O :O
+huh.png             :-? :? (?)
+unimpressed.png     :-/ :/ :-\ :\
+angry.png           >:-O >:O >:-o >:o {-O {O {-o {o
+sour.png            :-$ :$ :-S :S :-s :s
+sick.png            :-@ :@
+cool.png            B-) B)
+nerd.png            8-) 8)
+aww.png             :-} :}
+blush.png           :-> :> :#)
+love.png            :-* :* (l) (L) \~/
+err.png             {:-D {:D oo;
+hellyes.png         >:-D >:D
+yeah.png            X-D XD
+kill.png            >8-) >8)
+moustache.png       :{) :{D
+yoink.png           %-P %P %-) %)
+dead.png            X-P X-P +-P +P
+stoned.png          S-) S) s-) s) S-P
+ok.png              (ok) (y)
+no.png              (no) (n)
+star.png            (*)
+1010.png            (10) (1010)

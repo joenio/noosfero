@@ -1,0 +1,41 @@
+Name=Crystal Gaim
+Description=Everaldo's crystal emoticons
+Icon=kopete017.png
+Author=Chromakode
+
+[default]
+kopete002.png	(pr) (PR) (pR) (Pr)
+kopete003.png	(po) (PO) (pO) (Po)
+kopete004.png	(pg) (PG) (pG) (Pg)
+kopete005.png	(pb) (PB) (pB) (Pb)
+kopete020.png	:-) :)
+kopete015.png	:-| :|
+kopete019.png	:-( :(
+kopete016.png	:-P :P :-p :p
+kopete017.png	:-D :D :d :-d
+kopete012.png	:-(| :(| :-@ :@
+kopete013.png	;-) ;)
+kopete006.png	;-P ;P ;-p ;p
+kopete014.png	:-$ :$ :-S :S :-s :s
+kopete018.png	:-- :-=
+kopete011.png	:-O :O
+kopete009.png	>:-O >:O >:-o >:o {-O {O {-o {o
+kopete007.png	$-) $)
+kopete008.png	8-) 8) B) B-)
+kopete010.png	:-() :()
+kopete001.png	(l) (L) \~/ 	
+up.png			(^) (u) (U)
+forward.png		(>) (f) (F)
+down.png		(v) (d) (D)
+back.png		(<) (b) (B)
+appearance.png	(#) (@)
+bookmark.png	(*)
+button_ok.png	(ok)
+button_cancel.png	(no)
+reload.png	(G) (r) (R)
+alarm.png	(%) (o) (O)
+network.png	(n)
+people.png	(pp)
+person.png	(p)
+home.png	|^| (h) (H)
+idea.png	(&) (!) (i)

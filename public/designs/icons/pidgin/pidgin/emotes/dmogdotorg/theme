@@ -1,0 +1,330 @@
+Name=DamogDotOrg Theme 0.2
+Description=Implementation of the MadcowWorld Enhanced Theme 1.0.16.
+Icon=DamogDotOrg.png
+Author=Damog and Pitakill.
+
+[default]
+! luke.png          	C:-) C:)
+! oneeye.png        	O-)
+! crazy.png         	>:) >:-)
+! mrt.png           	:-o))) :-O)))
+! download.png      	8-|)
+! farted.png        	:-]
+! damogar.png		(damogar)
+! pitakill.png		(pitakill)
+! DamogDotOrg.png	(damog.org)
+smile.png        	:) :-)
+scream.png        	=-O =-o
+moneymouth.png    	:-$
+think.png         	:-/ :-\
+sad.png           	:( :-(
+kiss.png          	:-*
+burp.png          	:-!
+cry.png           	:'(
+wink.png          	;) ;-)
+yell.png          	>:o >:O
+embarrassed.png   	:-[
+xD.png			x-d x-D xD XD xd X-d X-D
+crossedlips.png   	:-X :-x
+tongue.png        	:-P :-p
+cool.png          	8-)
+angel.png         	O:-) o:-)
+bigsmile.png      	:-D :-d
+xD.png			xD XD Xd x-D X-D X-d
+69.bmp			(69)
+a.jpg			(chara)
+alien.bmp		(alien)
+angry.bmp		(angry)
+apenado.png		(ashamed)
+aplauso.bmp		(clap)
+baba.bmp		(saliva)
+bebe.bmp		(baby)
+burro.png		(donkey)
+c.jpg			(charc)
+caca.bmp		(shit)
+cansado.png		(tired)
+caracolitos.jpg		(huevos)
+carita.gif		(face)
+cejas.gif		(eyebr)
+cheve.bmp		(beer)
+chimuelo.gif		(notooth)
+chinito.bmp		(Chinese)
+chistoso.bmp		(joker)
+chones.gif		(panties)
+ciclope.bmp		(cyclops)
+cigarro.bmp		(cigarrete)
+colapeluda.jpg		(hairyass)
+colgate.bmp		(colgate)
+confundido.bmp		(confused)
+d.jpg			(chard)
+dedo.png		(finger)
+dedos.bmp		(fingers)
+demonio.bmp		(demon)
+diablo.bmp		(devil)
+dolido.bmp		(pain)
+durmiendo.png		(zzz)
+elvis.bmp		(elvis)
+encendedor.bmp		(lighter)
+erika.bmp		(eyes)
+estrella.bmp		(star)
+foto.bmp		(pic)
+fruncido.bmp		(shirr)
+fuck.bmp		(fuck)
+fuckoff.jpg		(fuckoff)
+furioso.bmp		(furious)
+hueva.png		(hueva)
+jim.bmp			(jim)
+juntos.png		(2gether)
+kaiosama.gif		(kaiosama)
+kissmyass.jpg		(kissmyass)
+lentes.jpg		(glasses)
+llanto.gif		(cry)
+locutor.jpg		(speaker)
+lola.gif		(lola)
+loser.bmp		(loser)
+loser.png		(loser2)
+marlboro.bmp		(marlboro)
+mojon.bmp		(bigshit)
+monster.bmp		(monster)
+muertito.bmp		(lildead)
+muerto.bmp		(dead)
+naco.bmp		(naco)
+narigon.bmp		(nose)
+negro.bmp		(mastache)
+nervioso.bmp		(nervous)
+nomames.jpg		(scary)
+o.jpg			(charo)
+ojete.jpg		(suspicious)
+oks.bmp			(ok)
+oriental.bmp		(oriental)
+p.jpg			(charp)
+pacman.bmp		(pacman)
+payasito.bmp		(clown)
+pipi.bmp		(pee)
+sexo.bmp		(sex)
+talvez.bmp		(maybe)
+triste.bmp		(sad)
+violeta.bmp		(violet)
+xman.bmp		(xman)
+
+[MSN]
+xD.png                  x-d x-D xD XD xd X-d X-D
+crossedlips.png         :-X :-x
+tongue.png              :-P :-p
+cool.png                8-)
+angel.png               O:-) o:-)
+bigsmile.png            :-D :-d
+xD.png                  xD XD Xd x-D X-D X-d
+69.bmp                  (69)
+a.jpg                   (chara)
+alien.bmp               (alien)
+angry.bmp               (angry)
+apenado.png             (ashamed)
+aplauso.bmp             (clap)
+baba.bmp                (saliva)
+bebe.bmp                (baby)
+burro.png               (donkey)
+c.jpg                   (charc)
+caca.bmp                (shit)
+cansado.png             (tired)
+caracolitos.jpg         (huevos)
+carita.gif              (face)
+cejas.gif               (eyebr)
+cheve.bmp               (beer)
+chimuelo.gif            (notooth)
+chinito.bmp             (Chinese)
+chistoso.bmp            (joker)
+chones.gif              (panties)
+ciclope.bmp             (cyclops)
+cigarro.bmp             (cigarrete)
+colapeluda.jpg          (hairyass)
+colgate.bmp             (colgate)
+confundido.bmp          (confused)
+d.jpg                   (chard)
+dedo.png                (finger)
+dedos.bmp               (fingers)
+demonio.bmp             (demon)
+diablo.bmp              (devil)
+dolido.bmp              (pain)
+durmiendo.png           (zzz)
+elvis.bmp               (elvis)
+encendedor.bmp          (lighter)
+erika.bmp               (eyes)
+estrella.bmp            (star)
+foto.bmp                (pic)
+fruncido.bmp            (shirr)
+fuck.bmp                (fuck)
+fuckoff.jpg             (fuckoff)
+furioso.bmp             (furious)
+hueva.png               (hueva)
+jim.bmp                 (jim)
+juntos.png              (2gether)
+kaiosama.gif            (kaiosama)
+kissmyass.jpg           (kissmyass)
+lentes.jpg              (glasses)
+llanto.gif              (cry)
+locutor.jpg             (speaker)
+lola.gif                (lola)
+loser.bmp               (loser)
+loser.png               (loser2)
+marlboro.bmp            (marlboro)
+mojon.bmp               (bigshit)
+monster.bmp             (monster)
+muertito.bmp            (lildead)
+muerto.bmp              (dead)
+naco.bmp                (naco)
+narigon.bmp             (nose)
+negro.bmp               (mastache)
+nervioso.bmp            (nervous)
+nomames.jpg             (scary)
+o.jpg                   (charo)
+ojete.jpg               (suspicious)
+oks.bmp                 (ok)
+oriental.bmp            (oriental)
+p.jpg                   (charp)
+pacman.bmp              (pacman)
+payasito.bmp            (clown)
+pipi.bmp                (pee)
+sexo.bmp                (sex)
+talvez.bmp              (maybe)
+triste.bmp              (sad)
+violeta.bmp             (violet)
+xman.bmp                (xman)
+msn_smiley.png    	:-) :)
+msn_laugh.png      	:-D :-d :d :D :-> :>
+msn_wink.png       	;) ;-) :S-
+msn_ooooh.png      	:-O :O :-o :o
+msn_tongue.png   	:-P :P :-p :p
+msn_hot.png        	(H) (h)
+msn_angry.png      	:-@ :@
+msn_weird.png     	:-S :-s :s :S
+msn_embarrassed.png	:$ :-$
+msn_sad.png	   	:-( :( :-<
+msn_cry.png        	:'( :`(
+msn_neutral.png    	:-| :|
+msn_angel.png      	(a) (A)
+msn_teeth.png       8o|8O|
+msn_nerd.png		8-|
+msn_sick.gif        +o( +O(
+msn_party.png       <:o) <:O)
+msn_sleepy.png      |-)
+msn_think.png       *-)
+msn_donttell.png    :-#
+msn_secret.png      :-*
+msn_sarcastic.png   ^o) ^O)
+msn_eyeroll.png     8-)
+msn_heart.png      	(L) (l)
+msn_brheart.png    	(U) (u)
+msn_icon.png       	(M) (m)
+msn_cat.png        	(@)
+msn_dog.png        	(&)
+msn_snail.png		(sn)
+msn_sheep.gif		(bah)
+msn_sleep.png      	(S) (s)
+msn_star.png       	(*)
+msn_sun.png			(#)
+msn_rainbow.png    	(r) (R)
+msn_run.png        	({)
+msn_runback.png    	(})
+msn_kiss.png       	(K) (k)
+msn_flower.png     	(F) (f)
+msn_deadflower.png 	(W) (w)
+msn_clock.png      	(o) (O)
+msn_gift.png       	(g) (G)
+msn_cake.png       	(^)
+msn_photo.png	   	(P) (p)
+msn_idea.png       	(I) (i)
+msn_coffee.png     	(C) (c)
+msn_phone.png      	(T) (t)
+msn_cellphone.gif	(mp)
+msn_car.gif			(car)
+msn_airplane.gif	(ap)
+msn_computer.gif	(co)
+msn_coins.gif		(mo)
+msn_film.png       	(~)
+msn_note.png       	(8)
+msn_pizza.gif		(pi)
+msn_soccer.gif		(so)
+msn_email.png      	(e) (E)
+msn_boy.png        	(Z) (z)
+msn_girl.png       	(X) (x)
+msn_island.gif		(ip)
+msn_umbrella.png	(um)
+msn_bat.png        	:-[ :[
+msn_beer.png       	(B) (b)
+msn_devil.png      	(6)
+msn_drink.png      	(D) (d)
+msn_handcuffs.png  	(%)
+msn_question.png   	(?)
+msn_thumbdown.png 	(N) (n)
+msn_thumbup.png   	(Y) (y)
+msn_plate.gif		(pl)
+msn_bowl.gif		(||)
+msn_storm.gif		(st)
+msn_lightning.gif	(li)
+
+[Yahoo]
+yahoo_smiley.gif	:-) :) (: (-:
+yahoo_question.gif	:-\ :-/
+yahoo_ooooh.gif		:O :-O
+yahoo_devil.gif		>:)
+yahoo_angel.gif		o:) o:-) O:-) O:) 0-:) 0:)
+yahoo_sick.gif		:-& :&
+yahoo_tired.gif		(:|
+yahoo_sad.gif		:( :-(
+yahoo_love.gif		:x :-x :X :-X
+yahoo_angry.gif		X-( x-( X( x(
+yahoo_cry.gif		:(( :-((
+yahoo_glasses.gif	:B :-B :b :-b
+yahoo_shhhh.gif		:-$ :$
+yahoo_drool.gif		=P~ =p~
+yahoo_wink.gif		;-) ;)
+yahoo_blush.gif		:">
+yahoo_mean.gif		:> :->
+yahoo_laughloud.gif	:)) :-))
+yahoo_bye.gif		=;
+yahoo_silent.gif	[-( [(
+yahoo_think.gif		:-? :?
+yahoo_bigsmile.gif	:D :-D :d :-d
+yahoo_tongue.gif	:-p :-P :p :P
+yahoo_sunglas.gif	B-) b-)
+yahoo_neutral.gif	:| :-|
+yahoo_sleep.gif		I-) |-) I-|
+yahoo_clown.gif		:o) :O) <@:) :0))
+yahoo_doh.gif		#-o #-O #O #o
+yahoo_batting.gif	;;)
+yahoo_kiss.gif		:* :-*
+yahoo_worried.gif	:-s :-S :s :S
+yahoo_eyebrow.gif	/:)
+yahoo_eyeroll.gif	8-| 8|
+yahoo_silly.gif		8-} 8}
+yahoo_clap.gif		=D> =d>
+yahoo_alien.gif		=:) =:-)
+yahoo_alien2.gif	>-) >)
+yahoo_beatup.gif	b-( b( B-( B(
+yahoo_chicken.gif	~:>
+yahoo_coffee.gif	~o) ~O)
+yahoo_cow.gif		3:-0 3:-O 3:-o 3:O
+yahoo_cowboy.gif	<):)
+yahoo_dance.gif		\:D/ \:d/
+yahoo_flower.gif	@};-
+yahoo_frustrated.gif	:-L :L :l :-l
+yahoo_ghost.gif		8-X 8-x
+yahoo_huggs.gif		>:D< >:d<
+yahoo_hypnotized.gif	@-)
+yahoo_idea.gif		*-:)
+yahoo_liar.gif		:^o :^O
+yahoo_monkey.gif	:(|)
+yahoo_moneyeyes.gif	$-) $)
+yahoo_peace.gif		:)>-
+yahoo_pig.gif		:@)
+yahoo_pray.gif		[-o< [-O<
+yahoo_pumpkin.gif	(~~)
+yahoo_shame.gif		[-X [-x
+yahoo_flag.gif		**==
+yahoo_shamrock.gif	%%-
+yahoo_whistling.gif	:-"
+yahoo_ninja1.gif	o->
+yahoo_ninja2.gif	o=>
+yahoo_ninja3.gif	o-+
+yahoo_yinyang.gif	(%)

@@ -1,0 +1,57 @@
+Name=FeltTip Retouched
+Description=FeltTip 3 - FeltTip Retouched.
+Icon=menupic.png
+Author=Chromakode
+
+[default]
+smile.png   		:-) :)
+wink.png            ;-) ;)
+# Two types of grin smileys... lets make the old version secret!
+grin.png            :-D :D :d :-d
+! laughing.png      (old:-D) (old:D) (old:-d) (old:d)
+meh.png             :-P :P :-p :p
+heh.png             ;-P ;P ;-p ;p
+halfsmile.png       :-J :J :-j :j
+boring.png          :-| :|
+frown.png           :-( :(
+crying.png          :-(( :(( :'-( :'(
+ugh.png             :-(| :(| :-C :-c 
+yeah.png            X-D XD
+doh.png             X-P X-p
+err.png             {:-D {:D oo; OO;
+erm.png             O_o o_O o.O O.o 0_o o_0 o.0 0.o
+unimpressed.png     :-/ :/ :-\ :\
+sleeping.png        |-) |) (zzz)
+ohmygod.png         :-O :O
+huh.png             :-? :? (?)
+hellyes.png         >:-D >:D
+angry.png           >:-O >:O >:-o >:o {-O {O {-o {o
+sour.png            :-$ :$ :-S :S :-s :s
+sick.png            :-@ :@
+dead.png            X-P X-P +-P +P
+aww.png             :-} :}
+blush.png           :-> :> :#)
+love.png            :-* :* (l) (L) \~/
+cool.png            B-) B)
+nerd.png            8-) 8-i
+whistling.png       :-" :"
+drool.png           :-D~ :D~
+money.png           $-D $D $-) $-D~ $D~
+reading.png         :)H :>=> (reading)
+good.png            O:-) O:) o:-) o:)
+evil.png            >:-D >:D
+alien.png           =:-) =:) (alien)
+peaceout.png        :)>- (Y) (peace)
+ninja.png           (:) (ninja)
+heart.png           <3
+brokenheart.png     </3 <\3 <Z3 <|3
+plus.png            (+) (plus)
+minus.png           (-) (minus)
+star.png            (*)
+# Secret smiley #2, shameless chromakode logo plug
+! logo.png          (Chromakode) (chromakode)
+# Secret smiley #3, chromakode logo animated! Oh, this alone was worth it. ;)
+! logo3d.gif        (Chromakode3d) (chromakode3d) (Chromakode3D) (chromakode3D)
+# Secret smileys galore! 
+! smile2.png        =)
+! robot.png           o[:) o-[:) 

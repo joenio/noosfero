@@ -1,0 +1,24 @@
+Name=HandmadeSmiles
+Description=Emoticons by Opengraphic
+Icon=pidgin.png
+Author=Opengraphic
+
+# http://opengraphic.wordpress.com/
+
+[default]
+smile.png   		:-) :)
+angry.png		:-@	:@
+bored.png
+cry.png			:(( :-(( :'(
+disappointed.png     	:<
+glass.png		B-) b-) 8-)
+happy.png           	:))     :-))
+nausea.png            	:-&
+occh.png		;-)     ;)
+ooo.png			:O :-O :o :-o
+secchione.png		B) 8-|	
+serio.png		:|      :-|
+strabico.png		*CRAZY*
+tongue.png		:P      :-P     :-p     :p
+zitto.png		:-#
+

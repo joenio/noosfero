@@ -1,0 +1,54 @@
+Name=InBob
+Description=InBob's emoticons
+Icon=HyperHappy.png
+Author=xOvni [www.invox.org]
+
+[default]
+HyperHappy.png		:-) :) :-D :-d
+HyperVeryHappy.png      :D :d
+HyperPasHappy.png	:-( :(
+Pleure.png		:*-( :*( :'( :'-(
+Hoo.png			:-o :o
+Clin.png		;-) ;)
+Langue.png		:-P :-p :-þ :P :p :þ
+Sunglasses.png		8-) 8)
+Angel.png		O:-) O:) o:-) o:)
+Angry.png		>:o >:O :-@ :@
+X.png			:-X :X :-x :x :-# :#
+$.png			:$ :-$
+Oo.png			:! :-!
+Smack.png		:* :-*
+
+
+[MSN]
+HyperHappy.png		:-) :)
+HyperVeryHappy.png      :-D :-d :D :d
+HyperPasHappy.png	:-( :(
+Pleure.png		:*-( :*( :'( :'-(
+Hoo.png			:-o :o
+Clin.png		;-) ;)
+Langue.png		:-P :-p :-þ :P :p :þ
+Sunglasses.png		8-) 8)
+Angel.png		O:-) O:) o:-) o:) (a) (A)
+Diablo.png              (6)
+Angry.png		>:o >:O :-@ :@
+X.png			:-X :X :-x :x
+$.png			:$ :-$
+Oo.png			:! :-!
+Smack.png		:* :-*
+Girl.png                (X) (x)
+Boy.png                 (Z) (z)
+Pizza.png		(PI) (pi) (Pi)
+Heart.png		(L) (l)
+BrokenHeart.png         (U) (u)
+Biere.png               (B) (b)
+Kiss.png                (K) (k)
+Flower.png              (F) (f)
+Star.png                (*)
+Sun.png                 (#)
+Moon.png                (S) (s)
+Rainbow.png             (R) (r)
+Clock.png               (O) (o)
+Kdo.png                 (G) (g)
+Note.png                (8)
+

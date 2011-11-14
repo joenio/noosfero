@@ -1,0 +1,29 @@
+Name=SmallSmiles
+Description=Small emoticons similar to those found in AIM.
+Icon=smile.png
+Author=Erick Woods
+
+[default]
+! luke.png          	C:-) C:)
+! oneeye.png        	O-)
+! crazy.png         	>:-) >:)
+! mrt.png           	:-o))) :-O)))
+! download.png      	8-|)
+! farted.png        	:-] :]
+smile.png               :-) :)
+sad.png                 :-( :(
+wink.png                ;-) ;)
+tongue.png              :-P :P :p  :-P
+scream.png              =-O :O :-O  =-O
+kiss.png                :-* :* :-{} :{}
+yell.png                >:o >:0 >:-0 >:-o >-O >-o >-0 >-@
+cool.png                8-) 8) B) B-)
+moneymouth.png          :-$ :$
+burp.png                :-! :! :*! :*)
+embarrassed.png         :-[ :[
+cry.png                 :'( :'-(
+think.png               :-\ :/ :\ :-/
+crossedlips.png         :-X :X :x :-X
+bigsmile.png            :-D :D :d :-D
+angel.png               O:-) O:)
+neutral.png       	:-| :|
