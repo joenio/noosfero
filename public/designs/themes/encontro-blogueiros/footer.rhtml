@@ -1,0 +1,16 @@
+<script type="text/javascript">
+  jQuery(function($) {
+    $('.date').each(function() {
+	var d = $(this).text().split(/,? /);
+     <% if html_language == 'en' %>
+        var month = d[0];
+        var day = d[1];
+      <% else %>
+        var month = d[2];
+        var day = d[0];
+      <% end %>
+	$(this).parent().prev().before('<div id="blog-date">' + day + '<span>' + month.substring(0,3) + '</span></div>');
+    });
+    $('.main-block .block-inner-1').after('<div id="blogosfero-footer"><p>&copy; Todos os direitos reservados - 2011 | Criado por: <a href="http://www.agenciaimam.com.br" title="IMAM">IMAM</a></p></div>');
+	});
+</script>

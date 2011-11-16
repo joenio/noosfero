@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  jQuery(".date").each(function() {
+		var d = $(this).text().split(/,? /);
+		<% if html_language == 'en' %>
+		  var month = d[0];
+			var day = d[1];
+		<% else %>
+		  var month = d[1];
+			var day = d[0];
+		<% end %>
+	  $(this).parent().prev().before('<div id="blog-date">' + day + '<span>' + month.substring(0,3) + '</span></div>');
+	});
+	//jQuery(".main-block .block-inner-1").after('<div id="blogosfero-footer"><p>&copy; Todos os direitos reservados - 2011 | Criado por: <a href="http://www.agenciaimam.com.br" title="IMAM">IMAM</a></p></div>');
+	jQuery("#user").prependTo("#conecte-se");
+	jQuery("#conecte-se").prepend("<span class='label-conect'>Conecte-se</span>");
+	jQuery("#user > form").appendTo("#top-functions").attr("id", "top-search");
+</script>
+
+<div id="footer-content">
+<ul>
+  <li>
+    <strong>Navegação</strong>
+    <ul>
+      <li><a href="#">Página Inicial</a></li>
+      <li><a href="#">Quem Somos</a></li>
+      <li><a href="#">Pessoas</a></li>
+      <li><a href="#">Comunidades</a></li>
+      <li><a href="#">Eventos</a></li>
+      <li><%= link_to _('Manual'), '/doc' %></li>
+    </ul>
+  </li>
+  <li>
+    <strong>Conecte-se</strong>
+    <ul id="external-sns">
+      <li class="twitter"><a href="#">Twitter</a></li>
+      <li class="facebook"><a href="#">Facebook</a></li>
+      <li class="flickr"><a href="#">Flickr</a></li>
+      <li class="youtube"><a href="#">Youtube</a></li>
+      <li class="vimeo"><a href="#">Vimeo</a></li>
+    </ul>
+  </li>
+  <li>
+    <strong>Acesso</strong>
+    <form id="footer-login" action="/account/login">
+      <input name="user[login]" placeholder="<%=_('User name')%>">
+      <input name="user[password]" placeholder="<%=_('Password')%>">
+      <div>
+        <input type="submit" value="<%=_('Ok')%>">
+        <a href="#"><%=_('New user')%></a>
+      </div>
+    </form>
+  </li>
+  <li>
+    <form id="footer-search" action="/search">
+      <input name="query" placeholder="<%=_('Search')%>">
+    </form>
+  </li>
+</ul>
+<%= language_chooser %>
+</div><!-- fim id="footer-content" -->

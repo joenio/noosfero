@@ -1,0 +1,4 @@
+name: "Blogosfero"
+layout: "application-ng"
+jquery_theme: "trontastic"
+icon_theme: [default, pidgin]
