@@ -1,3 +1,5 @@
+<div id="profile-edit-info">
+
 <h2><%= _('Personal information') %></h2>
 
   <%= required_fields_message %>
@@ -5,3 +7,5 @@
   <%= required f.text_field(:email)%>
 
   <%= render :partial => 'person_form', :locals => {:f => f} %>
+
+</div>

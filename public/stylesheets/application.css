@@ -127,6 +127,12 @@ a img {
    -webkit-border-radius: 3px;
 }
 
+/*** jQuery UI personalization ***************************/
+
+.ui-tabs-nav a {
+  outline: none;
+}
+
 /*********************************************************/
 
 
@@ -2827,10 +2833,10 @@ div#activation_enterprise div {
   clear: left;
 }
 
-#profile_change_picture label {
+#profile-change-picture label {
   display: none;
 }
-#profile_change_picture img {
+#profile-change-picture img {
   margin-left: 10px;
 }
 

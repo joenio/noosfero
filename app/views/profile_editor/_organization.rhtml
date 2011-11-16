@@ -1,3 +1,5 @@
+<div id="profile-edit-info">
+
 <h2><%= _('General information') %></h2>
 
   <%= required_fields_message %>
@@ -62,4 +64,8 @@
 
 <%= labelled_check_box(_('Enable "contact us"'), 'profile_data[enable_contact_us]', "1", @profile.enable_contact_us) if @profile.enterprise? %>
 
-<%= render :partial => 'moderation', :locals => { :profile => @profile } %>
+</div>
+
+<div id="profile-edit-moderation">
+  <%= render :partial => 'moderation', :locals => { :profile => @profile } %>
+</div>

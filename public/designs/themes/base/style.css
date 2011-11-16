@@ -28,6 +28,10 @@ input.button.with-text {
   max-height: 22px;
 }
 
+.button-bar .submit {
+  font-weight: bold;
+}
+
 #content input.button:hover, #content a.button:hover {
   color: #FFF;
   background-color: #555;

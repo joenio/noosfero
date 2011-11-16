@@ -4,15 +4,31 @@
 
 <% labelled_form_for :profile_data, @profile, :html => { :id => 'profile-data', :multipart => true } do |f| %>
 
+<div id="profile-edit-tabs">
+
+  <ul>
+    <li><a href="#profile-edit-info"><%= _('Information') %></a></li>
+    <li><a href="#profile-change-picture"><%= _('Picture') %></a></li>
+    <% if profile.organization? %>
+      <li><a href="#profile-edit-moderation"><%= _('Moderation') %></a></li>
+    <% end %>
+    <li><a href="#profile-edit-priv"><%= _('Privacy') %></a></li>
+    <% if !environment.enabled?(:disable_categories) %>
+      <li><a href="#profile-edit-categ"><%= _('Categories') %></a></li>
+    <% end %>
+  </ul>
+
   <%= render :partial => partial_for_class(@profile.class), :locals => { :f => f } %>
 
-  <div id="profile_change_picture">
-    <h2><%= _('Change picture') %></h2>
-    <% f.fields_for :image_builder, @profile.image do |i| %>
-      <%= file_field_or_thumbnail(_('Image:'), @profile.image, i) %><%= _("Max size: %s (.jpg, .gif, .png)")% Image.max_size.to_humanreadable %>
-    <% end %>
-  </div>
+<div id="profile-change-picture">
+  <h2><%= _('Change picture') %></h2>
+  <% f.fields_for :image_builder, @profile.image do |i| %>
+    <%= file_field_or_thumbnail(_('Image:'), @profile.image, i) %>
+    <%= _("Max size: %s (.jpg, .gif, .png)")% Image.max_size.to_humanreadable %>
+  <% end %>
+</div>
 
+<div id="profile-edit-priv">
   <h2><%= _('Privacy options') %></h2>
 
   <% if profile.person? %>
@@ -72,8 +88,16 @@
     </tr>
   </table>
   <% end %>
+</div>
 
-  <%= select_categories(:profile_data, _('Select the categories of your interest'), 2) %>
+<% if !environment.enabled?(:disable_categories) %>
+  <div id="profile-edit-categ">
+    <%= select_categories(:profile_data, _('Select the categories of your interest'), 2) %>
+  </div>
+<% end %>
+
+</div><!-- id="profile-edit-tabs" -->
+<script type="text/javascript"> jQuery("#profile-edit-tabs").tabs() </script>
 
   <%=
     @plugins.map(:profile_editor_extras).each do |content|
