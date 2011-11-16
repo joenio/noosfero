@@ -2833,6 +2833,18 @@ div#activation_enterprise div {
   clear: left;
 }
 
+#profile-edit-info {
+  position: relative;
+  min-height: 220px;
+}
+
+#profile-change-picture {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  text-align: right;
+}
+
 #profile-change-picture label {
   display: none;
 }

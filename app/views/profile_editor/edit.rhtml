@@ -8,7 +8,6 @@
 
   <ul>
     <li><a href="#profile-edit-info"><%= _('Information') %></a></li>
-    <li><a href="#profile-change-picture"><%= _('Picture') %></a></li>
     <% if profile.organization? %>
       <li><a href="#profile-edit-moderation"><%= _('Moderation') %></a></li>
     <% end %>
@@ -16,17 +15,10 @@
     <% if !environment.enabled?(:disable_categories) %>
       <li><a href="#profile-edit-categ"><%= _('Categories') %></a></li>
     <% end %>
+    <li><a href="#profile-edit-more"><%= _('More...') %></a></li>
   </ul>
 
   <%= render :partial => partial_for_class(@profile.class), :locals => { :f => f } %>
-
-<div id="profile-change-picture">
-  <h2><%= _('Change picture') %></h2>
-  <% f.fields_for :image_builder, @profile.image do |i| %>
-    <%= file_field_or_thumbnail(_('Image:'), @profile.image, i) %>
-    <%= _("Max size: %s (.jpg, .gif, .png)")% Image.max_size.to_humanreadable %>
-  <% end %>
-</div>
 
 <div id="profile-edit-priv">
   <h2><%= _('Privacy options') %></h2>
@@ -95,6 +87,15 @@
     <%= select_categories(:profile_data, _('Select the categories of your interest'), 2) %>
   </div>
 <% end %>
+
+<div id="profile-edit-more">
+  <h2><%= _('Other options') %></h2>
+
+  <%= labelled_check_box(
+    _('Automatic redirect the visitor to the translated article of him language'),
+    'profile_data[redirect_l10n]', true, @profile.redirect_l10n
+  )%>
+</div>
 
 </div><!-- id="profile-edit-tabs" -->
 <script type="text/javascript"> jQuery("#profile-edit-tabs").tabs() </script>
