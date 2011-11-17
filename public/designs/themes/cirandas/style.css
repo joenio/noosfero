@@ -1379,3 +1379,16 @@ body p {
 }
 
 /* }}} */
+
+/* Signup form {{{ */
+
+#signup-form {
+  padding-top: 30px;
+}
+
+body #email-check p,
+body #url-check p {
+  text-align: right;
+}
+
+/* }}} */
