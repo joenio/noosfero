@@ -686,6 +686,17 @@ function gravatarCommentFailback(img) {
   img.src = img.getAttribute("data-gravatar");
 }
 
+function updateThumbPreview(imgId, input, dialogId) {
+  var img = document.getElementById(imgId);
+  if ( input.files && window.URL && window.URL.createObjectURL ) {
+    img.src = window.URL.createObjectURL(input.files[0]);
+  } else {
+    // For browsers that can't load files from <input type="file">
+    img.src = "/images/icons-app/image-loading-thumb.png";
+  }
+  jQuery("#"+dialogId).dialog("close");
+}
+
 jQuery(function() {
   jQuery("#ajax-form").before("<div id='ajax-form-loading-area' style='display:block;width:16px;height:16px;'></div>");
   jQuery("#ajax-form").before("<div id='ajax-form-message-area'></div>");
