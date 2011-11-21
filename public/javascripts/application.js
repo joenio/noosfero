@@ -686,7 +686,7 @@ function gravatarCommentFailback(img) {
   img.src = img.getAttribute("data-gravatar");
 }
 
-function updateThumbPreview(imgId, input, dialogId) {
+function updateThumbPreview(imgId, input) {
   var img = document.getElementById(imgId);
   if ( input.files && window.URL && window.URL.createObjectURL ) {
     img.src = window.URL.createObjectURL(input.files[0]);
@@ -694,7 +694,7 @@ function updateThumbPreview(imgId, input, dialogId) {
     // For browsers that can't load files from <input type="file">
     img.src = "/images/icons-app/image-loading-thumb.png";
   }
-  jQuery("#"+dialogId).dialog("close");
+  if( input.dialogEl ) input.dialogEl.dialog("close");
 }
 
 jQuery(function() {

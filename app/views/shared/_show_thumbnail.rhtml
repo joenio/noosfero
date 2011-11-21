@@ -7,14 +7,11 @@
 
 <br/>
 
-<div id="<%= change_img_id %>"
-     style="display:none"
-     title="<%=_('Select an image to upload')%>">
-  <br/>
+<div id="<%= change_img_id %>" style="display:none">
   <%= render :partial => 'shared/change_image', :locals => {
              :i => i,
              :image => image,
-             :onchange => 'updateThumbPreview("'+thumb_id+'", this, "'+change_img_id+'")'
+             :onchange => 'updateThumbPreview("'+thumb_id+'", this)'
   } %>
 </div>
 
@@ -22,13 +19,21 @@
   :id => 'change-image-link',
   :class => 'button icon-photos with-text',
   :onclick => '
-    var d = jQuery("#'+change_img_id+'");
+    var d = jQuery("<div><br/></div>");
+    var hiddenPlace = jQuery("#'+change_img_id+'");
+    var input = jQuery("#'+change_img_id+' input");
+    input[0].dialogEl = d;
     d.dialog({
       modal: true,
       resizable: false,
+      title: '+ _('Select an image to upload').to_json() +',
       open: function(event, ui) {
         var p = parseInt(d.css("padding-left")) + parseInt(d.css("padding-right"));
-        d.dialog("option", "width", jQuery("input",d).width() + p + 5);
+        input.appendTo(d); /* Put the input inside the dialog */
+        d.dialog("option", "width", input.width() + p + 5);
+      },
+      beforeClose: function(event, ui) {
+        input.appendTo(hiddenPlace); /* Give back the input to the form */
       },
       buttons: { "'+_('Cancel')+'": function(){ d.dialog("close"); } }
     });
