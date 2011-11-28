@@ -44,7 +44,7 @@
 
   <div id='signup-login'>
     <div id='signup-login-field'>
-      <%= required f.text_field(:login, :onchange => 'this.value = convToValidLogin(this.value);', :rel => _('Login')) %>
+      <%= required f.text_field(:login, :onchange => 'this.value = convToValidLogin(this.value);', :rel => s_('signup|Login')) %>
       <div id='url-check'><p>&nbsp;</p></div>
     </div>
     <%= content_tag(:small, _('Choose your login name carefully! It will be your network access and you will not be able to change it later.'), :id => 'signup-balloon') %>
