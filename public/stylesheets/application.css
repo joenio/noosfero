@@ -6186,7 +6186,7 @@ h1#agenda-title {
   display: none !important;
 }
 
-/* Signup interface */
+/* Signup interface {{{ */
 
 #url-check {
   margin: 0 0 2px 0;
@@ -6210,6 +6210,18 @@ h1#agenda-title {
 
 .unavailable {
   color: #FFA000;
+}
+
+.action-account-signup #wrap-1 .formfield input.invalid_input {
+  border: 2px solid #FFA000;
+  background: #FFF;
+  padding: 5px 30px 8px 5px;
+}
+
+.action-account-signup #wrap-1 .formfield input.valid_input {
+  border: 2px solid #88BD00;
+  background: #FFF;
+  padding: 5px 30px 8px 5px;
 }
 
 .checking {
@@ -6354,7 +6366,9 @@ h1#agenda-title {
 
 .action-account-signup #wrap-1 #user_email,
 .action-account-signup #wrap-1 .formfield input.passwords_match,
-.action-account-signup #wrap-1 .formfield input.passwords_differ {
+.action-account-signup #wrap-1 .formfield input.passwords_differ,
+.action-account-signup #wrap-1 .formfield input.invalid_input,
+.action-account-signup #wrap-1 .formfield input.valid_input {
   width: 338px;
   padding-right: 30px;
 }
@@ -6532,3 +6546,5 @@ h1#agenda-title {
 .select-birth-date {
   margin-left: 14px;
 }
+
+/* }}} */

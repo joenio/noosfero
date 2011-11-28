@@ -140,12 +140,12 @@ jQuery(function($) {
       $('#user_password_confirmation_clear').show();
       $(this).hide();
     } else if ($(this).val() == $('#user_pw').val()) {
-      $(this).addClass('passwords_match');
-      $(this).removeClass('passwords_differ');
+      $(this).addClass('passwords_match').removeClass('passwords_differ');
+      $('#user_pw').removeClass('invalid_input').addClass('valid_input');
       $('#password-balloon').fadeOut('slow');
     } else if ($(this).val() != $('#user_pw').val()) {
-      $(this).removeClass('passwords_match');
-      $(this).addClass('passwords_differ');
+      $(this).removeClass('passwords_match').addClass('passwords_differ');
+      $('#user_pw').addClass('invalid_input').removeClass('valid_input');
       $('#password-balloon').fadeIn('slow');
       $('#signup-balloon').fadeOut('slow');
     }
