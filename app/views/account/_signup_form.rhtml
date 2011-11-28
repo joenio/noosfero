@@ -31,13 +31,13 @@
   <div id='signup-password'>
     <%= required f.password_field(:password, :id => 'user_pw') %>
     <%= f.text_field(:password_clear, :value => _('password')) %>
-    <%= content_tag(:small,_('Choose a password that you can remember easily. It must have at least 4 characters.')) %>
+    <%= content_tag(:small,_('Choose a password that you can remember easily. It must have at least 4 characters.'), :id => 'password-balloon') %>
   </div>
 
   <div id='signup-password-confirmation'>
     <%= required f.password_field(:password_confirmation) %>
     <%= f.text_field(:password_confirmation_clear, :value => _('password confirmation')) %>
-    <%= content_tag(:small, _('Passwords must match'), :id => 'password-balloon') %>
+    <div id='password-check'><p>&nbsp;</p></div>
   </div>
 
   <span id="signup-domain"><%= @environment.top_url.gsub(/^http:\/\//, '') %>/</span>
@@ -124,6 +124,9 @@ jQuery(function($) {
     $('#user_pw').show();
     $('#user_pw').focus();
   });
+  $('#user_pw').focus(function() {
+    $('#password-balloon').fadeIn('slow');
+  });
   $('#user_pw').blur(function() {
     if ($(this).val() == '') {
       $('#user_password_clear').show();
@@ -142,17 +145,16 @@ jQuery(function($) {
     } else if ($('#user_password_confirmation').val() == $('#user_pw').val()) {
       $('#user_password_confirmation').addClass('passwords_match').removeClass('passwords_differ');
       $('#user_pw').removeClass('invalid_input').addClass('valid_input');
-      $('#password-balloon').fadeOut('slow');
+      $('#password-check').html("<p>&nbsp;</p>");
     } else if ($('#user_password_confirmation').val() != $('#user_pw').val()) {
       $('#user_password_confirmation').removeClass('passwords_match').addClass('passwords_differ');
       $('#user_pw').addClass('invalid_input').removeClass('valid_input');
-      $('#password-balloon').fadeIn('slow');
-      $('#signup-balloon').fadeOut('slow');
+      $('#password-check').html("<p><span class='unavailable'><%= _('Passwords must match') %></span></p>");
     }
+    $('#password-balloon').fadeOut('slow');
   });
   $('#user_login').focus(function() {
     $('#signup-balloon').fadeIn('slow');
-    $('#password-balloon').fadeOut('slow');
   });
   $('#user_login').blur(function() { $('#signup-balloon').fadeOut('slow'); });
   $('#signup-form').validate({ rules: { 'user[email]': { email: true } }, messages: { 'user[email]' : '' } });
