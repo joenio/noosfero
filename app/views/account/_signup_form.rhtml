@@ -70,14 +70,7 @@
 
   <% unless @terms_of_use.blank? %>
     <div id='terms-of-use-box' class='formfieldline'>
-      <%= labelled_check_box(
-            _('I accept the %s') % link_to_function(
-              _('terms of use'),
-              "jQuery.colorbox({ width : '400px', height : '400px', html : '#{escape_javascript(@terms_of_use) +
-               content_tag(:p, button(:cancel, _('Close'), {}, :onclick => 'jQuery.colorbox.close(); return false;'), :style => 'text-align: center')}' })"
-            ),
-            'user[terms_accepted]'
-          ) %>
+      <%= labelled_check_box(_('I accept the %s') % link_to(_('terms of use'), {:controller => 'home', :action => 'terms'}, :target => '_blank'), 'user[terms_accepted]') %>
     </div>
   <% end %>
 
