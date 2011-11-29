@@ -4503,21 +4503,28 @@ h1#agenda-title {
 }
 
 .controller-search #content .search-results-type-article li,
-.controller-search #content .search-results-type-event li {
+.controller-search #content .search-results-type-event li,
+.controller-browse #content li.browse-results-type-content {
   padding: 0px 0px 4px 20px;
   background-repeat: no-repeat;
   border-color: transparent;
 }
 
 .controller-search #content .search-results-type-article li:hover,
-.controller-search #content .search-results-type-event li:hover {
+.controller-search #content .search-results-type-event li:hover,
+.controller-browse #content li.browse-results-type-content:hover {
   background-color: transparent;
 }
 
 .controller-search .search-results-type-article .item_meta,
-.controller-search .search-results-type-event .item_meta {
+.controller-search .search-results-type-event .item_meta,
+.controller-browse .browse-results-type-content .item_meta {
   font-size: 10px;
   color: #888;
+}
+
+.controller-browse .browse-results-type-content .item_meta span {
+  width: auto;
 }
 
 .search-results-type-article.search-results-innerbox {
@@ -6179,7 +6186,7 @@ h1#agenda-title {
   display: none !important;
 }
 
-/* Signup interface */
+/* Signup interface {{{ */
 
 #url-check {
   margin: 0 0 2px 0;
@@ -6187,13 +6194,15 @@ h1#agenda-title {
   text-align: right;
 }
 
-#email-check {
+#email-check,
+#password-check {
   margin: -2px 171px 2px 0;
   text-align: right;
   clear: both;
 }
 
-#email-check p {
+#email-check p,
+#password-check p {
   margin: 0;
 }
 
@@ -6205,11 +6214,25 @@ h1#agenda-title {
   color: #FFA000;
 }
 
+.action-account-signup #wrap-1 .formfield input.invalid_input {
+  border: 2px solid #FFA000;
+  background: #FFF;
+  padding: 5px 30px 8px 5px;
+}
+
+.action-account-signup #wrap-1 .formfield input.valid_input {
+  border: 2px solid #88BD00;
+  background: #FFF;
+  padding: 5px 30px 8px 5px;
+}
+
 .checking {
   color: #4A4A4A;
 }
 
-#email-check p, #url-check p {
+#email-check p,
+#password-check p,
+#url-check p {
   margin: 0;
   text-transform: lowercase;
   font-size: 11px;
@@ -6347,7 +6370,9 @@ h1#agenda-title {
 
 .action-account-signup #wrap-1 #user_email,
 .action-account-signup #wrap-1 .formfield input.passwords_match,
-.action-account-signup #wrap-1 .formfield input.passwords_differ {
+.action-account-signup #wrap-1 .formfield input.passwords_differ,
+.action-account-signup #wrap-1 .formfield input.invalid_input,
+.action-account-signup #wrap-1 .formfield input.valid_input {
   width: 338px;
   padding-right: 30px;
 }
@@ -6423,6 +6448,7 @@ h1#agenda-title {
   margin: 11px 0 0 0;
 }
 
+.action-account-signup #wrap-1 #signup-password,
 .action-account-signup #wrap-1 #signup-password-confirmation,
 .action-account-signup #wrap-1 #signup-login {
   position: relative;
@@ -6525,3 +6551,10 @@ h1#agenda-title {
 .select-birth-date {
   margin-left: 14px;
 }
+
+#thanks-for-signing {
+  font-size: 15px;
+  text-align: center;
+}
+
+/* }}} */

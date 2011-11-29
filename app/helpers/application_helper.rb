@@ -587,17 +587,18 @@ module ApplicationHelper
 
   def gravatar_url_for(email, options = {})
     # Ta dando erro de roteamento
+    default = theme_option['gravatar'] || NOOSFERO_CONF['gravatar'] || nil
     url_for( { :gravatar_id => Digest::MD5.hexdigest(email),
                :host => 'www.gravatar.com',
                :protocol => 'http://',
                :only_path => false,
                :controller => 'avatar.php',
-               :d => NOOSFERO_CONF['gravatar'] ? NOOSFERO_CONF['gravatar'] : nil
+               :d => default
              }.merge(options) )
   end
 
   def str_gravatar_url_for(email, options = {})
-    default = NOOSFERO_CONF['gravatar'] ? NOOSFERO_CONF['gravatar'] : nil
+    default = theme_option['gravatar'] || NOOSFERO_CONF['gravatar'] || nil
     url = 'http://www.gravatar.com/avatar.php?gravatar_id=' +
            Digest::MD5.hexdigest(email)
     {
@@ -1134,6 +1135,17 @@ module ApplicationHelper
     link_to(content_tag(:span, _('Communities Menu')), '#', :onclick => "toggleSubmenu(this,'',#{links.to_json}); return false", :class => 'menu-submenu-trigger up', :id => 'submenu-communities-trigger')
   end
 
+  def browse_contents_menu
+     links = [
+       {s_('contents|More Comments') => {:href => url_for({:controller => 'browse', :action => 'contents', :filter => 'more_comments'})}},
+       {s_('contents|More Views') => {:href => url_for({:controller => 'browse', :action => 'contents', :filter => 'more_views'})}},
+       {s_('contents|More Recent') => {:href => url_for({:controller => 'browse', :action => 'contents', :filter => 'more_recent'})}}
+     ]
+
+    link_to(content_tag(:span, _('Contents'), :class => 'icon-blog'), {:controller => "browse", :action => 'contents'}, :id => 'submenu-contents') +
+    link_to(content_tag(:span, _('Contents Menu')), '#', :onclick => "toggleSubmenu(this,'',#{links.to_json}); return false", :class => 'menu-submenu-trigger up', :id => 'submenu-contents-trigger')
+  end
+
   def pagination_links(collection, options={})
     options = {:prev_label => '&laquo; ' + _('Previous'), :next_label => _('Next') + ' &raquo;'}.merge(options)
     will_paginate(collection, options)
@@ -1166,7 +1178,7 @@ module ApplicationHelper
       pending_tasks_count = link_to(count.to_s, @environment.top_url + '/myprofile/{login}/tasks', :id => 'pending-tasks-count', :title => _("Manage your pending tasks"))
     end
 
-    (_('Welcome, %s') % link_to('<i></i><strong>{login}</strong>', @environment.top_url + '/{login}', :id => "homepage-link", :title => _('Go to your homepage'))) +
+    (_("<span class='welcome'>Welcome,</span> %s") % link_to('<i></i><strong>{login}</strong>', @environment.top_url + '/{login}', :id => "homepage-link", :title => _('Go to your homepage'))) +
     render_environment_features(:usermenu) +
     link_to('<i class="icon-menu-admin"></i><strong>' + _('Administration') + '</strong>', @environment.top_url + '/admin', :id => "controlpanel", :title => _("Configure the environment"), :class => 'admin-link', :style => 'display: none') +
     manage_enterprises.to_s +
