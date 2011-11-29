@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
 "POT-Creation-Date: 2011-11-29 11:53-0300\n"
-"PO-Revision-Date: 2011-11-29 12:58-0200\n"
+"PO-Revision-Date: 2011-11-29 13:08-0200\n"
 "Last-Translator: Joenio Costa <joenio@colivre.coop.br>\n"
 "Language-Team: LANGUAGE TEAM <E-MAIL@ADDRESS or HOME PAGE>\n"
 "MIME-Version: 1.0\n"
@@ -7448,7 +7448,7 @@ msgstr ""
 
 #: app/views/account/_signup_form.rhtml:74
 msgid "I accept the %s"
-msgstr "Eu aceito o %s"
+msgstr "Eu aceito os %s"
 
 #: app/views/account/_signup_form.rhtml:75
 msgid "terms of use"
