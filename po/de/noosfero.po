@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 15:02-0300\n"
+"POT-Creation-Date: 2011-11-28 17:45-0300\n"
 "PO-Revision-Date: 2011-03-15 13:14+0100\n"
 "Last-Translator: Ronny Kursawe <kursawe.ronny@googlemail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -7487,11 +7487,6 @@ msgstr ""
 msgid "password confirmation"
 msgstr "Passwort bestätigen"
 
-#: app/views/account/_signup_form.rhtml:40
-#, fuzzy
-msgid "Passwords must match"
-msgstr "Passworttype"
-
 #: app/views/account/_signup_form.rhtml:47
 msgid "signup|Login"
 msgstr ""
@@ -7515,6 +7510,11 @@ msgstr "Nutzungsbedingungen"
 #: app/views/account/_signup_form.rhtml:93
 msgid "Sign up"
 msgstr "Bestätige"
+
+#: app/views/account/_signup_form.rhtml:152
+#, fuzzy
+msgid "Passwords must match"
+msgstr "Passworttype"
 
 #: app/views/account/activation_question.rhtml:6
 msgid "The year must be between %d and %d"

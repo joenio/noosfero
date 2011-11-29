@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-28 15:02-0300\n"
+"POT-Creation-Date: 2011-11-28 17:45-0300\n"
 "PO-Revision-Date: 2009-12-04 18:46-0300\n"
 "Last-Translator: Jean-Claude Bulliard <jcb@bulliard-consulting.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -7874,11 +7874,6 @@ msgstr "Choisissez un mot de passe dont vous pourrez vous souvenir facilement."
 msgid "password confirmation"
 msgstr "Mot de passe (confirmation)"
 
-#: app/views/account/_signup_form.rhtml:40
-#, fuzzy
-msgid "Passwords must match"
-msgstr "Type de mot de passe"
-
 #: app/views/account/_signup_form.rhtml:47
 #, fuzzy
 msgid "signup|Login"
@@ -7904,6 +7899,11 @@ msgstr "Conditions d'utilisation"
 #: app/views/account/_signup_form.rhtml:93
 msgid "Sign up"
 msgstr "Se connecter"
+
+#: app/views/account/_signup_form.rhtml:152
+#, fuzzy
+msgid "Passwords must match"
+msgstr "Type de mot de passe"
 
 #: app/views/account/activation_question.rhtml:6
 msgid "The year must be between %d and %d"

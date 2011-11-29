@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 15:02-0300\n"
+"POT-Creation-Date: 2011-11-28 17:45-0300\n"
 "PO-Revision-Date: 2010-04-30 20:14-0300\n"
 "Last-Translator: Martín Olivera <molivera@solar.org.ar>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7656,11 +7656,6 @@ msgstr ""
 msgid "password confirmation"
 msgstr "Confirmación de contraseña"
 
-#: app/views/account/_signup_form.rhtml:40
-#, fuzzy
-msgid "Passwords must match"
-msgstr "Tipo de contraseña"
-
 #: app/views/account/_signup_form.rhtml:47
 msgid "signup|Login"
 msgstr ""
@@ -7683,6 +7678,11 @@ msgstr "Términos de uso"
 #: app/views/account/_signup_form.rhtml:93
 msgid "Sign up"
 msgstr ""
+
+#: app/views/account/_signup_form.rhtml:152
+#, fuzzy
+msgid "Passwords must match"
+msgstr "Tipo de contraseña"
 
 #: app/views/account/activation_question.rhtml:6
 msgid "The year must be between %d and %d"

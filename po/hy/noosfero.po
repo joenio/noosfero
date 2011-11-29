@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 15:02-0300\n"
+"POT-Creation-Date: 2011-11-28 17:45-0300\n"
 "PO-Revision-Date: 2009-10-26 16:20-0300\n"
 "Last-Translator: Anahit Minassian <anahit.minassian@cooperation.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7688,11 +7688,6 @@ msgstr ""
 msgid "password confirmation"
 msgstr "Մասնակից|Գաղտնաբառի հաստատում"
 
-#: app/views/account/_signup_form.rhtml:40
-#, fuzzy
-msgid "Passwords must match"
-msgstr "Գաղտնաբառի տեսակ"
-
 #: app/views/account/_signup_form.rhtml:47
 msgid "signup|Login"
 msgstr ""
@@ -7716,6 +7711,11 @@ msgstr "Օգտագործման կանոններն ու պայմանները"
 #: app/views/account/_signup_form.rhtml:93
 msgid "Sign up"
 msgstr "Գրանցվել"
+
+#: app/views/account/_signup_form.rhtml:152
+#, fuzzy
+msgid "Passwords must match"
+msgstr "Գաղտնաբառի տեսակ"
 
 #: app/views/account/activation_question.rhtml:6
 msgid "The year must be between %d and %d"
