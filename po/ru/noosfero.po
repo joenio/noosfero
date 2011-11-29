@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 17:45-0300\n"
+"POT-Creation-Date: 2011-11-29 11:53-0300\n"
 "PO-Revision-Date: 2010-10-26 09:57-0300\n"
 "Last-Translator: Anton <anton.c@live.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -7280,7 +7280,8 @@ msgid ""
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:56
-msgid "Register"
+#: app/views/account/_signup_form.rhtml:93
+msgid "Sign up"
 msgstr "Регистрация"
 
 #: app/views/layouts/application-ng.rhtml:70
@@ -7461,10 +7462,6 @@ msgstr "С правилами согласен"
 msgid "terms of use"
 msgstr "Правила пользования"
 
-#: app/views/account/_signup_form.rhtml:93
-msgid "Sign up"
-msgstr "Регистрация"
-
 #: app/views/account/_signup_form.rhtml:152
 #, fuzzy
 msgid "Passwords must match"
@@ -7579,11 +7576,11 @@ msgstr "Теперь вы можете <a href='%s'>войти</a> ."
 msgid "Sign up for %s!"
 msgstr "Регистрация"
 
-#: app/views/account/signup.rhtml:3
+#: app/views/account/signup.rhtml:4
 msgid "Thanks for signing up! Now check your e-mail to activate your account!"
 msgstr ""
 
-#: app/views/account/signup.rhtml:4
+#: app/views/account/signup.rhtml:5
 #, fuzzy
 msgid "Go to the homepage"
 msgstr "Перейти на домашнюю страницу сайта"
@@ -9543,6 +9540,9 @@ msgid ""
 "s and licensed under the <a href=\"http://www.gnu.org/licenses/agpl.html"
 "\">GNU Affero General Public License</a> version 3 or any later version."
 msgstr ""
+
+#~ msgid "Register"
+#~ msgstr "Регистрация"
 
 #~ msgid "Welcome, %s"
 #~ msgstr "Добро пожаловать, %s."

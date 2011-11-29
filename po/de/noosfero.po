@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 17:45-0300\n"
+"POT-Creation-Date: 2011-11-29 11:53-0300\n"
 "PO-Revision-Date: 2011-03-15 13:14+0100\n"
 "Last-Translator: Ronny Kursawe <kursawe.ronny@googlemail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -7320,8 +7320,9 @@ msgid ""
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:56
-msgid "Register"
-msgstr "Registriere"
+#: app/views/account/_signup_form.rhtml:93
+msgid "Sign up"
+msgstr "Bestätige"
 
 #: app/views/layouts/application-ng.rhtml:70
 msgid "Press <strong>Enter</strong> to send the search query."
@@ -7507,10 +7508,6 @@ msgstr "Ich akzeptiere die Nutzungsbedingungen"
 msgid "terms of use"
 msgstr "Nutzungsbedingungen"
 
-#: app/views/account/_signup_form.rhtml:93
-msgid "Sign up"
-msgstr "Bestätige"
-
 #: app/views/account/_signup_form.rhtml:152
 #, fuzzy
 msgid "Passwords must match"
@@ -7634,11 +7631,11 @@ msgstr "Sie können sich nun <a href='%s'>anmelden</a> ."
 msgid "Sign up for %s!"
 msgstr "Bestätige"
 
-#: app/views/account/signup.rhtml:3
+#: app/views/account/signup.rhtml:4
 msgid "Thanks for signing up! Now check your e-mail to activate your account!"
 msgstr ""
 
-#: app/views/account/signup.rhtml:4
+#: app/views/account/signup.rhtml:5
 #, fuzzy
 msgid "Go to the homepage"
 msgstr "Gehe zur Homepage"
@@ -9638,6 +9635,9 @@ msgstr ""
 "entwickelt wird und unter <a href=\"http://www.gnu.org/licenses/agpl.html"
 "\">GNU Affero General Public License</a> Version 3 oder einer späteren "
 "Version lizensiert ist."
+
+#~ msgid "Register"
+#~ msgstr "Registriere"
 
 #~ msgid "Welcome, %s"
 #~ msgstr "Willkommen, %s."

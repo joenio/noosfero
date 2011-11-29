@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 17:45-0300\n"
+"POT-Creation-Date: 2011-11-29 11:53-0300\n"
 "PO-Revision-Date: 2009-10-26 16:20-0300\n"
 "Last-Translator: Anahit Minassian <anahit.minassian@cooperation.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7525,7 +7525,8 @@ msgid ""
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:56
-msgid "Register"
+#: app/views/account/_signup_form.rhtml:93
+msgid "Sign up"
 msgstr "Գրանցվել"
 
 #: app/views/layouts/application-ng.rhtml:70
@@ -7708,10 +7709,6 @@ msgstr "Ես ընդունում եմ օգտագործման կանոնները"
 msgid "terms of use"
 msgstr "Օգտագործման կանոններն ու պայմանները"
 
-#: app/views/account/_signup_form.rhtml:93
-msgid "Sign up"
-msgstr "Գրանցվել"
-
 #: app/views/account/_signup_form.rhtml:152
 #, fuzzy
 msgid "Passwords must match"
@@ -7828,11 +7825,11 @@ msgstr "Կարող եք այժմ <a href='%s'>մուտք գործել</a>:"
 msgid "Sign up for %s!"
 msgstr "Գրանցվել"
 
-#: app/views/account/signup.rhtml:3
+#: app/views/account/signup.rhtml:4
 msgid "Thanks for signing up! Now check your e-mail to activate your account!"
 msgstr ""
 
-#: app/views/account/signup.rhtml:4
+#: app/views/account/signup.rhtml:5
 #, fuzzy
 msgid "Go to the homepage"
 msgstr "Գնալ Ձեր գլխավոր էջ"
@@ -9801,6 +9798,9 @@ msgid ""
 "s and licensed under the <a href=\"http://www.gnu.org/licenses/agpl.html"
 "\">GNU Affero General Public License</a> version 3 or any later version."
 msgstr ""
+
+#~ msgid "Register"
+#~ msgstr "Գրանցվել"
 
 #, fuzzy
 #~ msgid "Welcome, %s"

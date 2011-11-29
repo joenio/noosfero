@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 17:45-0300\n"
+"POT-Creation-Date: 2011-11-29 11:53-0300\n"
 "PO-Revision-Date: 2010-04-30 20:14-0300\n"
 "Last-Translator: Martín Olivera <molivera@solar.org.ar>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7501,7 +7501,8 @@ msgid ""
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:56
-msgid "Register"
+#: app/views/account/_signup_form.rhtml:93
+msgid "Sign up"
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:70
@@ -7675,10 +7676,6 @@ msgstr ""
 msgid "terms of use"
 msgstr "Términos de uso"
 
-#: app/views/account/_signup_form.rhtml:93
-msgid "Sign up"
-msgstr ""
-
 #: app/views/account/_signup_form.rhtml:152
 #, fuzzy
 msgid "Passwords must match"
@@ -7786,11 +7783,11 @@ msgstr ""
 msgid "Sign up for %s!"
 msgstr ""
 
-#: app/views/account/signup.rhtml:3
+#: app/views/account/signup.rhtml:4
 msgid "Thanks for signing up! Now check your e-mail to activate your account!"
 msgstr ""
 
-#: app/views/account/signup.rhtml:4
+#: app/views/account/signup.rhtml:5
 #, fuzzy
 msgid "Go to the homepage"
 msgstr "Post por página: "

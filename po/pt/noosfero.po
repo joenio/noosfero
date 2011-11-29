@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-28 17:45-0300\n"
-"PO-Revision-Date: 2011-11-28 16:32-0200\n"
+"POT-Creation-Date: 2011-11-29 11:53-0300\n"
+"PO-Revision-Date: 2011-11-29 12:58-0200\n"
 "Last-Translator: Joenio Costa <joenio@colivre.coop.br>\n"
 "Language-Team: LANGUAGE TEAM <E-MAIL@ADDRESS or HOME PAGE>\n"
 "MIME-Version: 1.0\n"
@@ -7271,8 +7271,9 @@ msgid ""
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:56
-msgid "Register"
-msgstr "Registrar"
+#: app/views/account/_signup_form.rhtml:93
+msgid "Sign up"
+msgstr "Inscreva-se"
 
 #: app/views/layouts/application-ng.rhtml:70
 msgid "Press <strong>Enter</strong> to send the search query."
@@ -7328,7 +7329,7 @@ msgstr ""
 
 #: app/views/account/index_anonymous.rhtml:10
 msgid "Sign up."
-msgstr "Registre-se."
+msgstr "Inscreva-se."
 
 #: app/views/account/index_anonymous.rhtml:11
 msgid ""
@@ -7420,9 +7421,8 @@ msgid "This e-mail address will be used to contact you."
 msgstr "Este endereço de e-mail será usado para contactar você."
 
 #: app/views/account/_signup_form.rhtml:33
-#, fuzzy
 msgid "password"
-msgstr "Senha"
+msgstr "senha"
 
 #: app/views/account/_signup_form.rhtml:34
 msgid ""
@@ -7433,9 +7433,8 @@ msgstr ""
 "caracteres."
 
 #: app/views/account/_signup_form.rhtml:39
-#, fuzzy
 msgid "password confirmation"
-msgstr "Confirmação de senha"
+msgstr "confirmação de senha"
 
 #: app/views/account/_signup_form.rhtml:47
 msgid "signup|Login"
@@ -7448,23 +7447,16 @@ msgid ""
 msgstr ""
 
 #: app/views/account/_signup_form.rhtml:74
-#, fuzzy
 msgid "I accept the %s"
-msgstr "Eu aceito os termos de uso"
+msgstr "Eu aceito o %s"
 
 #: app/views/account/_signup_form.rhtml:75
-#, fuzzy
 msgid "terms of use"
-msgstr "Termos de Uso"
-
-#: app/views/account/_signup_form.rhtml:93
-msgid "Sign up"
-msgstr "Registre-se"
+msgstr "termos de uso"
 
 #: app/views/account/_signup_form.rhtml:152
-#, fuzzy
 msgid "Passwords must match"
-msgstr "Tipo de senha"
+msgstr "As senhas devem combinar"
 
 #: app/views/account/activation_question.rhtml:6
 msgid "The year must be between %d and %d"
@@ -7579,16 +7571,15 @@ msgid "You can <a href='%s'>login</a> now."
 msgstr "Você pode <a href='%s'>logar</a> agora."
 
 #: app/views/account/signup.rhtml:1
-#, fuzzy
 msgid "Sign up for %s!"
-msgstr "Registre-se"
+msgstr "Inscreva-se no %s!"
 
-#: app/views/account/signup.rhtml:3
+#: app/views/account/signup.rhtml:4
 msgid "Thanks for signing up! Now check your e-mail to activate your account!"
 msgstr ""
 "Obrigado por se registrar! Agora verifique seu e-mail para ativar sua conta!"
 
-#: app/views/account/signup.rhtml:4
+#: app/views/account/signup.rhtml:5
 msgid "Go to the homepage"
 msgstr "Ir para a página inicial do site."
 
@@ -9515,6 +9506,9 @@ msgstr ""
 "Este site usa <a href=\"http://noosfero.org/\">Noosfero</a>, desenvolvido "
 "pela %s e licenciado sob a <a href=\"http://www.gnu.org/licenses/agpl.html"
 "\">GNU Affero General Public License</a> versão 3 ou superior."
+
+#~ msgid "Register"
+#~ msgstr "Registrar"
 
 #~ msgid "Welcome, %s"
 #~ msgstr "Bem-vindo(a), %s"
