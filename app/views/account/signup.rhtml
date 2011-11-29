@@ -1,7 +1,9 @@
 <h1><%= _('Sign up for %s!') % environment.name %></h1>
 <% if @register_pending %>
-  <%= _('Thanks for signing up! Now check your e-mail to activate your account!') %>
-  <p style="text-align: center"><%= link_to(_('Go to the homepage'), '/') %></p>
+<div id='thanks-for-signing'>
+  <p><%= _('Thanks for signing up! Now check your e-mail to activate your account!') %></p>
+  <p><%= link_to(_('Go to the homepage'), '/') %></p>
+</div>
 <% else %>
   <%= render :partial => 'signup_form' %>
 <% end %>

@@ -6552,4 +6552,9 @@ h1#agenda-title {
   margin-left: 14px;
 }
 
+#thanks-for-signing {
+  font-size: 15px;
+  text-align: center;
+}
+
 /* }}} */
