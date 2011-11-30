@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-29 11:53-0300\n"
+"POT-Creation-Date: 2011-11-29 23:10-0300\n"
 "PO-Revision-Date: 2009-10-26 16:20-0300\n"
 "Last-Translator: Anahit Minassian <anahit.minassian@cooperation.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -916,7 +916,6 @@ msgstr ""
 #: app/views/box_organizer/edit.rhtml:28
 #: app/views/admin_panel/message_for_disabled_enterprise.rhtml:11
 #: app/views/admin_panel/set_portal_news_amount.rhtml:9
-#: app/views/admin_panel/terms_of_use.rhtml:11
 #: app/views/content_viewer/_comment_form.rhtml:51
 #: app/views/content_viewer/_comment_form.rhtml:85
 #: app/views/profile_editor/header_footer.rhtml:29
@@ -2062,11 +2061,10 @@ msgstr "Նորություններ"
 #: app/views/manage_products/_edit_name.rhtml:10
 #: app/views/manage_products/_edit_description.rhtml:11
 #: app/views/box_organizer/edit.rhtml:27
-#: app/views/admin_panel/site_info.rhtml:13
+#: app/views/admin_panel/site_info.rhtml:15
 #: app/views/admin_panel/message_for_disabled_enterprise.rhtml:10
 #: app/views/admin_panel/set_portal_news_amount.rhtml:8
 #: app/views/admin_panel/set_portal_folders.rhtml:41
-#: app/views/admin_panel/terms_of_use.rhtml:10
 #: app/views/admin_panel/set_portal_community.rhtml:8
 #: app/views/profile_editor/header_footer.rhtml:28
 #: app/views/profile_editor/edit.rhtml:81
@@ -2243,7 +2241,7 @@ msgstr "Որոշիչ"
 #: app/views/enterprise_registration/select_validator.rhtml:12
 #: app/views/contact/sender/mail.rhtml:11
 #: app/views/enterprise_validation/_details.rhtml:3
-#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:10
+#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:60
 #: plugins/shopping_cart/views/shopping_cart_plugin_profile/buy.html.erb:6
 #: plugins/shopping_cart/views/shopping_cart_plugin_myprofile/_orders_list.html.erb:35
 #: plugins/mezuro/views/profile/_project_tab.html.erb:9
@@ -2643,60 +2641,60 @@ msgstr "Հոդվածներ հրապարակել"
 msgid "Invite members"
 msgstr "Հեռացնել անդամին"
 
-#: app/models/profile.rb:557
+#: app/models/profile.rb:558
 #, fuzzy
 msgid "%s can't have members"
 msgstr "%s - ը անդամներ ունենալ չի կարող"
 
-#: app/models/profile.rb:578
+#: app/models/profile.rb:579
 msgid "%s can't has moderators"
 msgstr "մոդերատորներ ունենալ չի կարող"
 
-#: app/models/profile.rb:659
+#: app/models/profile.rb:660
 msgid "Public profile"
 msgstr ""
 
-#: app/models/profile.rb:659
+#: app/models/profile.rb:660
 #, fuzzy
 msgid "Private profile"
 msgstr "Փոփոխել անհատական էջը"
 
-#: app/models/profile.rb:756
+#: app/models/profile.rb:757
 #, fuzzy
 msgid "Since: "
 msgstr "Գին"
 
-#: app/models/profile.rb:771
+#: app/models/profile.rb:772
 #, fuzzy
 msgid "no activity"
 msgstr "Տնտեսական գործունեություն"
 
-#: app/models/profile.rb:772
+#: app/models/profile.rb:773
 #, fuzzy
 msgid "one activity"
 msgstr "Տնտեսական գործունեություն"
 
-#: app/models/profile.rb:773
+#: app/models/profile.rb:774
 #, fuzzy
 msgid "%s activities"
 msgstr "Տնտեսական գործունեություն"
 
-#: app/models/profile.rb:779
+#: app/models/profile.rb:780
 #, fuzzy
 msgid "no members"
 msgstr "Նոր անդամ"
 
-#: app/models/profile.rb:780
+#: app/models/profile.rb:781
 #, fuzzy
 msgid "one member"
 msgstr "Նոր անդամ"
 
-#: app/models/profile.rb:781
+#: app/models/profile.rb:782
 #, fuzzy
 msgid "%s members"
 msgstr "%s-ի անդամները"
 
-#: app/models/profile.rb:817 app/models/person.rb:407
+#: app/models/profile.rb:818 app/models/person.rb:407
 #, fuzzy
 msgid "Profile Info and settings"
 msgstr "Անհանատական էջի տվյալների բաժին"
@@ -2804,7 +2802,7 @@ msgid "Username"
 msgstr "Մասնակցի անուն"
 
 #: app/models/change_password.rb:10 app/models/user.rb:- app/models/user.rb:19
-#: app/models/contact.rb:14 app/views/account/_signup_form.rhtml:13
+#: app/models/contact.rb:14 app/views/account/_signup_form.rhtml:41
 msgid "e-Mail"
 msgstr "Էլ. հասցե"
 
@@ -2874,8 +2872,7 @@ msgstr ""
 msgid "Remember token expires at"
 msgstr ""
 
-#: app/models/user.rb:- app/views/admin_panel/index.rhtml:18
-#: app/views/admin_panel/terms_of_use.rhtml:1
+#: app/models/user.rb:-
 msgid "Terms of use"
 msgstr "Օգտագործման կանոններն ու պայմանները"
 
@@ -5397,19 +5394,15 @@ msgstr "Փոփոխել ձեռնարկությունը"
 msgid "Environment settings"
 msgstr "Համակարգ|Պարամետրեր"
 
-#: app/views/admin_panel/site_info.rhtml:8
-#, fuzzy
-msgid "Site name"
-msgstr "Ֆայլի անուն"
-
-#: app/views/admin_panel/site_info.rhtml:10
-#, fuzzy
-msgid "Homepage content"
-msgstr "Կառավարել բովանդակությունը:"
-
+#: app/views/admin_panel/site_info.rhtml:9
 #: app/views/admin_panel/message_for_disabled_enterprise.rhtml:1
 msgid "Site info"
 msgstr "Տեղեկություններ կայքի մասին"
+
+#: app/views/admin_panel/site_info.rhtml:11
+#, fuzzy
+msgid "Terms os use"
+msgstr "Օգտագործման կանոններն ու պայմանները"
 
 #: app/views/admin_panel/set_portal_news_amount.rhtml:1
 #, fuzzy
@@ -5446,6 +5439,16 @@ msgid ""
 "The same order in which you arrange the folders here will be used for "
 "arranging the boxes in the environment initial page."
 msgstr ""
+
+#: app/views/admin_panel/_site_info.rhtml:1
+#, fuzzy
+msgid "Site name"
+msgstr "Ֆայլի անուն"
+
+#: app/views/admin_panel/_site_info.rhtml:3
+#, fuzzy
+msgid "Homepage content"
+msgstr "Կառավարել բովանդակությունը:"
 
 #: app/views/admin_panel/set_portal_community.rhtml:1
 #, fuzzy
@@ -6591,6 +6594,11 @@ msgstr "բաժին"
 msgid "News"
 msgstr "Նորություններ"
 
+#: app/views/home/terms.rhtml:1
+#, fuzzy
+msgid "Terms of use - %s"
+msgstr "Օգտագործման կանոններն ու պայմանները"
+
 #: app/views/invite/_dialog_wait_loading.rhtml:8
 msgid "Please, wait..."
 msgstr ""
@@ -7525,7 +7533,6 @@ msgid ""
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:56
-#: app/views/account/_signup_form.rhtml:93
 msgid "Sign up"
 msgstr "Գրանցվել"
 
@@ -7669,49 +7676,54 @@ msgstr ""
 "Համակարգում Ձեր աշխատանքն ավարտելուց հետո խորհուրդ է տրվում դուրս գալ "
 "այնտեղից:"
 
-#: app/views/account/_signup_form.rhtml:14
-msgid "This e-mail address will be used to contact you."
-msgstr ""
-
-#: app/views/account/_signup_form.rhtml:33
-#, fuzzy
-msgid "password"
-msgstr "Նոր գաղտնաբառ"
-
-#: app/views/account/_signup_form.rhtml:34
-msgid ""
-"Choose a password that you can remember easily. It must have at least 4 "
-"characters."
-msgstr ""
-
-#: app/views/account/_signup_form.rhtml:39
-#, fuzzy
-msgid "password confirmation"
-msgstr "Մասնակից|Գաղտնաբառի հաստատում"
-
-#: app/views/account/_signup_form.rhtml:47
+#: app/views/account/_signup_form.rhtml:12
 msgid "signup|Login"
 msgstr ""
 
-#: app/views/account/_signup_form.rhtml:50
+#: app/views/account/_signup_form.rhtml:15
 msgid ""
 "Choose your login name carefully! It will be your network access and you "
 "will not be able to change it later."
 msgstr ""
 
-#: app/views/account/_signup_form.rhtml:74
+#: app/views/account/_signup_form.rhtml:29
+#, fuzzy
+msgid "password"
+msgstr "Նոր գաղտնաբառ"
+
+#: app/views/account/_signup_form.rhtml:30
+msgid ""
+"Choose a password that you can remember easily. It must have at least 4 "
+"characters."
+msgstr ""
+
+#: app/views/account/_signup_form.rhtml:36
+#, fuzzy
+msgid "password confirmation"
+msgstr "Մասնակից|Գաղտնաբառի հաստատում"
+
+#: app/views/account/_signup_form.rhtml:42
+msgid "This e-mail address will be used to contact you."
+msgstr ""
+
+#: app/views/account/_signup_form.rhtml:72
 #, fuzzy
 msgid "I accept the %s"
 msgstr "Ես ընդունում եմ օգտագործման կանոնները"
 
-#: app/views/account/_signup_form.rhtml:75
+#: app/views/account/_signup_form.rhtml:72
 #, fuzzy
 msgid "terms of use"
 msgstr "Օգտագործման կանոններն ու պայմանները"
 
-#: app/views/account/_signup_form.rhtml:152
+#: app/views/account/_signup_form.rhtml:85
 #, fuzzy
-msgid "Passwords must match"
+msgid "Create my account"
+msgstr "Ստեղծված է"
+
+#: app/views/account/_signup_form.rhtml:144
+#, fuzzy
+msgid "Passwords don't match"
 msgstr "Գաղտնաբառի տեսակ"
 
 #: app/views/account/activation_question.rhtml:6

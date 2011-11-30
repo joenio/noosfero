@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-29 11:53-0300\n"
+"POT-Creation-Date: 2011-11-29 23:10-0300\n"
 "PO-Revision-Date: 2010-10-26 09:57-0300\n"
 "Last-Translator: Anton <anton.c@live.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -873,7 +873,6 @@ msgstr "Все новые организации по умолчанию утв�
 #: app/views/box_organizer/edit.rhtml:28
 #: app/views/admin_panel/message_for_disabled_enterprise.rhtml:11
 #: app/views/admin_panel/set_portal_news_amount.rhtml:9
-#: app/views/admin_panel/terms_of_use.rhtml:11
 #: app/views/content_viewer/_comment_form.rhtml:51
 #: app/views/content_viewer/_comment_form.rhtml:85
 #: app/views/profile_editor/header_footer.rhtml:29
@@ -2000,11 +1999,10 @@ msgstr "Новый"
 #: app/views/manage_products/_edit_name.rhtml:10
 #: app/views/manage_products/_edit_description.rhtml:11
 #: app/views/box_organizer/edit.rhtml:27
-#: app/views/admin_panel/site_info.rhtml:13
+#: app/views/admin_panel/site_info.rhtml:15
 #: app/views/admin_panel/message_for_disabled_enterprise.rhtml:10
 #: app/views/admin_panel/set_portal_news_amount.rhtml:8
 #: app/views/admin_panel/set_portal_folders.rhtml:41
-#: app/views/admin_panel/terms_of_use.rhtml:10
 #: app/views/admin_panel/set_portal_community.rhtml:8
 #: app/views/profile_editor/header_footer.rhtml:28
 #: app/views/profile_editor/edit.rhtml:81
@@ -2174,7 +2172,7 @@ msgstr "сертификатор"
 #: app/views/enterprise_registration/select_validator.rhtml:12
 #: app/views/contact/sender/mail.rhtml:11
 #: app/views/enterprise_validation/_details.rhtml:3
-#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:10
+#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:60
 #: plugins/shopping_cart/views/shopping_cart_plugin_profile/buy.html.erb:6
 #: plugins/shopping_cart/views/shopping_cart_plugin_myprofile/_orders_list.html.erb:35
 #: plugins/mezuro/views/profile/_project_tab.html.erb:9
@@ -2567,56 +2565,56 @@ msgstr "Публиковать контент"
 msgid "Invite members"
 msgstr "Пригласить участников"
 
-#: app/models/profile.rb:557
+#: app/models/profile.rb:558
 #, fuzzy
 msgid "%s can't have members"
 msgstr "%s не может иметь участников"
 
-#: app/models/profile.rb:578
+#: app/models/profile.rb:579
 msgid "%s can't has moderators"
 msgstr "%s не может иметь модераторов"
 
-#: app/models/profile.rb:659
+#: app/models/profile.rb:660
 msgid "Public profile"
 msgstr "Публичный пофиль"
 
-#: app/models/profile.rb:659
+#: app/models/profile.rb:660
 msgid "Private profile"
 msgstr "Приватный профиль"
 
-#: app/models/profile.rb:756
+#: app/models/profile.rb:757
 msgid "Since: "
 msgstr "С:"
 
-#: app/models/profile.rb:771
+#: app/models/profile.rb:772
 #, fuzzy
 msgid "no activity"
 msgstr "Экономическая активность"
 
-#: app/models/profile.rb:772
+#: app/models/profile.rb:773
 #, fuzzy
 msgid "one activity"
 msgstr "Экономическая активность"
 
-#: app/models/profile.rb:773
+#: app/models/profile.rb:774
 #, fuzzy
 msgid "%s activities"
 msgstr "деятельность %s"
 
-#: app/models/profile.rb:779
+#: app/models/profile.rb:780
 #, fuzzy
 msgid "no members"
 msgstr "один участник"
 
-#: app/models/profile.rb:780
+#: app/models/profile.rb:781
 msgid "one member"
 msgstr "один участник"
 
-#: app/models/profile.rb:781
+#: app/models/profile.rb:782
 msgid "%s members"
 msgstr "%s участников"
 
-#: app/models/profile.rb:817 app/models/person.rb:407
+#: app/models/profile.rb:818 app/models/person.rb:407
 msgid "Profile Info and settings"
 msgstr "Инфо профиля и настройки"
 
@@ -2724,7 +2722,7 @@ msgid "Username"
 msgstr "Имя пользователя"
 
 #: app/models/change_password.rb:10 app/models/user.rb:- app/models/user.rb:19
-#: app/models/contact.rb:14 app/views/account/_signup_form.rhtml:13
+#: app/models/contact.rb:14 app/views/account/_signup_form.rhtml:41
 msgid "e-Mail"
 msgstr "E-Mail"
 
@@ -2793,8 +2791,7 @@ msgstr "Запомнить токен"
 msgid "Remember token expires at"
 msgstr "Запомнить конечную дату действительности токена"
 
-#: app/models/user.rb:- app/views/admin_panel/index.rhtml:18
-#: app/views/admin_panel/terms_of_use.rhtml:1
+#: app/models/user.rb:-
 msgid "Terms of use"
 msgstr "Правила пользования"
 
@@ -5225,18 +5222,15 @@ msgstr "Редактировать шаблон компании"
 msgid "Environment settings"
 msgstr "Статистика среды"
 
-#: app/views/admin_panel/site_info.rhtml:8
-#, fuzzy
-msgid "Site name"
-msgstr "Имя файла"
-
-#: app/views/admin_panel/site_info.rhtml:10
-msgid "Homepage content"
-msgstr "Контент домашней страницы"
-
+#: app/views/admin_panel/site_info.rhtml:9
 #: app/views/admin_panel/message_for_disabled_enterprise.rhtml:1
 msgid "Site info"
 msgstr "Инфо сайта"
+
+#: app/views/admin_panel/site_info.rhtml:11
+#, fuzzy
+msgid "Terms os use"
+msgstr "Правила пользования"
 
 #: app/views/admin_panel/set_portal_news_amount.rhtml:1
 msgid "News amount by folder"
@@ -5271,6 +5265,15 @@ msgid ""
 msgstr ""
 "Такой же порядок, в котором Вы организовали тут каталоги,будет использован "
 "для организации боксов на начальной странице среды"
+
+#: app/views/admin_panel/_site_info.rhtml:1
+#, fuzzy
+msgid "Site name"
+msgstr "Имя файла"
+
+#: app/views/admin_panel/_site_info.rhtml:3
+msgid "Homepage content"
+msgstr "Контент домашней страницы"
 
 #: app/views/admin_panel/set_portal_community.rhtml:1
 msgid "Set Environment Portal"
@@ -6366,6 +6369,11 @@ msgstr "разблокировать"
 msgid "News"
 msgstr "Новости"
 
+#: app/views/home/terms.rhtml:1
+#, fuzzy
+msgid "Terms of use - %s"
+msgstr "Правила пользования"
+
 #: app/views/invite/_dialog_wait_loading.rhtml:8
 msgid "Please, wait..."
 msgstr "Пожалуйста, подождите"
@@ -7280,7 +7288,6 @@ msgid ""
 msgstr ""
 
 #: app/views/layouts/application-ng.rhtml:56
-#: app/views/account/_signup_form.rhtml:93
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -7422,49 +7429,54 @@ msgid ""
 "environment."
 msgstr "Рекомендуется выйти с портала после работы"
 
-#: app/views/account/_signup_form.rhtml:14
-msgid "This e-mail address will be used to contact you."
-msgstr "Этот адрес будет использован для связи с вами"
-
-#: app/views/account/_signup_form.rhtml:33
-#, fuzzy
-msgid "password"
-msgstr "Пароль"
-
-#: app/views/account/_signup_form.rhtml:34
-msgid ""
-"Choose a password that you can remember easily. It must have at least 4 "
-"characters."
-msgstr "Пароль, минимум 4 символа"
-
-#: app/views/account/_signup_form.rhtml:39
-#, fuzzy
-msgid "password confirmation"
-msgstr "Подтверждение пароля"
-
-#: app/views/account/_signup_form.rhtml:47
+#: app/views/account/_signup_form.rhtml:12
 msgid "signup|Login"
 msgstr ""
 
-#: app/views/account/_signup_form.rhtml:50
+#: app/views/account/_signup_form.rhtml:15
 msgid ""
 "Choose your login name carefully! It will be your network access and you "
 "will not be able to change it later."
 msgstr ""
 
-#: app/views/account/_signup_form.rhtml:74
+#: app/views/account/_signup_form.rhtml:29
+#, fuzzy
+msgid "password"
+msgstr "Пароль"
+
+#: app/views/account/_signup_form.rhtml:30
+msgid ""
+"Choose a password that you can remember easily. It must have at least 4 "
+"characters."
+msgstr "Пароль, минимум 4 символа"
+
+#: app/views/account/_signup_form.rhtml:36
+#, fuzzy
+msgid "password confirmation"
+msgstr "Подтверждение пароля"
+
+#: app/views/account/_signup_form.rhtml:42
+msgid "This e-mail address will be used to contact you."
+msgstr "Этот адрес будет использован для связи с вами"
+
+#: app/views/account/_signup_form.rhtml:72
 #, fuzzy
 msgid "I accept the %s"
 msgstr "С правилами согласен"
 
-#: app/views/account/_signup_form.rhtml:75
+#: app/views/account/_signup_form.rhtml:72
 #, fuzzy
 msgid "terms of use"
 msgstr "Правила пользования"
 
-#: app/views/account/_signup_form.rhtml:152
+#: app/views/account/_signup_form.rhtml:85
 #, fuzzy
-msgid "Passwords must match"
+msgid "Create my account"
+msgstr "Создано"
+
+#: app/views/account/_signup_form.rhtml:144
+#, fuzzy
+msgid "Passwords don't match"
 msgstr "Подсказка пароля"
 
 #: app/views/account/activation_question.rhtml:6
