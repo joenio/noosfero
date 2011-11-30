@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-29 23:10-0300\n"
+"POT-Creation-Date: 2011-11-30 11:40-0300\n"
 "PO-Revision-Date: 2011-03-15 13:14+0100\n"
 "Last-Translator: Ronny Kursawe <kursawe.ronny@googlemail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -709,6 +709,15 @@ msgstr "Ereignisse für %s"
 #: app/helpers/events_helper.rb:10
 msgid "No events for this date"
 msgstr "Keine Ereignisse an diesem Tag"
+
+#: app/helpers/account_helper.rb:10
+msgid "Checking availability of login name..."
+msgstr ""
+
+#: app/helpers/account_helper.rb:12
+#, fuzzy
+msgid "Checking if e-mail address is already taken..."
+msgstr "Die E-Mail werden versandt"
 
 #: app/helpers/enterprise_validation_helper.rb:6
 msgid "Approved"
@@ -2173,7 +2182,7 @@ msgstr "Bestätigender"
 #: app/views/enterprise_registration/select_validator.rhtml:12
 #: app/views/contact/sender/mail.rhtml:11
 #: app/views/enterprise_validation/_details.rhtml:3
-#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:60
+#: app/views/cms/view.rhtml:24
 #: plugins/shopping_cart/views/shopping_cart_plugin_profile/buy.html.erb:6
 #: plugins/shopping_cart/views/shopping_cart_plugin_myprofile/_orders_list.html.erb:35
 #: plugins/mezuro/views/profile/_project_tab.html.erb:9
@@ -7505,6 +7514,13 @@ msgstr "Passwort bestätigen"
 msgid "This e-mail address will be used to contact you."
 msgstr "Diese E-mail Adresse soll genutzt werden, um Sie zu kontaktieren."
 
+#: app/views/account/_signup_form.rhtml:60
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
+#, fuzzy
+msgid "Full name"
+msgstr "Dateiname"
+
 #: app/views/account/_signup_form.rhtml:72
 #, fuzzy
 msgid "I accept the %s"
@@ -7520,7 +7536,7 @@ msgstr "Nutzungsbedingungen"
 msgid "Create my account"
 msgstr "Erstellt"
 
-#: app/views/account/_signup_form.rhtml:144
+#: app/views/account/_signup_form.rhtml:148
 #, fuzzy
 msgid "Passwords don't match"
 msgstr "Passworttype"
@@ -9273,12 +9289,6 @@ msgstr "Das ist eine neue Veröffentlichung  von \"%s\", durch %s."
 msgid "Below follows the customer informations:"
 msgstr ""
 
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
-#, fuzzy
-msgid "Full name"
-msgstr "Dateiname"
-
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:17
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:19
 #, fuzzy
@@ -9647,6 +9657,10 @@ msgstr ""
 "entwickelt wird und unter <a href=\"http://www.gnu.org/licenses/agpl.html"
 "\">GNU Affero General Public License</a> Version 3 oder einer späteren "
 "Version lizensiert ist."
+
+#, fuzzy
+#~ msgid "This e-mail address is not valid"
+#~ msgstr "Die E-Mail werden versandt"
 
 #~ msgid "Register"
 #~ msgstr "Registriere"
