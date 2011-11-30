@@ -6276,6 +6276,13 @@ h1#agenda-title {
   border: 0;
 }
 
+.action-account-signup #wrap-1 .formfield select.filled-in,
+.action-account-signup #wrap-1 .formfield textarea.filled-in,
+.action-account-signup #wrap-1 #profile_data_name.filled-in,
+.action-account-signup #wrap-1 .formfield input.filled-in {
+   color: #4A4A4A;
+}
+
 .action-account-signup #wrap-1 .formfield select {
   height: auto;
 }
@@ -6499,7 +6506,7 @@ h1#agenda-title {
 
 #terms-of-use-box {
   margin: 20px 0 30px 40px;
-  color: #B3B3B3;
+  color: #4A4A4A;
 }
 
 #terms-of-use-box input[type=checkbox] {
@@ -6509,7 +6516,7 @@ h1#agenda-title {
 
 .action-account-signup #terms-of-use-box label {
   display: inline;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .action-account-signup #terms-of-use-box label a {

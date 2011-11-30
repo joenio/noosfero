@@ -19,7 +19,7 @@
         :url => { :action => 'check_url' },
         :with => 'identifier',
         :update => 'url-check',
-        :loading => "jQuery('#user_login').removeClass().addClass('checking');
+        :loading => "jQuery('#user_login').removeClass('#{validation_classes}').addClass('checking');
                      jQuery('#url-check').html('<p><span class=\"checking\">#{_('Checking availability of login name...')}</span></p>');",
         :complete => "jQuery('#user_login').removeClass('checking')"
   %>
@@ -46,18 +46,18 @@
         :url      => { :action => "check_email" },
         :with     => "address",
         :update   => "email-check",
-        :loading  => "jQuery('#user_email').removeClass().addClass('checking');
+        :loading  => "jQuery('#user_email').removeClass('#{validation_classes}').addClass('checking');
                       jQuery('#email-check').html('<p><span class=\"checking\">#{_('Checking if e-mail address is already taken...')}</span></p>');",
         :complete => "jQuery('#user_email').removeClass('checking')",
         :before   => "if (!( jQuery('#user_email').valid() )) {
-                        jQuery('#user_email').removeClass().addClass('unavailable');
+                        jQuery('#user_email').removeClass('#{validation_classes}').addClass('unavailable');
                         jQuery('#email-check').html('<p><span class=\"unavailable\">#{_('This e-mail address is not valid')}</span></p>');
                         return false;
                       }"
   %>
 
   <%= label :profile_data, :name %>
-  <%= required text_field(:profile_data, :name, :rel => _('Name')) %>
+  <%= required text_field(:profile_data, :name, :rel => _('Full name')) %>
 
 </div>
 
@@ -96,7 +96,11 @@ jQuery(function($) {
       if ($(this).val() == default_value) $(this).val('');
     });
     $(this).bind('blur', function() {
-      if ($(this).val() == '') $(this).val(default_value);
+      if ($(this).val() == '') {
+        $(this).val(default_value);
+        $(this).removeClass('filled-in');
+      }
+      else $(this).addClass('filled-in');
     });
   });
 
