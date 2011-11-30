@@ -6216,18 +6216,6 @@ h1#agenda-title {
   color: #FFA000;
 }
 
-.action-account-signup #wrap-1 .formfield input.invalid_input {
-  border: 2px solid #FFA000;
-  background: #FFF;
-  padding: 5px 30px 8px 5px;
-}
-
-.action-account-signup #wrap-1 .formfield input.valid_input {
-  border: 2px solid #88BD00;
-  background: #FFF;
-  padding: 5px 30px 8px 5px;
-}
-
 .checking {
   color: #4A4A4A;
 }
@@ -6247,7 +6235,8 @@ h1#agenda-title {
 
 @font-face {
   font-family: droidserif;
-  src: url('/fonts/DroidSerif-Regular.ttf');
+  src: url('/fonts/DroidSerif-Regular.eot'); /* EOT file for IE */
+  src: local("DroidSerif-Regular"), url('/fonts/DroidSerif-Regular.ttf');
 }
 
 .action-account-signup #content .no-boxes h1 {
@@ -6259,6 +6248,36 @@ h1#agenda-title {
   text-align: center;
   margin-top: 35px;
   margin-left: 12px;
+}
+
+.action-account-signup #wrap-1 label,
+.action-account-signup #wrap-1 small,
+.action-account-signup #wrap-1 #user_password,
+.action-account-signup #wrap-1 #user_password_confirmation {
+   display: none;
+}
+
+.action-account-signup #wrap-1 #signup-form-header {
+  background: #E3E3E3;
+  padding: 22px 0;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  margin: 60px auto 20px;
+  position: relative;
+  width: 563px;
+}
+
+.action-account-signup #wrap-1 .formfield input.invalid_input {
+  border: 2px solid #FFA000;
+  background: #FFF;
+  padding: 5px 30px 8px 5px;
+}
+
+.action-account-signup #wrap-1 .formfield input.valid_input {
+  border: 2px solid #88BD00;
+  background: #FFF;
+  padding: 5px 30px 8px 5px;
 }
 
 .action-account-signup #wrap-1 .formfield select,
@@ -6274,6 +6293,23 @@ h1#agenda-title {
   font-family: droidserif, serif;
   margin: 9px 14px 0;
   border: 0;
+  padding-right: 30px;
+}
+
+.action-account-signup #wrap-1 #user_login.checking,
+.action-account-signup #wrap-1 #user_login.available,
+.action-account-signup #wrap-1 #user_login.unavailable,
+.action-account-signup #wrap-1 #user_email.checking,
+.action-account-signup #wrap-1 #user_email.available,
+.action-account-signup #wrap-1 #user_email.unavailable,
+.action-account-signup #wrap-1 .formfield input.passwords_differ,
+.action-account-signup #wrap-1 .formfield input.passwords_match {
+  border-width: 2px;
+  border-style: solid;
+  background-color: #fff;
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding: 5px 30px 8px 5px;
 }
 
 .action-account-signup #wrap-1 .formfield select.filled-in,
@@ -6285,6 +6321,8 @@ h1#agenda-title {
 
 .action-account-signup #wrap-1 .formfield select {
   height: auto;
+  padding-right: 3px;
+  width: 365px;
 }
 
 .action-account-signup #wrap-1 .formfield .select-birth-date select {
@@ -6298,23 +6336,14 @@ h1#agenda-title {
 }
 
 .action-account-signup #wrap-1 .formfield textarea {
-  height: 335px;
   background: #fff;
+  height: 100px;
+  padding-right: 3px;
+  width: 365px;
 }
 
 .action-account-signup #wrap-1 .formfield input[type=file] {
   font-size: 12px;
-}
-
-.action-account-signup #wrap-1 .formfield textarea {
-  height: 100px;
-}
-
-.action-account-signup #wrap-1 label,
-.action-account-signup #wrap-1 small,
-.action-account-signup #wrap-1 #user_password,
-.action-account-signup #wrap-1 #user_password_confirmation {
-   display: none;
 }
 
 .action-account-signup #wrap-1 input[type=radio] {
@@ -6348,60 +6377,8 @@ h1#agenda-title {
   display: block;
 }
 
-.action-account-signup #wrap-1 .formfield input[type=password] {
-  /*margin-bottom: -6px;
-  margin-top: 15px;*/
-}
-
-.action-account-signup #wrap-1 .formfield textarea,
-.action-account-signup #wrap-1 .formfield input[type=password],
-.action-account-signup #wrap-1 #profile_data_name,
-.action-account-signup #wrap-1 .formfield input[type=text] {
-  width: 400px;
-}
-
 .action-account-signup #wrap-1 #profile_data_name {
   padding-left: 10px;
-  /*margin-top: 12px;
-  margin-bottom: 3px;*/
-}
-
-.action-account-signup #wrap-1 #signup-form-header {
-  background: #E3E3E3;
-  padding: 22px 0;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-  margin: 60px auto 20px;
-  position: relative;
-  width: 563px;
-}
-
-.action-account-signup #wrap-1 #user_email,
-.action-account-signup #wrap-1 .formfield input.passwords_match,
-.action-account-signup #wrap-1 .formfield input.passwords_differ,
-.action-account-signup #wrap-1 .formfield input.invalid_input,
-.action-account-signup #wrap-1 .formfield input.valid_input {
-  width: 338px;
-  padding-right: 30px;
-}
-
-.action-account-signup #wrap-1 #user_login.available,
-.action-account-signup #wrap-1 #user_email.available,
-.action-account-signup #wrap-1 #user_login.unavailable,
-.action-account-signup #wrap-1 #user_email.unavailable,
-.action-account-signup #wrap-1 #user_email.checking,
-.action-account-signup #wrap-1 #user_login.checking,
-.action-account-signup #wrap-1 #user_login.available,
-.action-account-signup #wrap-1 #user_email.available,
-.action-account-signup #wrap-1 .formfield input.passwords_differ,
-.action-account-signup #wrap-1 .formfield input.passwords_match {
-  border-width: 2px;
-  border-style: solid;
-  background-color: #fff;
-  background-position: right center;
-  background-repeat: no-repeat;
-  padding: 5px 30px 8px 5px;
 }
 
 .action-account-signup #wrap-1 #user_login.unavailable,
@@ -6542,14 +6519,6 @@ h1#agenda-title {
 .action-account-signup .no-boxes {
   margin-left: 128px;
   margin-right: 128px;
-}
-
-#signup-password {
-  /*margin-top: -19px;*/
-}
-
-#signup-password-confirmation {
-  /*margin-top: -5px;*/
 }
 
 #signup-form-profile {
