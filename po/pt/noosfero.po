@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
 "POT-Creation-Date: 2011-11-30 11:40-0300\n"
-"PO-Revision-Date: 2011-11-30 14:43-0200\n"
+"PO-Revision-Date: 2011-11-30 14:52-0200\n"
 "Last-Translator: Joenio Costa <joenio@colivre.coop.br>\n"
 "Language-Team: LANGUAGE TEAM <E-MAIL@ADDRESS or HOME PAGE>\n"
 "MIME-Version: 1.0\n"
@@ -2796,7 +2796,7 @@ msgstr "Lembre do token que expira em"
 
 #: app/models/user.rb:-
 msgid "Terms of use"
-msgstr "Termos de Uso"
+msgstr "Termos de uso"
 
 #: app/models/user.rb:- app/models/user.rb:9
 msgid "Terms accepted"
@@ -5221,11 +5221,6 @@ msgstr "Configurações do ambiente"
 msgid "Site info"
 msgstr "Informações do site"
 
-#: app/views/admin_panel/site_info.rhtml:11
-#, fuzzy
-msgid "Terms os use"
-msgstr "Termos de Uso"
-
 #: app/views/admin_panel/set_portal_news_amount.rhtml:1
 msgid "News amount by folder"
 msgstr "Quantidade de notícias por pasta"
@@ -6374,9 +6369,8 @@ msgid "News"
 msgstr "Notícias"
 
 #: app/views/home/terms.rhtml:1
-#, fuzzy
 msgid "Terms of use - %s"
-msgstr "Termos de Uso"
+msgstr "Termos de uso - %s"
 
 #: app/views/invite/_dialog_wait_loading.rhtml:8
 msgid "Please, wait..."

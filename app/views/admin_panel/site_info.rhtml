@@ -8,7 +8,7 @@
   <% tabs = [] %>
   <% tabs << {:title => _('Site info'), :id => 'site-info',
     :content => (render :partial => 'site_info', :locals => {:f => f})} %>
-  <% tabs << {:title => _('Terms os use'), :id => 'terms-of-use',
+  <% tabs << {:title => _('Terms of use'), :id => 'terms-of-use',
     :content => (render :partial => 'terms_of_use', :locals => {:f => f})} %>
   <%= render_tabs(tabs) %>
   <% button_bar do %>
