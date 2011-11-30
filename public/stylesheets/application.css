@@ -6189,19 +6189,21 @@ h1#agenda-title {
 /* Signup interface {{{ */
 
 #url-check {
-  margin: 0 0 2px 0;
+  margin: 0 0 -5px 0;
   width: 100%;
   text-align: right;
 }
 
 #email-check,
+#fake-check,
 #password-check {
-  margin: -2px 171px 2px 0;
+  margin: -2px 171px -5px 0;
   text-align: right;
   clear: both;
 }
 
 #email-check p,
+#fake-check p,
 #password-check p {
   margin: 0;
 }
@@ -6340,8 +6342,8 @@ h1#agenda-title {
 }
 
 .action-account-signup #wrap-1 .formfield input[type=password] {
-  margin-bottom: -6px;
-  margin-top: 15px;
+  /*margin-bottom: -6px;
+  margin-top: 15px;*/
 }
 
 .action-account-signup #wrap-1 .formfield textarea,
@@ -6353,17 +6355,17 @@ h1#agenda-title {
 
 .action-account-signup #wrap-1 #profile_data_name {
   padding-left: 10px;
-  margin-top: 12px;
-  margin-bottom: 3px;
+  /*margin-top: 12px;
+  margin-bottom: 3px;*/
 }
 
 .action-account-signup #wrap-1 #signup-form-header {
   background: #E3E3E3;
-  padding-top: 10px;
+  padding: 22px 0;
   -moz-border-radius: 8px;
   border-radius: 8px;
   -webkit-border-radius: 8px;
-  margin: 75px auto 20px;
+  margin: 60px auto 20px;
   position: relative;
   width: 563px;
 }
@@ -6430,7 +6432,7 @@ h1#agenda-title {
   font-size: 20px;
   font-family: droidserif;
   text-transform: lowercase;
-  margin: 14px 0 0 14px;
+  margin-left: 14px;
 }
 
 .action-account-signup #wrap-1 #signup-form-header #user_login {
@@ -6445,7 +6447,6 @@ h1#agenda-title {
 
 #signup-login-field {
   float: left;
-  margin: 11px 0 0 0;
 }
 
 .action-account-signup #wrap-1 #signup-password,
@@ -6469,7 +6470,7 @@ h1#agenda-title {
   position: absolute;
   z-index: 2;
   right: -40px;
-  top: -80px;
+  top: -100px;
 }
 
 .action-account-signup #wrap-1 .required-field label,
@@ -6537,11 +6538,11 @@ h1#agenda-title {
 }
 
 #signup-password {
-  margin-top: -19px;
+  /*margin-top: -19px;*/
 }
 
 #signup-password-confirmation {
-  margin-top: -5px;
+  /*margin-top: -5px;*/
 }
 
 #signup-form-profile {
@@ -6555,6 +6556,10 @@ h1#agenda-title {
 #thanks-for-signing {
   font-size: 15px;
   text-align: center;
+}
+
+.action-account-signup .formfieldline {
+  padding: 0;
 }
 
 /* }}} */

@@ -6,8 +6,36 @@
 
 <div id='signup-form-header'>
 
-  <%= label :profile_data, :name %>
-  <%= required text_field(:profile_data, :name, :rel => _('Name')) %>
+  <span id="signup-domain"><%= environment.default_hostname %>/</span>
+  <div id='signup-login'>
+    <div id='signup-login-field'>
+      <%= required f.text_field(:login, :onchange => 'this.value = convToValidLogin(this.value);', :rel => s_('signup|Login')) %>
+      <div id='url-check'><p>&nbsp;</p></div>
+    </div>
+    <%= content_tag(:small, _('Choose your login name carefully! It will be your network access and you will not be able to change it later.'), :id => 'signup-balloon') %>
+    <br style="clear: both;" />
+  </div>
+  <%= observe_field 'user_login',
+        :url => { :action => 'check_url' },
+        :with => 'identifier',
+        :update => 'url-check',
+        :loading => "jQuery('#user_login').removeClass().addClass('checking');
+                     jQuery('#url-check').html('<p><span class=\"checking\">#{_('Checking availability of login name...')}</span></p>');",
+        :complete => "jQuery('#user_login').removeClass('checking')"
+  %>
+
+  <div id='signup-password'>
+    <%= required f.password_field(:password, :id => 'user_pw') %>
+    <%= f.text_field(:password_clear, :value => _('password')) %>
+    <%= content_tag(:small,_('Choose a password that you can remember easily. It must have at least 4 characters.'), :id => 'password-balloon') %>
+    <div id='fake-check'><p>&nbsp;</p></div>
+  </div>
+
+  <div id='signup-password-confirmation'>
+    <%= required f.password_field(:password_confirmation) %>
+    <%= f.text_field(:password_confirmation_clear, :value => _('password confirmation')) %>
+    <div id='password-check'><p>&nbsp;</p></div>
+  </div>
 
   <div id='signup-email'>
     <%= required f.text_field(:email, :rel => _('e-Mail')) %>
@@ -28,37 +56,8 @@
                       }"
   %>
 
-  <div id='signup-password'>
-    <%= required f.password_field(:password, :id => 'user_pw') %>
-    <%= f.text_field(:password_clear, :value => _('password')) %>
-    <%= content_tag(:small,_('Choose a password that you can remember easily. It must have at least 4 characters.'), :id => 'password-balloon') %>
-  </div>
-
-  <div id='signup-password-confirmation'>
-    <%= required f.password_field(:password_confirmation) %>
-    <%= f.text_field(:password_confirmation_clear, :value => _('password confirmation')) %>
-    <div id='password-check'><p>&nbsp;</p></div>
-  </div>
-
-  <span id="signup-domain"><%= @environment.top_url.gsub(/^http:\/\//, '') %>/</span>
-
-  <div id='signup-login'>
-    <div id='signup-login-field'>
-      <%= required f.text_field(:login, :onchange => 'this.value = convToValidLogin(this.value);', :rel => s_('signup|Login')) %>
-      <div id='url-check'><p>&nbsp;</p></div>
-    </div>
-    <%= content_tag(:small, _('Choose your login name carefully! It will be your network access and you will not be able to change it later.'), :id => 'signup-balloon') %>
-    <br style="clear: both;" />
-  </div>
-
-  <%= observe_field 'user_login',
-        :url => { :action => 'check_url' },
-        :with => 'identifier',
-        :update => 'url-check',
-        :loading => "jQuery('#user_login').removeClass().addClass('checking');
-                     jQuery('#url-check').html('<p><span class=\"checking\">#{_('Checking availability of login name...')}</span></p>');",
-        :complete => "jQuery('#user_login').removeClass('checking')"
-  %>
+  <%= label :profile_data, :name %>
+  <%= required text_field(:profile_data, :name, :rel => _('Name')) %>
 
 </div>
 
@@ -83,7 +82,7 @@
 </div>
 
 <p style="text-align: center">
-  <%= submit_button('save', _('Sign up')) %>
+  <%= submit_button('save', _('Create my account')) %>
 </p>
 
 <% end -%>
@@ -142,7 +141,7 @@ jQuery(function($) {
     } else if ($('#user_password_confirmation').val() != $('#user_pw').val()) {
       $('#user_password_confirmation').removeClass('passwords_match').addClass('passwords_differ');
       $('#user_pw').addClass('invalid_input').removeClass('valid_input');
-      $('#password-check').html("<p><span class='unavailable'><%= _('Passwords must match') %></span></p>");
+      $('#password-check').html("<p><span class='unavailable'><%= _('Passwords don\'t match') %></span></p>");
     }
     $('#password-balloon').fadeOut('slow');
   });
