@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-29 23:10-0300\n"
+"POT-Creation-Date: 2011-11-30 11:40-0300\n"
 "PO-Revision-Date: 2009-10-26 16:20-0300\n"
 "Last-Translator: Anahit Minassian <anahit.minassian@cooperation.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -743,6 +743,15 @@ msgstr "%-ից մինչև %"
 #: app/helpers/events_helper.rb:10
 msgid "No events for this date"
 msgstr ""
+
+#: app/helpers/account_helper.rb:10
+msgid "Checking availability of login name..."
+msgstr ""
+
+#: app/helpers/account_helper.rb:12
+#, fuzzy
+msgid "Checking if e-mail address is already taken..."
+msgstr "Այս անհատական էջը հրապարակային չէ:"
 
 #: app/helpers/enterprise_validation_helper.rb:6
 msgid "Approved"
@@ -2241,7 +2250,7 @@ msgstr "Որոշիչ"
 #: app/views/enterprise_registration/select_validator.rhtml:12
 #: app/views/contact/sender/mail.rhtml:11
 #: app/views/enterprise_validation/_details.rhtml:3
-#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:60
+#: app/views/cms/view.rhtml:24
 #: plugins/shopping_cart/views/shopping_cart_plugin_profile/buy.html.erb:6
 #: plugins/shopping_cart/views/shopping_cart_plugin_myprofile/_orders_list.html.erb:35
 #: plugins/mezuro/views/profile/_project_tab.html.erb:9
@@ -7706,6 +7715,13 @@ msgstr "Մասնակից|Գաղտնաբառի հաստատում"
 msgid "This e-mail address will be used to contact you."
 msgstr ""
 
+#: app/views/account/_signup_form.rhtml:60
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
+#, fuzzy
+msgid "Full name"
+msgstr "Ֆայլի անուն"
+
 #: app/views/account/_signup_form.rhtml:72
 #, fuzzy
 msgid "I accept the %s"
@@ -7721,7 +7737,7 @@ msgstr "Օգտագործման կանոններն ու պայմանները"
 msgid "Create my account"
 msgstr "Ստեղծված է"
 
-#: app/views/account/_signup_form.rhtml:144
+#: app/views/account/_signup_form.rhtml:148
 #, fuzzy
 msgid "Passwords don't match"
 msgstr "Գաղտնաբառի տեսակ"
@@ -9451,12 +9467,6 @@ msgstr ""
 msgid "Below follows the customer informations:"
 msgstr ""
 
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
-#, fuzzy
-msgid "Full name"
-msgstr "Ֆայլի անուն"
-
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:17
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:19
 #, fuzzy
@@ -10192,9 +10202,6 @@ msgstr ""
 
 #~ msgid "Update"
 #~ msgstr "Թարմացնել"
-
-#~ msgid "This profile is not public."
-#~ msgstr "Այս անհատական էջը հրապարակային չէ:"
 
 #~ msgid "This menu gives you access to your personal functionalities."
 #~ msgstr "Այս մենյուի միջոցով կարող եք անձնական պարամետրեր մուտք գործել:"

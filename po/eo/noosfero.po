@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-29 23:10-0300\n"
+"POT-Creation-Date: 2011-11-30 11:40-0300\n"
 "PO-Revision-Date: 2011-03-30 20:52-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -698,6 +698,14 @@ msgstr ""
 
 #: app/helpers/events_helper.rb:10
 msgid "No events for this date"
+msgstr ""
+
+#: app/helpers/account_helper.rb:10
+msgid "Checking availability of login name..."
+msgstr ""
+
+#: app/helpers/account_helper.rb:12
+msgid "Checking if e-mail address is already taken..."
 msgstr ""
 
 #: app/helpers/enterprise_validation_helper.rb:6
@@ -2140,7 +2148,7 @@ msgstr ""
 #: app/views/enterprise_registration/select_validator.rhtml:12
 #: app/views/contact/sender/mail.rhtml:11
 #: app/views/enterprise_validation/_details.rhtml:3
-#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:60
+#: app/views/cms/view.rhtml:24
 #: plugins/shopping_cart/views/shopping_cart_plugin_profile/buy.html.erb:6
 #: plugins/shopping_cart/views/shopping_cart_plugin_myprofile/_orders_list.html.erb:35
 #: plugins/mezuro/views/profile/_project_tab.html.erb:9
@@ -7203,6 +7211,12 @@ msgstr ""
 msgid "This e-mail address will be used to contact you."
 msgstr ""
 
+#: app/views/account/_signup_form.rhtml:60
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
+msgid "Full name"
+msgstr ""
+
 #: app/views/account/_signup_form.rhtml:72
 msgid "I accept the %s"
 msgstr ""
@@ -7215,7 +7229,7 @@ msgstr ""
 msgid "Create my account"
 msgstr ""
 
-#: app/views/account/_signup_form.rhtml:144
+#: app/views/account/_signup_form.rhtml:148
 msgid "Passwords don't match"
 msgstr ""
 
@@ -8798,11 +8812,6 @@ msgstr ""
 
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:11
 msgid "Below follows the customer informations:"
-msgstr ""
-
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
-msgid "Full name"
 msgstr ""
 
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:17

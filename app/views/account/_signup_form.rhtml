@@ -20,7 +20,7 @@
         :with => 'identifier',
         :update => 'url-check',
         :loading => "jQuery('#user_login').removeClass('#{validation_classes}').addClass('checking');
-                     jQuery('#url-check').html('<p><span class=\"checking\">#{_('Checking availability of login name...')}</span></p>');",
+                     jQuery('#url-check').html('<p><span class=\"checking\">#{checking_message(:url)}</span></p>');",
         :complete => "jQuery('#user_login').removeClass('checking')"
   %>
 
@@ -47,7 +47,7 @@
         :with     => "address",
         :update   => "email-check",
         :loading  => "jQuery('#user_email').removeClass('#{validation_classes}').addClass('checking');
-                      jQuery('#email-check').html('<p><span class=\"checking\">#{_('Checking if e-mail address is already taken...')}</span></p>');",
+                      jQuery('#email-check').html('<p><span class=\"checking\">#{checking_message(:email)}</span></p>');",
         :complete => "jQuery('#user_email').removeClass('checking')",
         :before   => "if (!( jQuery('#user_email').valid() )) {
                         jQuery('#user_email').removeClass('#{validation_classes}').addClass('unavailable');

@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: noosfero 0.34.0\n"
-"POT-Creation-Date: 2011-11-29 23:10-0300\n"
-"PO-Revision-Date: 2011-11-30 10:59-0200\n"
+"POT-Creation-Date: 2011-11-30 11:40-0300\n"
+"PO-Revision-Date: 2011-11-30 14:43-0200\n"
 "Last-Translator: Joenio Costa <joenio@colivre.coop.br>\n"
 "Language-Team: LANGUAGE TEAM <E-MAIL@ADDRESS or HOME PAGE>\n"
 "MIME-Version: 1.0\n"
@@ -715,6 +715,14 @@ msgstr "Eventos para %s"
 #: app/helpers/events_helper.rb:10
 msgid "No events for this date"
 msgstr "Nenhum evento para essa data"
+
+#: app/helpers/account_helper.rb:10
+msgid "Checking availability of login name..."
+msgstr "Checando disponibilidade do nome de login..."
+
+#: app/helpers/account_helper.rb:12
+msgid "Checking if e-mail address is already taken..."
+msgstr "Checanco se o endereço de e-mail já está em uso..."
 
 #: app/helpers/enterprise_validation_helper.rb:6
 msgid "Approved"
@@ -2171,7 +2179,7 @@ msgstr "certificador"
 #: app/views/enterprise_registration/select_validator.rhtml:12
 #: app/views/contact/sender/mail.rhtml:11
 #: app/views/enterprise_validation/_details.rhtml:3
-#: app/views/cms/view.rhtml:24 app/views/account/_signup_form.rhtml:60
+#: app/views/cms/view.rhtml:24
 #: plugins/shopping_cart/views/shopping_cart_plugin_profile/buy.html.erb:6
 #: plugins/shopping_cart/views/shopping_cart_plugin_myprofile/_orders_list.html.erb:35
 #: plugins/mezuro/views/profile/_project_tab.html.erb:9
@@ -4156,24 +4164,20 @@ msgid "The supplied current password is incorrect."
 msgstr "A senha informada está incorreta"
 
 #: app/controllers/public/account_controller.rb:216
-#, fuzzy
 msgid "This login name is available"
-msgstr "Esta ação não está disponível para \"%s\"."
+msgstr "Este nome de login está disponível"
 
 #: app/controllers/public/account_controller.rb:219
-#, fuzzy
 msgid "This login name is unavailable"
-msgstr "Esta ação não está disponível para \"%s\"."
+msgstr "Este nome de login não está disponível"
 
 #: app/controllers/public/account_controller.rb:227
-#, fuzzy
 msgid "This e-mail address is available"
-msgstr "Este endereço de e-mail será usado para contactar você."
+msgstr "Este endereço de e-mail está disponível"
 
 #: app/controllers/public/account_controller.rb:230
-#, fuzzy
 msgid "This e-mail address is taken"
-msgstr "Os e-mail estão sendo enviados"
+msgstr "Este endereço de email já está em uso"
 
 #: app/controllers/public/browse_controller.rb:65
 msgid "More recent people"
@@ -7432,8 +7436,8 @@ msgid ""
 "Choose your login name carefully! It will be your network access and you "
 "will not be able to change it later."
 msgstr ""
-"Escolha seu login com cuidado! Ele te dará acesso a rede e não poderá "
-"ser alterado depois."
+"Escolha seu login com cuidado! Ele te dará acesso a rede e não poderá ser "
+"alterado depois."
 
 #: app/views/account/_signup_form.rhtml:29
 msgid "password"
@@ -7455,6 +7459,12 @@ msgstr "confirmação de senha"
 msgid "This e-mail address will be used to contact you."
 msgstr "Este endereço de e-mail será usado para contactar você."
 
+#: app/views/account/_signup_form.rhtml:60
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
+#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
+msgid "Full name"
+msgstr "Nome completo"
+
 #: app/views/account/_signup_form.rhtml:72
 msgid "I accept the %s"
 msgstr "Eu aceito os %s"
@@ -7467,7 +7477,7 @@ msgstr "termos de uso"
 msgid "Create my account"
 msgstr "Criar minha conta"
 
-#: app/views/account/_signup_form.rhtml:144
+#: app/views/account/_signup_form.rhtml:148
 msgid "Passwords don't match"
 msgstr "As senhas não conferem"
 
@@ -9174,11 +9184,6 @@ msgstr "Esse é um pedido de compra feito por %s."
 msgid "Below follows the customer informations:"
 msgstr "Abaixo seguem as informações do consumidor:"
 
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:15
-#: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:17
-msgid "Full name"
-msgstr "Nome completo"
-
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/supplier_notification.html.erb:17
 #: plugins/shopping_cart/views/shopping_cart_plugin/mailer/customer_notification.html.erb:19
 msgid "Phone number"
@@ -9519,6 +9524,10 @@ msgstr ""
 "Este site usa <a href=\"http://noosfero.org/\">Noosfero</a>, desenvolvido "
 "pela %s e licenciado sob a <a href=\"http://www.gnu.org/licenses/agpl.html"
 "\">GNU Affero General Public License</a> versão 3 ou superior."
+
+#, fuzzy
+#~ msgid "This e-mail address is not valid"
+#~ msgstr "Os e-mail estão sendo enviados"
 
 #~ msgid "Register"
 #~ msgstr "Registrar"
