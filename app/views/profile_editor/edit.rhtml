@@ -95,16 +95,17 @@
     _('Automatic redirect the visitor to the translated article of him language'),
     'profile_data[redirect_l10n]', true, @profile.redirect_l10n
   )%>
-</div>
-
-</div><!-- id="profile-edit-tabs" -->
-<script type="text/javascript"> jQuery("#profile-edit-tabs").tabs() </script>
 
   <%=
     @plugins.map(:profile_editor_extras).each do |content|
       content.respond_to?(:call) ? content.call : content
     end.join("\n")
   %>
+
+</div>
+
+</div><!-- id="profile-edit-tabs" -->
+<script type="text/javascript"> jQuery("#profile-edit-tabs").tabs() </script>
 
   <% button_bar do %>
     <%= submit_button('save', _('Save'), :cancel => {:action => 'index'}) %>
