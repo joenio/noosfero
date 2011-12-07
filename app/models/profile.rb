@@ -147,6 +147,7 @@ class Profile < ActiveRecord::Base
   doc
   chat
   plugin
+  site
   ]
 
   belongs_to :user
