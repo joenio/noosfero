@@ -214,6 +214,22 @@ Given /^the following certifiers$/ do |table|
   end
 end
 
+Given /^the following production costs?$/ do |table|
+  table.hashes.map{|item| item.dup}.each do |item|
+    owner_type = item.delete('owner')
+    owner = owner_type == 'environment' ? Environment.default : Profile[owner_type]
+    ProductionCost.create!(item.merge(:owner => owner))
+  end
+end
+
+Given /^the following price details?$/ do |table|
+  table.hashes.map{|item| item.dup}.each do |item|
+    product = Product.find_by_name item.delete('product')
+    production_cost = ProductionCost.find_by_name item.delete('production_cost')
+    product.price_details.create!(item.merge(:production_cost => production_cost))
+  end
+end
+
 Given /^I am logged in as "(.+)"$/ do |username|
   visit('/account/logout')
   visit('/account/login')
@@ -487,4 +503,8 @@ Then /^"([^\"]*)" profile should not exist$/ do |profile_selector|
   rescue
     profile.nil?.should be_true
   end
+end
+
+And /^I want to add "([^\"]*)" as cost$/ do |string|
+  selenium.answer_on_next_prompt(string)
 end
