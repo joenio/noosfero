@@ -1,6 +1,6 @@
 h1. Google Analytics
 
-Tracking and web analytics to people and communities.
+Tracking and web analytics for people and communities.
 
 h2. Usage
 

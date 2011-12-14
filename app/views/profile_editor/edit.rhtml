@@ -107,6 +107,12 @@
 </div><!-- id="profile-edit-tabs" -->
 <script type="text/javascript"> jQuery("#profile-edit-tabs").tabs() </script>
 
+  <%=
+    @plugins.map(:profile_editor_extras).each do |content|
+      content.respond_to?(:call) ? content.call : content
+    end.join("\n")
+  %>
+
   <% button_bar do %>
     <%= submit_button('save', _('Save'), :cancel => {:action => 'index'}) %>
     <%= button(:back, _('Back to control panel'), :controller => 'profile_editor') %>

@@ -11,7 +11,7 @@ class GoogleAnalyticsPlugin < Noosfero::Plugin
   end
 
   def self.plugin_description
-    _("Tracking and web analytics to people and communities")
+    _("Tracking and web analytics for people and communities")
   end
 
   def profile_id
