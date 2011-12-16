@@ -816,6 +816,10 @@ private :generate_url, :url_options
     name
   end
 
+  # Override in your subclasses
+  def activities
+    []
+  end
   protected
 
     def followed_by?(person)
