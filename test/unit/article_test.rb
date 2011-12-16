@@ -1007,6 +1007,28 @@ class ArticleTest < Test::Unit::TestCase
     assert_equal ['a','b'], ta.get_name
   end
 
+  should 'update action when article is updated' do
+    article = create(TinyMceArticle, :profile => profile)
+    action = ActionTracker::Record.last
+    time = action.updated_at
+
+    Time.stubs(:now).returns(time + 1.day)
+    article.name = 'New name'
+    article.save
+    assert_not_equal time, ActionTracker::Record.last.updated_at
+  end
+
+  should 'update action when comment is created' do
+    article = create(TinyMceArticle, :profile => profile)
+    action = ActionTracker::Record.last
+    time = action.updated_at
+
+    Time.stubs(:now).returns(time + 1.day)
+
+    article.comments << Comment.create(:name => 'Guest', :email => 'guest@example.com', :title => 'test comment', :body => 'hello!')
+    assert_not_equal time, ActionTracker::Record.last.updated_at
+  end
+
   should 'notifiable is false by default' do
     a = fast_create(Article)
     assert !a.notifiable?
@@ -1656,5 +1678,4 @@ class ArticleTest < Test::Unit::TestCase
     assert_includes Article.created_between(from, to), article2
     assert_not_includes Article.created_between(from, to), article3
   end
-
 end
