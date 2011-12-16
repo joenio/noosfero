@@ -446,4 +446,10 @@ class EnterpriseTest < Test::Unit::TestCase
     assert_equal false, enterprise.receives_scrap_notification?
   end
 
+  should 'have production cost' do
+    e = fast_create(Enterprise)
+    assert_respond_to e, :production_costs
+  end
+
+  should 'return tracked_actions and scraps as activities'
 end
