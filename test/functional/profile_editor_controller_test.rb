@@ -879,7 +879,6 @@ class ProfileEditorControllerTest < Test::Unit::TestCase
     assert_tag :tag => 'a', :content => plugin2_button[:title], :attributes => {:class => /#{plugin2_button[:icon]}/, :href => /#{plugin2_button[:url]}/}
   end
 
-<<<<<<< HEAD
   should 'add extra content provided by plugins on edit' do
     plugin1_content = "<input id='field_added_by_plugin' value='value_of_field_added_by_plugin'/>"
     plugins = mock()
