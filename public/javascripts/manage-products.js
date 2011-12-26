@@ -13,10 +13,12 @@
   });
 
   $(".cancel-price-details").live('click', function() {
-    if (confirm($(this).attr('data-confirm'))) {
-      $("#manage-product-details-button").show();
-      $("#display-price-details").show();
-      $("#display-manage-price-details").html('');
+    if ( !$(this).hasClass('form-changed') ) {
+      cancelPriceDetailsEdition();
+    } else {
+      if (confirm($(this).attr('data-confirm'))) {
+        cancelPriceDetailsEdition();
+      }
     }
     return false;
   });
@@ -45,19 +47,23 @@
     return false;
   });
 
-  $("#product-info-form, form.edit_input").live('submit', function(data) {
-     bar_url = $(this).find('.bar-update-url').val();
-     $.get(bar_url, function(data){
-       $("#price-composition-bar").html(data);
-     });
-     inputs_cost_update_url = $(this).find('#inputs-cost-update-url').val();
-     $.get(inputs_cost_update_url, function(data){
-       $(".inputs-cost").html(data);
-     });
-     return false;
+  $("#product-info-form").live('submit', function(data) {
+    var form = this;
+    updatePriceCompositionBar(form);
+  });
+
+  $("form.edit_input").live('submit', function(data) {
+    var form = this;
+    updatePriceCompositionBar(form);
+    inputs_cost_update_url = $(form).find('#inputs-cost-update-url').val();
+    $.get(inputs_cost_update_url, function(data){
+      $(".inputs-cost").html(data);
+    });
+    return false;
   });
 
   $("#manage-product-details-form .price-details-price").live('change', function(data) {
+     $('.cancel-price-details').addClass('form-changed');
      var product_price = parseFloat($('form #product_price').val());
      var total_cost = parseFloat($('#product_inputs_cost').val());
 
@@ -69,6 +75,12 @@
      var percentage = total_cost * 100 / product_price;
      priceCompositionBar(percentage, described, total_cost, product_price);
   });
+
+  function cancelPriceDetailsEdition() {
+    $("#manage-product-details-button").show();
+    $("#display-price-details").show();
+    $("#display-manage-price-details").html('');
+  }
 
 })(jQuery);
 
@@ -93,6 +105,13 @@ function productionCostTypeChange(select, url, question, error_msg) {
       }
     });
   }
+}
+
+function updatePriceCompositionBar(form) {
+  bar_url = jQuery(form).find('.bar-update-url').val();
+  jQuery.get(bar_url, function(data){
+    jQuery("#price-composition-bar").html(data);
+  });
 }
 
 function priceCompositionBar(value, described, total_cost, price) {
