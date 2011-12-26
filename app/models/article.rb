@@ -143,7 +143,7 @@ class Article < ActiveRecord::Base
   after_update :update_creation_activity
   def update_creation_activity
     action = ActionTracker::Record.find(:first, :conditions => {:target_type => 'Article', :target_id => self.id})
-    action.touch
+    action.touch if action
   end
 
   # retrieves all articles belonging to the given +profile+ that are not
