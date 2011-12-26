@@ -62,7 +62,7 @@
     return false;
   });
 
-  $("#manage-product-details-form .price-details-price").live('change', function(data) {
+  $("#manage-product-details-form .price-details-price").live('keydown', function(data) {
      $('.cancel-price-details').addClass('form-changed');
      var product_price = parseFloat($('form #product_price').val());
      var total_cost = parseFloat($('#product_inputs_cost').val());
@@ -70,7 +70,7 @@
      $('form .price-details-price').each(function() {
        total_cost = total_cost + parseFloat($(this).val());
      });
-     $('#manage-product-details-form input.submit').removeAttr("disabled")
+     $('#manage-product-details-form input.submit').removeAttr("disabled").removeClass('disabled');
      var described = (product_price - total_cost) == 0;
      var percentage = total_cost * 100 / product_price;
      priceCompositionBar(percentage, described, total_cost, product_price);
@@ -80,6 +80,13 @@
     $("#manage-product-details-button").show();
     $("#display-price-details").show();
     $("#display-manage-price-details").html('');
+  }
+
+  function updatePriceCompositionBar(form) {
+    bar_url = $(form).find('.bar-update-url').val();
+    $.get(bar_url, function(data){
+      $("#price-composition-bar").html(data);
+    });
   }
 
 })(jQuery);
@@ -105,13 +112,6 @@ function productionCostTypeChange(select, url, question, error_msg) {
       }
     });
   }
-}
-
-function updatePriceCompositionBar(form) {
-  bar_url = jQuery(form).find('.bar-update-url').val();
-  jQuery.get(bar_url, function(data){
-    jQuery("#price-composition-bar").html(data);
-  });
 }
 
 function priceCompositionBar(value, described, total_cost, price) {
