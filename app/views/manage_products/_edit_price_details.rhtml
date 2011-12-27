@@ -5,6 +5,7 @@
     <td>
       <%= button_to_remote(:remove, _('Remove'),
                            :update => "price-detail-#{price_detail.id}",
+                           :success => "jQuery('#manage-product-details-form input.submit').removeAttr('disabled').removeClass('disabled');", 
                            :confirm => _('Are you sure that you want to remove this cost?'),
                            :url => { :action => 'remove_price_detail', :id => price_detail, :product => @product }) %>
   </tr>

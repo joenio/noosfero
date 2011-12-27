@@ -70,7 +70,8 @@
      $('form .price-details-price').each(function() {
        total_cost = total_cost + parseFloat($(this).val());
      });
-     $('#manage-product-details-form input.submit').removeAttr("disabled").removeClass('disabled');
+     enablePriceDetailSubmit();
+
      var described = (product_price - total_cost) == 0;
      var percentage = total_cost * 100 / product_price;
      priceCompositionBar(percentage, described, total_cost, product_price);
@@ -80,14 +81,18 @@
     $("#manage-product-details-button").show();
     $("#display-price-details").show();
     $("#display-manage-price-details").html('');
-  }
+  };
 
   function updatePriceCompositionBar(form) {
     bar_url = $(form).find('.bar-update-url').val();
     $.get(bar_url, function(data){
       $("#price-composition-bar").html(data);
     });
-  }
+  };
+
+  function enablePriceDetailSubmit() {
+    $('#manage-product-details-form input.submit').removeAttr("disabled").removeClass('disabled');
+  };
 
 })(jQuery);
 
