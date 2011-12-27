@@ -694,3 +694,25 @@ jQuery(function() {
     target: "#ajax-form-message-area"
   })
 });
+
+jQuery(function($){
+  $('.submit-with-keypress').live('keydown', function(e) {
+     field = this;
+     if (e.keyCode == 13) {
+       e.preventDefault();
+       var form = $(field).closest("form");
+       $.ajax({
+           url: form.attr("action"),
+           data: form.serialize(),
+           beforeSend: function() {
+             loading_for_button($(field));
+           },
+           success: function(data) {
+             $('#profile_activities').html(data);
+             $('.submit-with-keypress').val('');
+           }
+       });
+       return false;
+     }
+   });
+});
