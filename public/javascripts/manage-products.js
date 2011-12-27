@@ -47,21 +47,6 @@
     return false;
   });
 
-<<<<<<< HEAD
-  $("#product-info-form, form.edit_input").live('submit', function(data) {
-     bar_url = $(this).find('.bar-update-url').val();
-     $.get(bar_url, function(data){
-       $("#price-composition-bar").html(data);
-     });
-     inputs_cost_update_url = $(this).find('#inputs-cost-update-url').val();
-     $.get(inputs_cost_update_url, function(data){
-       $(".inputs-cost").html(data);
-     });
-     return false;
-  });
-
-  $("#manage-product-details-form .price-details-price").live('change', function(data) {
-=======
   $("#product-info-form").live('submit', function(data) {
     var form = this;
     updatePriceCompositionBar(form);
@@ -79,26 +64,19 @@
 
   $("#manage-product-details-form .price-details-price").live('keydown', function(data) {
      $('.cancel-price-details').addClass('form-changed');
->>>>>>> AI1413-fixes
      var product_price = parseFloat($('form #product_price').val());
      var total_cost = parseFloat($('#product_inputs_cost').val());
 
      $('form .price-details-price').each(function() {
        total_cost = total_cost + parseFloat($(this).val());
      });
-<<<<<<< HEAD
-     $('#manage-product-details-form input.submit').removeAttr("disabled")
-=======
      enablePriceDetailSubmit();
 
->>>>>>> AI1413-fixes
      var described = (product_price - total_cost) == 0;
      var percentage = total_cost * 100 / product_price;
      priceCompositionBar(percentage, described, total_cost, product_price);
   });
 
-<<<<<<< HEAD
-=======
   function cancelPriceDetailsEdition() {
     $("#manage-product-details-button").show();
     $("#display-price-details").show();
@@ -116,7 +94,6 @@
     $('#manage-product-details-form input.submit').removeAttr("disabled").removeClass('disabled');
   };
 
->>>>>>> AI1413-fixes
 })(jQuery);
 
 function productionCostTypeChange(select, url, question, error_msg) {
@@ -148,10 +125,6 @@ function priceCompositionBar(value, described, total_cost, price) {
     $(bar_area).find('#progressbar').progressbar({
       value: value
     });
-<<<<<<< HEAD
-    $(bar_area).find('.percentage-described').html(value.toFixed(2));
-=======
->>>>>>> AI1413-fixes
     $(bar_area).find('.production-cost').html(total_cost.toFixed(2));
     $(bar_area).find('.product_price').html(price.toFixed(2));
     if (described) {
