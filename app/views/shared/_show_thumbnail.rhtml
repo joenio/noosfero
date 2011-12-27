@@ -1,41 +1,11 @@
-<%
-  thumb_id = 'thumb-'+i.id.to_s()+'-'+image.id.to_s()
-  change_img_id = 'change-'+thumb_id
-%>
+  <%= image_tag(image.public_filename(:thumb)) %>
 
-<%= image_tag image.public_filename(:thumb), :id=>thumb_id, :class=>'thumb-preview' %>
+  <br/>
 
-<br/>
+  <%= link_to_function(_('Change image'), nil, :id => 'change-image-link', :class => 'button icon-photos with-text') do |page|
+    page['change-image'].replace_html :partial => 'shared/change_image', :locals => { :i => i, :image => image }
+    page['change-image-link'].hide
+    page['cancel-change-image-link'].show
+  end %>
 
-<div id="<%= change_img_id %>" style="display:none">
-  <%= render :partial => 'shared/change_image', :locals => {
-             :i => i,
-             :image => image,
-             :onchange => 'updateThumbPreview("'+thumb_id+'", this)'
-  } %>
-</div>
-
-<%= link_to(_('Change image'), '#',
-  :id => 'change-image-link',
-  :class => 'button icon-photos with-text',
-  :onclick => '
-    var d = jQuery("<div><br/></div>");
-    var hiddenPlace = jQuery("#'+change_img_id+'");
-    var input = jQuery("#'+change_img_id+' input");
-    input[0].dialogEl = d;
-    d.dialog({
-      modal: true,
-      resizable: false,
-      title: '+ _('Select an image to upload').to_json() +',
-      open: function(event, ui) {
-        var p = parseInt(d.css("padding-left")) + parseInt(d.css("padding-right"));
-        input.appendTo(d); /* Put the input inside the dialog */
-        d.dialog("option", "width", input.width() + p + 5);
-      },
-      beforeClose: function(event, ui) {
-        input.appendTo(hiddenPlace); /* Give back the input to the form */
-      },
-      buttons: { "'+_('Cancel')+'": function(){ d.dialog("close"); } }
-    });
-    return false;'
-) %>
+  <div id='change-image'> </div> <br/>

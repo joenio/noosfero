@@ -127,11 +127,6 @@ a img {
    -webkit-border-radius: 3px;
 }
 
-.thumb-preview {
-  max-width: 100px;
-  max-height: 100px;
-}
-
 /*** jQuery UI personalization ***************************/
 
 .ui-tabs-nav a {
