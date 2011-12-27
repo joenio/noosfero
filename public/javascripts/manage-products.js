@@ -13,10 +13,12 @@
   });
 
   $(".cancel-price-details").live('click', function() {
-    if (confirm($(this).attr('data-confirm'))) {
-      $("#manage-product-details-button").show();
-      $("#display-price-details").show();
-      $("#display-manage-price-details").html('');
+    if ( !$(this).hasClass('form-changed') ) {
+      cancelPriceDetailsEdition();
+    } else {
+      if (confirm($(this).attr('data-confirm'))) {
+        cancelPriceDetailsEdition();
+      }
     }
     return false;
   });
@@ -45,30 +47,52 @@
     return false;
   });
 
-  $("#product-info-form, form.edit_input").live('submit', function(data) {
-     bar_url = $(this).find('.bar-update-url').val();
-     $.get(bar_url, function(data){
-       $("#price-composition-bar").html(data);
-     });
-     inputs_cost_update_url = $(this).find('#inputs-cost-update-url').val();
-     $.get(inputs_cost_update_url, function(data){
-       $(".inputs-cost").html(data);
-     });
-     return false;
+  $("#product-info-form").live('submit', function(data) {
+    var form = this;
+    updatePriceCompositionBar(form);
   });
 
-  $("#manage-product-details-form .price-details-price").live('change', function(data) {
+  $("form.edit_input").live('submit', function(data) {
+    var form = this;
+    updatePriceCompositionBar(form);
+    inputs_cost_update_url = $(form).find('#inputs-cost-update-url').val();
+    $.get(inputs_cost_update_url, function(data){
+      $(".inputs-cost").html(data);
+    });
+    return false;
+  });
+
+  $("#manage-product-details-form .price-details-price").live('keydown', function(data) {
+     $('.cancel-price-details').addClass('form-changed');
      var product_price = parseFloat($('form #product_price').val());
      var total_cost = parseFloat($('#product_inputs_cost').val());
 
      $('form .price-details-price').each(function() {
        total_cost = total_cost + parseFloat($(this).val());
      });
-     $('#manage-product-details-form input.submit').removeAttr("disabled")
+     enablePriceDetailSubmit();
+
      var described = (product_price - total_cost) == 0;
      var percentage = total_cost * 100 / product_price;
      priceCompositionBar(percentage, described, total_cost, product_price);
   });
+
+  function cancelPriceDetailsEdition() {
+    $("#manage-product-details-button").show();
+    $("#display-price-details").show();
+    $("#display-manage-price-details").html('');
+  };
+
+  function updatePriceCompositionBar(form) {
+    bar_url = $(form).find('.bar-update-url').val();
+    $.get(bar_url, function(data){
+      $("#price-composition-bar").html(data);
+    });
+  };
+
+  function enablePriceDetailSubmit() {
+    $('#manage-product-details-form input.submit').removeAttr("disabled").removeClass('disabled');
+  };
 
 })(jQuery);
 
@@ -101,7 +125,6 @@ function priceCompositionBar(value, described, total_cost, price) {
     $(bar_area).find('#progressbar').progressbar({
       value: value
     });
-    $(bar_area).find('.percentage-described').html(value.toFixed(2));
     $(bar_area).find('.production-cost').html(total_cost.toFixed(2));
     $(bar_area).find('.product_price').html(price.toFixed(2));
     if (described) {
