@@ -4,24 +4,24 @@ Tracking and web analytics for people and communities.
 
 h2. Usage
 
-* Create a "Google Analytics":http://www.google.com/analytics/ account
-* Configure your Google Analytics account following these steps
+Create and configure "Google Analytics":http://www.google.com/analytics/
+account following these steps:
 
+# Signin to Google Analytics
 !=/plugins/google_analytics/images/doc/google-analytics-setup-step1.en.png(Google Setup - Step 1)!
-
+# Fill in _Website's URL_ with your profile address (eg.: softwarelivre.org/joenio) and _Account Name_ with your name
 !=/plugins/google_analytics/images/doc/google-analytics-setup-step2.en.png(Google Setup - Step 2)!
-
+# Fill in your first and last name
 !=/plugins/google_analytics/images/doc/google-analytics-setup-step3.en.png(Google Setup - Step 3)!
-
+# Read and accept terms of use
 !=/plugins/google_analytics/images/doc/google-analytics-setup-step4.en.png(Google Setup - Step 4)!
-
+# Accept default options and click next
 !=/plugins/google_analytics/images/doc/google-analytics-setup-step5.en.png(Google Setup - Step 5)!
-
+# Take note of your Google Analytics Profile ID (eg.: UA-23455430-3)
 !=/plugins/google_analytics/images/doc/google-analytics-setup-step6.en.png(Google Setup - Step 6)!
-
-* Take note of your Google Analytics Profile ID
-* Login to Noosfero and go to your control panel
-* Follow Profile Info and Settings and fill in Google Analytics Profile ID
+# Login to Noosfero and go to your control panel
+!=/plugins/google_analytics/images/doc/google-analytics-setup-step7.en.png(Google Setup - Step 7)!
+# Follow _Profile Info and Settings_ and fill in _Google Analytics Profile ID_ with ID above
 
 h2. Info
 
