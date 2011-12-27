@@ -125,7 +125,6 @@ function priceCompositionBar(value, described, total_cost, price) {
     $(bar_area).find('#progressbar').progressbar({
       value: value
     });
-    $(bar_area).find('.percentage-described').html(value.toFixed(2));
     $(bar_area).find('.production-cost').html(total_cost.toFixed(2));
     $(bar_area).find('.product_price').html(price.toFixed(2));
     if (described) {
