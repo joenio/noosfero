@@ -285,12 +285,9 @@ module ManageProductsHelper
 
   def price_composition_progressbar_text(product, args = {})
     currency = environment.currency_unit
-    production_cost_value = args[:production_cost_value] || product.formatted_value(:total_production_cost)
+    production_cost = args[:production_cost_value] || product.formatted_value(:total_production_cost)
     product_price = args[:product_price] || product.formatted_value(:price)
-    percentage_described = ("%.2f" % (args[:percentage_described] || product.price_description_percentage))
 
-    currency + content_tag('span', production_cost_value, :class => 'production-cost') + '/' +
-    currency + content_tag('span', product_price, :class => 'product_price') +
-    '(' + content_tag('span', percentage_described, :class => 'percentage-described') + '%)'
+    _("%{currency} %{production_cost} of %{currency} %{product_price}") % {:currency => currency, :production_cost => production_cost, :product_price => product_price}
   end
 end

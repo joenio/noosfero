@@ -3247,6 +3247,10 @@ div#activation_enterprise div {
   display: inline-block;
 }
 
+#manage-product-details-form #add-new-cost {
+  float: right;
+}
+
 /* * * Progress bar on price details edition * * */
 
 #display-manage-price-details .ui-widget-content {
