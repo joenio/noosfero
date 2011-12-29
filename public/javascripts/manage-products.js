@@ -76,6 +76,7 @@
     $.get(bar_url, function(data){
       $("#price-composition-bar").html(data);
       $('form #product_price').val($('#progressbar-text .product_price').html());
+      $('form #product_inputs_cost').val($('#progressbar-text .production_cost').html());
       calculateValuesForBar();
     });
   };
@@ -89,7 +90,7 @@ function enablePriceDetailSubmit() {
 function calculateValuesForBar() {
   jQuery('.cancel-price-details').addClass('form-changed');
   var product_price = currencyToFloat(jQuery('form #product_price').val(), currency_format.separator, currency_format.delimiter);
-  var total_cost = parseFloat(jQuery('#product_inputs_cost').val());
+  var total_cost = currencyToFloat(jQuery('form #product_inputs_cost').val(), currency_format.separator, currency_format.delimiter);
 
   jQuery('form .price-details-price').each(function() {
     var this_val = parseFloat(jQuery(this).val()) || 0;
