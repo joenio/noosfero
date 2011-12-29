@@ -76,7 +76,7 @@
     $.get(bar_url, function(data){
       $("#price-composition-bar").html(data);
       $('form #product_price').val(currencyToFloat($('#progressbar-text .product_price').html(), currency_format.separator, currency_format.delimiter));
-      $('form #product_inputs_cost').val(currencyToFloat($('#progressbar-text .production_cost').html(), currency_format.separator, currency_format.delimiter));
+      $('form #product_inputs_cost').val(currencyToFloat($('#display-product-price-details .inputs-cost span').html(), currency_format.separator, currency_format.delimiter, currency_format.unit));
       calculateValuesForBar();
     });
   };
