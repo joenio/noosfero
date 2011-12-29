@@ -58,7 +58,7 @@
     updatePriceCompositionBar(form);
     inputs_cost_update_url = $(form).find('#inputs-cost-update-url').val();
     $.get(inputs_cost_update_url, function(data){
-      $(".inputs-cost").html(data);
+      $(".inputs-cost span").html(data);
     });
     return false;
   });
