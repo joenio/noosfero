@@ -323,4 +323,5 @@ class CommentTest < ActiveSupport::TestCase
 
   should 'update article activity when add a comment'
   should 'update activity when add a comment'
+  should 'create a new activity when add a comment and the activity was removed'
 end
