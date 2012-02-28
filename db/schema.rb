@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111228202739) do
+ActiveRecord::Schema.define(:version => 20120228154642) do
 
   create_table "abuse_reports", :force => true do |t|
     t.integer  "reporter_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20111228202739) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "comments_count", :default => 0
+    t.boolean  "visible",        :default => true
   end
 
   add_index "action_tracker", ["target_id", "target_type"], :name => "index_action_tracker_on_dispatcher_id_and_dispatcher_type"

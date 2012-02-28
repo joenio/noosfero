@@ -223,7 +223,11 @@ class ProfileController < PublicController
   def remove_activity
     begin
       activity = current_person.tracked_actions.find(params[:activity_id])
-      activity.destroy
+      if params[:only_hide]
+        activity.update_attribute(:visible, false)
+      else
+        activity.destroy
+      end
       render :text => _('Activity successfully removed.')
     rescue
       render :text => _('You could not remove this activity')
