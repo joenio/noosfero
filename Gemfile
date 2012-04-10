@@ -9,6 +9,7 @@ gem 'database_cleaner'
 gem 'exception_notification', '1.0.20090728'
 gem 'system_timer'
 gem 'rake'
+gem 'rails', '2.3.5'
 
 def program(name)
   unless system("which #{name} > /dev/null")
