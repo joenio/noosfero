@@ -1,6 +1,7 @@
 source :rubygems
+gem 'rails', '2.3.5'
 gem 'cucumber', '0.4.0'
-gem 'webrat', '0.5.1'
+gem 'webrat'
 gem 'rspec', '1.2.9'
 gem 'rspec-rails', '1.2.9'
 gem 'Selenium', '>= 1.1.14'
@@ -9,7 +10,6 @@ gem 'database_cleaner'
 gem 'exception_notification', '1.0.20090728'
 gem 'system_timer'
 gem 'rake'
-gem 'rails', '2.3.5'
 
 def program(name)
   unless system("which #{name} > /dev/null")
