@@ -1,5 +1,4 @@
 #!/bin/sh
-
-sudo apt-get install debootstrap schroot
-sudo debootstrap squeeze
-sudo chroot squeeze
+sudo apt-get install debootstrap
+sudo debootstrap squeeze ./squeeze
+sudo chroot ./squeeze

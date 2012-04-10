@@ -1,1 +1,1 @@
-before_script: ./script/ci-build
+before_install: ./script/ci-build
