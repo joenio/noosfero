@@ -1,1 +1,1 @@
-before_script: ./script/quick-start-debian
+before_script: ./script/ci-build
