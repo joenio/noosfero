@@ -2,3 +2,9 @@
 sudo apt-get install debootstrap
 sudo debootstrap squeeze ./squeeze
 sudo chroot ./squeeze
+git clone --depth=100 --quiet git://github.com/joenio/noosfero.git
+cd noosfero
+git checkout master
+export TRAVIS_RUBY_VERSION=default
+export BUNDLE_GEMFILE=$PWD/Gemfile
+./script/quick-start-debian
